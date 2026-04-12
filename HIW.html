@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>How It Works – Size Matters</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Google+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --blue: #1a73e8;
+            --blue-light: #e8f0fe;
+            --blue-dark: #1557b0;
+            --gray: #5f6368;
+            --border: #dadce0;
+            --surface: #f8f9fa;
+            --text: #202124;
+            --text2: #5f6368;
+            --code-bg: #f1f3f4;
+            --sidebar-w: 260px;
+            --nav-h: 56px;
+            --green: #137333;
+            --purple: #7c3aed;
+            --orange: #b45309;
+            --red: #c5221f;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            color: var(--text);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh
+        }
+
+        /* TOP NAV */
+        nav.topnav {
+            height: var(--nav-h);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 200
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--blue);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .nav-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff
+        }
+
+        .nav-title {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text)
+        }
+
+        .nav-sep {
+            color: var(--border);
+            font-size: 18px;
+            margin: 0 2px
+        }
+
+        .nav-section {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 14px;
+            color: var(--gray)
+        }
+
+        .nav-links-right {
+            margin-left: auto;
+            display: flex;
+            gap: 4px
+        }
+
+        .nav-links-right a {
+            font-size: 13px;
+            color: var(--gray);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 4px
+        }
+
+        .nav-links-right a:hover {
+            background: var(--surface)
+        }
+
+        /* LAYOUT */
+        .layout {
+            display: flex;
+            flex: 1
+        }
+
+        /* SIDEBAR */
+        aside {
+            width: var(--sidebar-w);
+            border-right: 1px solid var(--border);
+            position: sticky;
+            top: var(--nav-h);
+            height: calc(100vh - var(--nav-h));
+            overflow-y: auto;
+            padding: 20px 0;
+            flex-shrink: 0
+        }
+
+        .sidebar-section {
+            margin-bottom: 4px
+        }
+
+        .sidebar-group-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            padding: 8px 20px 4px
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 5px 20px 5px 28px;
+            font-size: 13px;
+            color: var(--text2);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: all 0.15s;
+            line-height: 1.4
+        }
+
+        .sidebar-link:hover {
+            color: var(--blue);
+            background: var(--blue-light)
+        }
+
+        .sidebar-link.active {
+            color: var(--blue);
+            border-left-color: var(--blue);
+            background: var(--blue-light);
+            font-weight: 500
+        }
+
+        .sidebar-file {
+            display: block;
+            padding: 6px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 12px;
+            transition: all 0.15s;
+            border-left: 2px solid transparent
+        }
+
+        .sidebar-file:hover {
+            color: var(--blue);
+            background: var(--blue-light)
+        }
+
+        .sidebar-file.active {
+            color: var(--blue);
+            border-left-color: var(--blue);
+            background: var(--blue-light)
+        }
+
+        /* MAIN CONTENT */
+        main {
+            flex: 1;
+            padding: 40px 56px;
+            max-width: 900px;
+            min-width: 0
+        }
+
+        /* TYPOGRAPHY */
+        .page-title {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px
+        }
+
+        .page-subtitle {
+            font-size: 15px;
+            color: var(--gray);
+            margin-bottom: 32px;
+            line-height: 1.6
+        }
+
+        h2.file-heading {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 22px;
+            font-weight: 500;
+            margin: 48px 0 6px;
+            padding-top: 8px;
+            color: var(--text);
+            border-top: 1px solid var(--border)
+        }
+
+        h2.file-heading:first-of-type {
+            margin-top: 0;
+            border-top: none
+        }
+
+        .file-role {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Roboto', sans-serif
+        }
+
+        .badge-server {
+            background: #e6f4ea;
+            color: #137333
+        }
+
+        .badge-client {
+            background: #e8f0fe;
+            color: #174ea6
+        }
+
+        h3.section-heading {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            margin: 28px 0 10px;
+            color: var(--text);
+            scroll-margin-top: calc(var(--nav-h) + 20px)
+        }
+
+        h2.file-heading {
+            scroll-margin-top: calc(var(--nav-h) + 20px)
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.75;
+            color: #3c4043;
+            margin-bottom: 14px
+        }
+
+        p:last-child {
+            margin-bottom: 0
+        }
+
+        ul.doc-list {
+            padding-left: 20px;
+            margin-bottom: 14px
+        }
+
+        ul.doc-list li {
+            font-size: 14px;
+            line-height: 1.75;
+            color: #3c4043;
+            margin-bottom: 4px
+        }
+
+        code.inline {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 12px;
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 1px 5px;
+            color: var(--text)
+        }
+
+        /* ARCH DIAGRAM */
+        .arch {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0 28px;
+            flex-wrap: wrap;
+            align-items: stretch
+        }
+
+        .arch-box {
+            flex: 1;
+            min-width: 200px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px
+        }
+
+        .arch-box-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px
+        }
+
+        .arch-box-label.server {
+            color: var(--green)
+        }
+
+        .arch-box-label.client {
+            color: var(--blue)
+        }
+
+        .arch-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px
+        }
+
+        .ftag {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 3px;
+            font-weight: 500
+        }
+
+        .ftag.gs {
+            background: #e6f4ea;
+            color: #137333
+        }
+
+        .ftag.html {
+            background: #e8f0fe;
+            color: #174ea6
+        }
+
+        .arch-desc {
+            font-size: 12px;
+            color: var(--gray);
+            line-height: 1.5;
+            margin: 0
+        }
+
+        .arch-arrow {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            color: #bbb;
+            padding: 0 4px
+        }
+
+        /* CODE BLOCKS */
+        .code-block {
+            background: #1e1e2e;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 14px 0 22px;
+            font-size: 0
+        }
+
+        .code-header {
+            background: #2a2a3d;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .code-filename {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 11px;
+            color: #a0a0b8;
+            font-weight: 500
+        }
+
+        .code-lang {
+            font-size: 10px;
+            color: #6060a0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 18px 20px;
+            overflow-x: auto;
+            background: transparent
+        }
+
+        .code-block code {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 12.5px;
+            line-height: 1.65;
+            color: #cdd6f4
+        }
+
+        /* Syntax tokens */
+        .kw {
+            color: #cba6f7
+        }
+
+        /* keyword: function, const, return, if */
+        .fn {
+            color: #89b4fa
+        }
+
+        /* function name */
+        .str {
+            color: #a6e3a1
+        }
+
+        /* string */
+        .num {
+            color: #fab387
+        }
+
+        /* number */
+        .cmt {
+            color: #6c7086;
+            font-style: italic
+        }
+
+        /* comment */
+        .prop {
+            color: #89dceb
+        }
+
+        /* property / method */
+        .var {
+            color: #cdd6f4
+        }
+
+        /* variable */
+        .op {
+            color: #89dceb
+        }
+
+        /* operator */
+        .cls {
+            color: #f9e2af
+        }
+
+        /* class name / constant */
+        .punc {
+            color: #cdd6f4
+        }
+
+        /* punctuation */
+
+        /* CALL-OUT BOXES */
+        .callout {
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 16px 0;
+            font-size: 13px;
+            line-height: 1.65;
+            display: flex;
+            gap: 12px
+        }
+
+        .callout-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .callout-body {
+            flex: 1
+        }
+
+        .callout-body strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px
+        }
+
+        .callout.note {
+            background: #e8f0fe;
+            border-left: 3px solid var(--blue)
+        }
+
+        .callout.tip {
+            background: #e6f4ea;
+            border-left: 3px solid #34a853
+        }
+
+        .callout.warn {
+            background: #fef7e0;
+            border-left: 3px solid #fbbc04
+        }
+
+        .callout .callout-body {
+            color: #3c4043
+        }
+
+        /* PARAM TABLE */
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 20px;
+            font-size: 13px
+        }
+
+        .param-table th {
+            text-align: left;
+            padding: 7px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--text);
+            font-size: 12px
+        }
+
+        .param-table td {
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            color: #3c4043;
+            vertical-align: top;
+            line-height: 1.6
+        }
+
+        .param-table td:first-child {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 12px;
+            color: var(--blue);
+            white-space: nowrap
+        }
+
+        .param-table td:nth-child(2) {
+            color: var(--gray);
+            font-style: italic
+        }
+
+        /* DIVIDER */
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 12px 0 0
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="topnav">
+        <a class="nav-brand" href="#">
+            <div class="nav-icon"><svg viewBox="0 0 24 24">
+                    <path d="M4 5h16v2H4V5zm0 4h10v2H4V9zm0 4h16v2H4v-2zm0 4h10v2H4v-2z" />
+                </svg></div>
+            <span class="nav-title">Size Matters</span>
+        </a>
+        <span class="nav-sep">/</span>
+        <span class="nav-section">How It Works</span>
+        <div class="nav-links-right">
+            <a href="#">Home</a>
+            <a href="#">Support</a>
+        </div>
+    </nav>
+
+    <div class="layout">
+
+        <aside id="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-group-label">Overview</div>
+                <a class="sidebar-link" href="#overview">Architecture</a>
+                <a class="sidebar-link" href="#data-flow">Data flow</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-group-label">Server-side (.gs)</div>
+                <a class="sidebar-file" href="#appscript">appscript.json</a>
+                <a class="sidebar-file" href="#main-gs">Main.gs</a>
+                <a class="sidebar-file" href="#cached-gs">Cached.gs</a>
+                <a class="sidebar-link" href="#cached-units">Unit preference</a>
+                <a class="sidebar-link" href="#cached-presets">Custom presets</a>
+                <a class="sidebar-link" href="#cached-colors">Custom colors</a>
+                <a class="sidebar-file" href="#colours-gs">Colours.gs</a>
+                <a class="sidebar-link" href="#colours-api">API color format</a>
+                <a class="sidebar-link" href="#colours-conversion">Hex ↔ RGB conversion</a>
+                <a class="sidebar-file" href="#currentsettings-gs">CurrentPageSettings.gs</a>
+                <a class="sidebar-link" href="#currentsettings-unit">Unit conversion</a>
+                <a class="sidebar-link" href="#currentsettings-init">Single-roundtrip init</a>
+                <a class="sidebar-file" href="#margins-gs">Margins.gs</a>
+                <a class="sidebar-file" href="#reset-gs">Reset.gs</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-group-label">Client-side (HTML)</div>
+                <a class="sidebar-file" href="#sidebar-html">Sidebar.html</a>
+                <a class="sidebar-link" href="#sidebar-structure">Structure &amp; includes</a>
+                <a class="sidebar-link" href="#sidebar-modals">Modal system</a>
+                <a class="sidebar-file" href="#sidebarutils">SidebarUtils.html</a>
+                <a class="sidebar-link" href="#utils-conversions">CONVERSIONS object</a>
+                <a class="sidebar-link" href="#utils-color-math">Color math</a>
+                <a class="sidebar-link" href="#utils-floats">Float comparison</a>
+                <a class="sidebar-link" href="#utils-toast">Toast system</a>
+                <a class="sidebar-link" href="#utils-spinner">Spinner &amp; animations</a>
+                <a class="sidebar-file" href="#sidebarlogic">SidebarLogic.html</a>
+                <a class="sidebar-link" href="#logic-state">AppState</a>
+                <a class="sidebar-link" href="#logic-validation">Input validation</a>
+                <a class="sidebar-link" href="#logic-orientation">Orientation swap</a>
+                <a class="sidebar-link" href="#logic-unit-switch">Unit switching</a>
+                <a class="sidebar-link" href="#logic-presets">Custom presets</a>
+                <a class="sidebar-link" href="#logic-buttons">Button states</a>
+                <a class="sidebar-link" href="#logic-init">Initialization</a>
+                <a class="sidebar-file" href="#colorpicker">SidebarColorPicker.html</a>
+                <a class="sidebar-link" href="#picker-canvas">Gradient canvas</a>
+                <a class="sidebar-link" href="#picker-hex">Smart hex input</a>
+                <a class="sidebar-link" href="#picker-custom">Custom colors</a>
+                <a class="sidebar-link" href="#picker-server">Server actions</a>
+                <a class="sidebar-file" href="#sidebarcss">SidebarCSS.html</a>
+                <a class="sidebar-link" href="#css-tokens">Design tokens</a>
+                <a class="sidebar-link" href="#css-animation">Tumble animation</a>
+            </div>
+        </aside>
+
+        <main id="main-content">
+
+            <h1 class="page-title">How It Works</h1>
+            <p class="page-subtitle">A deep-dive into the architecture, logic, and implementation details behind Size
+                Matters. Whether you're curious about how Apps Script extensions work or want to understand a specific
+                feature, this covers it all.</p>
+
+            <!-- ============================================================ -->
+            <!-- OVERVIEW -->
+            <!-- ============================================================ -->
+            <h3 class="section-heading" id="overview">Architecture</h3>
+            <p>Size Matters is built entirely with Google Apps Script — no external servers, no build pipeline, no npm.
+                The project splits cleanly into two layers: server-side <code class="inline">.gs</code> files that
+                interact with the Google Docs API, and client-side HTML template files that form the sidebar UI. These
+                two layers communicate exclusively through <code class="inline">google.script.run</code>, Google's
+                built-in async bridge for calling server functions from the sidebar iframe.</p>
+
+            <div class="arch">
+                <div class="arch-box">
+                    <div class="arch-box-label server">Server-side (.gs)</div>
+                    <div class="arch-tags">
+                        <span class="ftag gs">appscript.json</span>
+                        <span class="ftag gs">Main.gs</span>
+                        <span class="ftag gs">Margins.gs</span>
+                        <span class="ftag gs">Reset.gs</span>
+                        <span class="ftag gs">Colours.gs</span>
+                        <span class="ftag gs">CurrentPageSettings.gs</span>
+                        <span class="ftag gs">Cached.gs</span>
+                    </div>
+                    <p class="arch-desc">Runs on Google's infrastructure. Reads and writes the active document's page
+                        properties via <code class="inline">DocumentApp</code>. Persists user preferences via <code
+                            class="inline">PropertiesService</code>.</p>
+                </div>
+                <div class="arch-arrow">⇄</div>
+                <div class="arch-box">
+                    <div class="arch-box-label client">Client-side (HTML)</div>
+                    <div class="arch-tags">
+                        <span class="ftag html">Sidebar.html</span>
+                        <span class="ftag html">SidebarCSS.html</span>
+                        <span class="ftag html">SidebarUtils.html</span>
+                        <span class="ftag html">SidebarLogic.html</span>
+                        <span class="ftag html">SidebarColorPicker.html</span>
+                    </div>
+                    <p class="arch-desc">Runs in a sandboxed iframe. Manages all UI state, input validation, and visual
+                        feedback. Calls the server asynchronously via <code class="inline">google.script.run</code>.</p>
+                </div>
+            </div>
+
+            <h3 class="section-heading" id="data-flow">Data flow</h3>
+            <p>Every user action follows the same pattern: the client validates input locally, calls a server function,
+                and handles the response with either <code class="inline">.withSuccessHandler()</code> or <code
+                    class="inline">.withFailureHandler()</code>. The server never pushes data to the client — all
+                communication is pull-based, initiated by the UI.</p>
+            <div class="callout note">
+                <span class="callout-icon">ℹ️</span>
+                <div class="callout-body"><strong>Important constraint</strong>Every <code
+                        class="inline">google.script.run</code> call is asynchronous and has real latency (typically
+                    300–1500ms depending on load). Minimizing the number of server round trips — especially during
+                    startup — is a key architectural priority. See <a href="#currentsettings-init">Single-roundtrip
+                        init</a>.</div>
+            </div>
+            <p>All page dimensions are stored internally on the client in <strong>points</strong>, regardless of what
+                unit the user has selected. Conversion between points and the display unit only happens at the edges —
+                when populating input fields and when reading from them. This means the core logic is always working in
+                one consistent unit, and unit-switching never corrupts the underlying state.</p>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- appscript.json -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="appscript">appscript.json</h2>
+            <div class="file-role"><span class="badge badge-server">Server-side</span> Project manifest</div>
+            <p>The manifest is the first thing Google reads when the extension loads. It declares the runtime version,
+                exception logging destination, and — most importantly — the OAuth scopes the extension requests from the
+                user.</p>
+            <p>Size Matters requests the absolute minimum: only two scopes, both narrowly scoped.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">appscript.json</span><span
+                        class="code-lang">JSON</span></div>
+                <pre><code><span class="punc">{</span>
+  <span class="str">"timeZone"</span><span class="punc">:</span> <span class="str">"America/New_York"</span><span class="punc">,</span>
+  <span class="str">"dependencies"</span><span class="punc">: {},</span>
+  <span class="str">"exceptionLogging"</span><span class="punc">:</span> <span class="str">"STACKDRIVER"</span><span class="punc">,</span>
+  <span class="str">"oauthScopes"</span><span class="punc">: [</span>
+    <span class="str">"https://www.googleapis.com/auth/documents.currentonly"</span><span class="punc">,</span>
+    <span class="str">"https://www.googleapis.com/auth/script.container.ui"</span>
+  <span class="punc">],</span>
+  <span class="str">"runtimeVersion"</span><span class="punc">:</span> <span class="str">"V8"</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <table class="param-table">
+                <tr>
+                    <th>Scope</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>documents.currentonly</td>
+                    <td>Grants access to the single document currently open in the browser tab. The extension cannot
+                        access any other files in your Drive.</td>
+                </tr>
+                <tr>
+                    <td>script.container.ui</td>
+                    <td>Allows the script to render a sidebar panel inside the Google Docs UI.</td>
+                </tr>
+            </table>
+
+            <div class="callout tip">
+                <span class="callout-icon">✅</span>
+                <div class="callout-body"><strong>Why this matters for privacy</strong>The <code
+                        class="inline">documents.currentonly</code> scope only permits reading and writing page-level
+                    properties (dimensions, margins, background color). It does not grant access to the text content of
+                    your document in any way.</div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- Main.gs -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="main-gs">Main.gs</h2>
+            <div class="file-role"><span class="badge badge-server">Server-side</span> Entry points &amp; sidebar
+                launcher</div>
+            <p><code class="inline">onInstall()</code> and <code class="inline">onOpen()</code> are reserved Apps Script
+                lifecycle hooks — Google calls them automatically when the add-on is installed or a document is opened.
+                They add a "Size Matters" menu to the Google Docs toolbar. <code class="inline">onInstall()</code> just
+                delegates to <code class="inline">onOpen()</code> so the menu appears immediately after install without
+                needing a page refresh.</p>
+            <p><code class="inline">showSidebar()</code> compiles the <code class="inline">Sidebar.html</code> template
+                via <code class="inline">HtmlService.createTemplateFromFile()</code>. This is different from <code
+                    class="inline">createHtmlOutputFromFile()</code> — templates support scriptlet tags like <code
+                    class="inline">&lt;?!= ... ?&gt;</code>, which is how multiple HTML files get stitched together into
+                one output at render time.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">Main.gs</span><span class="code-lang">GS</span>
+                </div>
+                <pre><code><span class="kw">function</span> <span class="fn">onOpen</span><span class="punc">() {</span>
+  <span class="kw">const</span> <span class="var">ui</span> <span class="op">=</span> <span class="cls">DocumentApp</span><span class="punc">.</span><span class="prop">getUi</span><span class="punc">();</span>
+  <span class="var">ui</span><span class="punc">.</span><span class="prop">createMenu</span><span class="punc">(</span><span class="str">"Size Matters"</span><span class="punc">)</span>
+    <span class="punc">.</span><span class="prop">addItem</span><span class="punc">(</span><span class="str">"Open Sidebar"</span><span class="punc">,</span> <span class="str">"showSidebar"</span><span class="punc">)</span>
+    <span class="punc">.</span><span class="prop">addToUi</span><span class="punc">();</span>
+<span class="punc">}</span>
+
+<span class="kw">function</span> <span class="fn">showSidebar</span><span class="punc">() {</span>
+  <span class="kw">const</span> <span class="var">html</span> <span class="op">=</span> <span class="cls">HtmlService</span>
+    <span class="punc">.</span><span class="prop">createTemplateFromFile</span><span class="punc">(</span><span class="str">"Sidebar"</span><span class="punc">)</span>
+    <span class="punc">.</span><span class="prop">evaluate</span><span class="punc">()</span>
+    <span class="punc">.</span><span class="prop">setTitle</span><span class="punc">(</span><span class="str">"Size Matters"</span><span class="punc">);</span>
+  <span class="cls">DocumentApp</span><span class="punc">.</span><span class="prop">getUi</span><span class="punc">().</span><span class="prop">showSidebar</span><span class="punc">(</span><span class="var">html</span><span class="punc">);</span>
+<span class="punc">}</span>
+
+<span class="cmt">// Called by &lt;?!= include('SidebarCSS') ?&gt; template tags in Sidebar.html</span>
+<span class="kw">function</span> <span class="fn">include</span><span class="punc">(</span><span class="var">filename</span><span class="punc">) {</span>
+  <span class="kw">return</span> <span class="cls">HtmlService</span>
+    <span class="punc">.</span><span class="prop">createHtmlOutputFromFile</span><span class="punc">(</span><span class="var">filename</span><span class="punc">)</span>
+    <span class="punc">.</span><span class="prop">getContent</span><span class="punc">();</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <p>The <code class="inline">include()</code> helper is what allows the project to be split across multiple
+                HTML files while still producing a single compiled sidebar. At render time, each <code
+                    class="inline">&lt;?!= include('SidebarCSS') ?&gt;</code> tag in <code
+                    class="inline">Sidebar.html</code> is replaced with the raw content of that file. The output is one
+                flat HTML document delivered to the browser.</p>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- Cached.gs -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="cached-gs">Cached.gs</h2>
+            <div class="file-role"><span class="badge badge-server">Server-side</span> User persistence layer</div>
+            <p>This file handles everything that needs to survive across sessions: the user's preferred unit of
+                measurement, their saved custom page size presets, and their saved custom page colors. All storage goes
+                through <code class="inline">PropertiesService.getUserProperties()</code> — a key-value store scoped to
+                the individual Google account that persists indefinitely until explicitly cleared.</p>
+
+            <h3 class="section-heading" id="cached-units">Unit preference</h3>
+            <p>The simplest piece of state: a single string (<code class="inline">"inches"</code>, <code
+                    class="inline">"cm"</code>, or <code class="inline">"points"</code>) stored under the key <code
+                    class="inline">"unitPreference"</code>. It's read once during sidebar initialization and saved
+                whenever the user changes the unit selector.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">Cached.gs</span><span class="code-lang">GS</span>
+                </div>
+                <pre><code><span class="kw">function</span> <span class="fn">getUserUnitPreference</span><span class="punc">() {</span>
+  <span class="kw">const</span> <span class="var">userProperties</span> <span class="op">=</span> <span class="cls">PropertiesService</span><span class="punc">.</span><span class="prop">getUserProperties</span><span class="punc">();</span>
+  <span class="kw">return</span> <span class="var">userProperties</span><span class="punc">.</span><span class="prop">getProperty</span><span class="punc">(</span><span class="str">"unitPreference"</span><span class="punc">);</span>
+  <span class="cmt">// Returns null if not yet set — caller defaults to "inches"</span>
+<span class="punc">}</span>
+
+<span class="kw">function</span> <span class="fn">saveUserUnitPreference</span><span class="punc">(</span><span class="var">unit</span><span class="punc">) {</span>
+  <span class="cls">PropertiesService</span><span class="punc">.</span><span class="prop">getUserProperties</span><span class="punc">()</span>
+    <span class="punc">.</span><span class="prop">setProperty</span><span class="punc">(</span><span class="str">"unitPreference"</span><span class="punc">,</span> <span class="var">unit</span><span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="cached-presets">Custom page size presets</h3>
+            <p>Custom presets are stored as a JSON-serialized object, keyed by a sanitized version of the preset's
+                display name. The sanitization strips everything except lowercase letters and digits, then prepends
+                <code class="inline">custom_</code> to distinguish custom presets from built-in ones like <code
+                    class="inline">"letter"</code> or <code class="inline">"a4"</code> in the client-side <code
+                    class="inline">PAGE_SIZES</code> lookup.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">Cached.gs — saveCustomPreset()</span><span
+                        class="code-lang">GS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">saveCustomPreset</span><span class="punc">(</span><span class="var">name</span><span class="punc">,</span> <span class="var">width</span><span class="punc">,</span> <span class="var">height</span><span class="punc">,</span> <span class="var">unit</span><span class="punc">) {</span>
+  <span class="kw">const</span> <span class="cls">MAX_PRESETS</span> <span class="op">=</span> <span class="num">20</span><span class="punc">;</span>
+  <span class="kw">let</span> <span class="var">presets</span> <span class="op">=</span> <span class="fn">getCustomPresets</span><span class="punc">();</span>
+
+  <span class="cmt">// Sanitize name → deterministic, collision-resistant key</span>
+  <span class="kw">const</span> <span class="var">safeKey</span> <span class="op">=</span> <span class="str">"custom_"</span> <span class="op">+</span> <span class="var">name</span><span class="punc">.</span><span class="prop">toLowerCase</span><span class="punc">().</span><span class="prop">replace</span><span class="punc">(</span><span class="str">/[^a-z0-9]/g</span><span class="punc">,</span> <span class="str">""</span><span class="punc">);</span>
+
+  <span class="cmt">// Enforce cap only for new keys (overwriting an existing one is fine)</span>
+  <span class="kw">if</span> <span class="punc">(!</span><span class="var">presets</span><span class="punc">[</span><span class="var">safeKey</span><span class="punc">]</span> <span class="op">&amp;&amp;</span> <span class="cls">Object</span><span class="punc">.</span><span class="prop">keys</span><span class="punc">(</span><span class="var">presets</span><span class="punc">).</span><span class="prop">length</span> <span class="op">&gt;=</span> <span class="cls">MAX_PRESETS</span><span class="punc">) {</span>
+    <span class="kw">throw new</span> <span class="cls">Error</span><span class="punc">(</span><span class="str">"MAX_LIMIT_REACHED"</span><span class="punc">);</span>
+  <span class="punc">}</span>
+
+  <span class="var">presets</span><span class="punc">[</span><span class="var">safeKey</span><span class="punc">] = {</span>
+    <span class="var">name</span><span class="punc">:</span> <span class="var">name</span><span class="punc">,</span>
+    <span class="var">width</span><span class="punc">:</span> <span class="prop">parseFloat</span><span class="punc">(</span><span class="var">width</span><span class="punc">),</span>
+    <span class="var">height</span><span class="punc">:</span> <span class="prop">parseFloat</span><span class="punc">(</span><span class="var">height</span><span class="punc">),</span>
+    <span class="var">unit</span><span class="punc">:</span> <span class="var">unit</span>
+  <span class="punc">};</span>
+
+  <span class="cls">PropertiesService</span><span class="punc">.</span><span class="prop">getUserProperties</span><span class="punc">()</span>
+    <span class="punc">.</span><span class="prop">setProperty</span><span class="punc">(</span><span class="str">"customPagePresets"</span><span class="punc">,</span> <span class="cls">JSON</span><span class="punc">.</span><span class="prop">stringify</span><span class="punc">(</span><span class="var">presets</span><span class="punc">));</span>
+  <span class="kw">return</span> <span class="var">presets</span><span class="punc">;</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <div class="callout note">
+                <span class="callout-icon">ℹ️</span>
+                <div class="callout-body"><strong>Dual enforcement</strong>The 20-preset cap is checked on both the
+                    server (here, throwing <code class="inline">MAX_LIMIT_REACHED</code>) and the client (in <code
+                        class="inline">SidebarLogic.html</code>, before the save modal even opens). The server check is
+                    the authoritative one — it ensures the limit holds even if somehow the client-side check is
+                    bypassed.</div>
+            </div>
+
+            <h3 class="section-heading" id="cached-colors">Custom colors</h3>
+            <p>Saved colors are stored as a JSON array of hex strings under the key <code
+                    class="inline">"customPageColors"</code>. The array acts as a FIFO queue: new colors are pushed to
+                the end, and if the length exceeds 30, the oldest entry is removed with <code
+                    class="inline">shift()</code>. Duplicates are silently ignored before the add.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">Cached.gs — saveCustomColor()</span><span
+                        class="code-lang">GS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">saveCustomColor</span><span class="punc">(</span><span class="var">hexColor</span><span class="punc">) {</span>
+  <span class="kw">let</span> <span class="var">colors</span> <span class="op">=</span> <span class="fn">getCustomColors</span><span class="punc">();</span>
+
+  <span class="kw">if</span> <span class="punc">(!</span><span class="var">colors</span><span class="punc">.</span><span class="prop">includes</span><span class="punc">(</span><span class="var">hexColor</span><span class="punc">)) {</span>
+    <span class="var">colors</span><span class="punc">.</span><span class="prop">push</span><span class="punc">(</span><span class="var">hexColor</span><span class="punc">);</span>
+
+    <span class="cmt">// Enforce max 30 — remove oldest if over limit</span>
+    <span class="kw">if</span> <span class="punc">(</span><span class="var">colors</span><span class="punc">.</span><span class="prop">length</span> <span class="op">&gt;</span> <span class="num">30</span><span class="punc">) {</span>
+      <span class="var">colors</span><span class="punc">.</span><span class="prop">shift</span><span class="punc">();</span>
+    <span class="punc">}</span>
+
+    <span class="cls">PropertiesService</span><span class="punc">.</span><span class="prop">getUserProperties</span><span class="punc">()</span>
+      <span class="punc">.</span><span class="prop">setProperty</span><span class="punc">(</span><span class="str">"customPageColors"</span><span class="punc">,</span> <span class="cls">JSON</span><span class="punc">.</span><span class="prop">stringify</span><span class="punc">(</span><span class="var">colors</span><span class="punc">));</span>
+  <span class="punc">}</span>
+  <span class="kw">return</span> <span class="var">colors</span><span class="punc">;</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- Colours.gs -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="colours-gs">Colours.gs</h2>
+            <div class="file-role"><span class="badge badge-server">Server-side</span> Page background color operations
+            </div>
+
+            <h3 class="section-heading" id="colours-api">The API color format problem</h3>
+            <p>The Google Docs API and a browser color picker speak two different color dialects. The Docs API's <code
+                    class="inline">body.setBackgroundColor()</code> method expects a <strong>hex string</strong> like
+                <code class="inline">"#f28b82"</code>. But the way color travels between the client (the color picker)
+                and the server is as an <strong>RGB object with float components between 0 and 1</strong> — because
+                that's the format <code class="inline">body.getBackgroundColor()</code> returns as, and it's consistent
+                with how the Docs API represents colors internally.</p>
+            <p>This means every color operation crosses two format boundaries. On the way <em>in</em> (applying a
+                color), the flow is: browser hex → float RGB object → server → hex string → Docs API. On the way
+                <em>out</em> (reading the current color), the flow reverses: Docs API hex string → float RGB object →
+                client.</p>
+
+            <h3 class="section-heading" id="colours-conversion">Hex ↔ RGB conversion</h3>
+            <p>The server-side conversions in this file work with float components in the 0–1 range. This is the
+                opposite convention from the client-side versions in <code class="inline">SidebarUtils.html</code>,
+                which work with integer components in the 0–255 range. Both are correct for their context — the server
+                needs floats to match the Docs API's own format, while the browser's canvas and CSS work naturally with
+                integers.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">Colours.gs — rgbToHex() (server-side, floats
+                        0–1)</span><span class="code-lang">GS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">rgbToHex</span><span class="punc">(</span><span class="var">r</span><span class="punc">,</span> <span class="var">g</span><span class="punc">,</span> <span class="var">b</span><span class="punc">) {</span>
+  <span class="cmt">// Each component is a float 0–1. Multiply by 255, round,</span>
+  <span class="cmt">// convert to base-16, then zero-pad to 2 digits.</span>
+  <span class="kw">const</span> <span class="var">toHex</span> <span class="op">=</span> <span class="punc">(</span><span class="var">c</span><span class="punc">) =&gt; {</span>
+    <span class="kw">const</span> <span class="var">hex</span> <span class="op">=</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">round</span><span class="punc">(</span><span class="var">c</span> <span class="op">*</span> <span class="num">255</span><span class="punc">).</span><span class="prop">toString</span><span class="punc">(</span><span class="num">16</span><span class="punc">);</span>
+    <span class="kw">return</span> <span class="var">hex</span><span class="punc">.</span><span class="prop">length</span> <span class="op">===</span> <span class="num">1</span> <span class="op">?</span> <span class="str">"0"</span> <span class="op">+</span> <span class="var">hex</span> <span class="op">:</span> <span class="var">hex</span><span class="punc">;</span>
+  <span class="punc">};</span>
+  <span class="kw">return</span> <span class="str">"#"</span> <span class="op">+</span> <span class="fn">toHex</span><span class="punc">(</span><span class="var">r</span><span class="punc">)</span> <span class="op">+</span> <span class="fn">toHex</span><span class="punc">(</span><span class="var">g</span><span class="punc">)</span> <span class="op">+</span> <span class="fn">toHex</span><span class="punc">(</span><span class="var">b</span><span class="punc">);</span>
+<span class="punc">}</span>
+
+<span class="kw">function</span> <span class="fn">hexToRgb</span><span class="punc">(</span><span class="var">hex</span><span class="punc">) {</span>
+  <span class="kw">if</span> <span class="punc">(!</span><span class="var">hex</span><span class="punc">) </span><span class="kw">return</span> <span class="punc">{</span> <span class="var">red</span><span class="punc">:</span> <span class="num">1</span><span class="punc">,</span> <span class="var">green</span><span class="punc">:</span> <span class="num">1</span><span class="punc">,</span> <span class="var">blue</span><span class="punc">:</span> <span class="num">1</span> <span class="punc">};</span> <span class="cmt">// default white</span>
+
+  <span class="cmt">// Parse the 6-digit hex as a single 24-bit integer,</span>
+  <span class="cmt">// then extract R, G, B using bitwise shifts and masking.</span>
+  <span class="kw">const</span> <span class="var">bigint</span> <span class="op">=</span> <span class="prop">parseInt</span><span class="punc">(</span><span class="var">hex</span><span class="punc">.</span><span class="prop">slice</span><span class="punc">(</span><span class="num">1</span><span class="punc">),</span> <span class="num">16</span><span class="punc">);</span>
+  <span class="kw">return</span> <span class="punc">{</span>
+    <span class="var">red</span><span class="punc">:</span>   <span class="punc">((</span><span class="var">bigint</span> <span class="op">&gt;&gt;</span> <span class="num">16</span><span class="punc">)</span> <span class="op">&amp;</span> <span class="num">255</span><span class="punc">)</span> <span class="op">/</span> <span class="num">255</span><span class="punc">,</span>
+    <span class="var">green</span><span class="punc">: ((</span><span class="var">bigint</span> <span class="op">&gt;&gt;</span>  <span class="num">8</span><span class="punc">)</span> <span class="op">&amp;</span> <span class="num">255</span><span class="punc">)</span> <span class="op">/</span> <span class="num">255</span><span class="punc">,</span>
+    <span class="var">blue</span><span class="punc">:  (</span><span class="var">bigint</span>           <span class="op">&amp;</span> <span class="num">255</span><span class="punc">)</span> <span class="op">/</span> <span class="num">255</span>
+  <span class="punc">};</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <p>The bitwise extraction works by treating the 6-digit hex value as a single 24-bit integer. The red
+                component occupies bits 16–23, green bits 8–15, and blue bits 0–7. Right-shifting by 16 or 8 moves the
+                target component into the lowest byte, and <code class="inline">& 255</code> (i.e., <code
+                    class="inline">& 0xFF</code>) masks off everything above it. Dividing by 255 normalizes the result
+                to the 0–1 float range the Docs API expects.</p>
+
+            <div class="callout tip">
+                <span class="callout-icon">✅</span>
+                <div class="callout-body"><strong>Contrast with client-side versions</strong>The client-side <code
+                        class="inline">hexToRgb()</code> in <code class="inline">SidebarUtils.html</code> uses the exact
+                    same bitwise logic, but returns integers 0–255 instead of floats — because the canvas and CSS work
+                    in that range. The server and client versions are intentionally different scales for their
+                    respective environments.</div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- CurrentPageSettings.gs -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="currentsettings-gs">CurrentPageSettings.gs</h2>
+            <div class="file-role"><span class="badge badge-server">Server-side</span> Document state reader</div>
+
+            <h3 class="section-heading" id="currentsettings-unit">Unit conversion</h3>
+            <p>The Docs API always returns page dimensions in <strong>points</strong> — there's no way to ask for inches
+                or centimeters directly. One point is 1/72 of an inch, which means 1 inch = 72 points, and 1 centimeter
+                = 72 ÷ 2.54 ≈ 28.3465 points.</p>
+            <p><code class="inline">getCurrentPageSettings(unit)</code> uses a conversion factor lookup to divide each
+                raw point value by the appropriate factor before returning it to the client. Requesting <code
+                    class="inline">"points"</code> uses a factor of 1 (no-op), which is how the client fetches values
+                for internal storage.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">CurrentPageSettings.gs — conversion
+                        logic</span><span class="code-lang">GS</span></div>
+                <pre><code><span class="kw">const</span> <span class="cls">UNIT_CONVERSIONS</span> <span class="op">=</span> <span class="punc">{</span>
+  <span class="var">inches</span><span class="punc">:</span> <span class="num">72</span><span class="punc">,</span>        <span class="cmt">// 1 inch  = 72 points</span>
+  <span class="var">cm</span><span class="punc">:</span>     <span class="num">72</span> <span class="op">/</span> <span class="num">2.54</span><span class="punc">,</span>  <span class="cmt">// 1 cm    ≈ 28.3465 points</span>
+  <span class="var">points</span><span class="punc">:</span> <span class="num">1</span>           <span class="cmt">// no conversion needed</span>
+<span class="punc">};</span>
+
+<span class="kw">const</span> <span class="var">conversionFactor</span> <span class="op">=</span> <span class="cls">UNIT_CONVERSIONS</span><span class="punc">[</span><span class="var">unit</span><span class="punc">];</span>
+<span class="kw">const</span> <span class="var">pointsToUnit</span> <span class="op">=</span> <span class="punc">(</span><span class="var">points</span><span class="punc">) =&gt;</span> <span class="var">points</span> <span class="op">/</span> <span class="var">conversionFactor</span><span class="punc">;</span>
+
+<span class="kw">return</span> <span class="punc">{</span>
+  <span class="var">width</span><span class="punc">:</span>        <span class="fn">pointsToUnit</span><span class="punc">(</span><span class="var">body</span><span class="punc">.</span><span class="prop">getPageWidth</span><span class="punc">()),</span>
+  <span class="var">height</span><span class="punc">:</span>       <span class="fn">pointsToUnit</span><span class="punc">(</span><span class="var">body</span><span class="punc">.</span><span class="prop">getPageHeight</span><span class="punc">()),</span>
+  <span class="var">topMargin</span><span class="punc">:</span>    <span class="fn">pointsToUnit</span><span class="punc">(</span><span class="var">body</span><span class="punc">.</span><span class="prop">getMarginTop</span><span class="punc">()),</span>
+  <span class="var">bottomMargin</span><span class="punc">:</span> <span class="fn">pointsToUnit</span><span class="punc">(</span><span class="var">body</span><span class="punc">.</span><span class="prop">getMarginBottom</span><span class="punc">()),</span>
+  <span class="var">leftMargin</span><span class="punc">:</span>   <span class="fn">pointsToUnit</span><span class="punc">(</span><span class="var">body</span><span class="punc">.</span><span class="prop">getMarginLeft</span><span class="punc">()),</span>
+  <span class="var">rightMargin</span><span class="punc">:</span>  <span class="fn">pointsToUnit</span><span class="punc">(</span><span class="var">body</span><span class="punc">.</span><span class="prop">getMarginRight</span><span class="punc">())</span>
+<span class="punc">};</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="currentsettings-init">Single-roundtrip initialization</h3>
+            <p>When the sidebar first opens, it needs three things from the server: the user's unit preference, their
+                saved custom presets, and the current document's page settings. Naively, that's three separate <code
+                    class="inline">google.script.run</code> calls — meaning up to three serial round trips before the UI
+                can display anything meaningful.</p>
+            <p><code class="inline">getInitialSidebarData()</code> eliminates this by bundling all three into a single
+                server call. The server reads all three data sources and returns them as one object, which the client
+                receives in a single callback.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">CurrentPageSettings.gs —
+                        getInitialSidebarData()</span><span class="code-lang">GS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">getInitialSidebarData</span><span class="punc">() {</span>
+  <span class="kw">const</span> <span class="var">unit</span> <span class="op">=</span> <span class="fn">getUserUnitPreference</span><span class="punc">()</span> <span class="op">||</span> <span class="str">"inches"</span><span class="punc">;</span>
+  <span class="kw">return</span> <span class="punc">{</span>
+    <span class="var">customPresets</span><span class="punc">:</span> <span class="fn">getCustomPresets</span><span class="punc">(),</span>
+    <span class="var">unitPreference</span><span class="punc">:</span> <span class="var">unit</span><span class="punc">,</span>
+    <span class="var">pageSettings</span><span class="punc">:</span> <span class="fn">getCurrentPageSettings</span><span class="punc">(</span><span class="var">unit</span><span class="punc">)</span>
+  <span class="punc">};</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <div class="callout tip">
+                <span class="callout-icon">✅</span>
+                <div class="callout-body"><strong>Why this matters</strong>Each <code
+                        class="inline">google.script.run</code> call has fixed overhead of several hundred milliseconds
+                    just for the round trip. Collapsing three calls into one can cut sidebar initialization time by half
+                    a second or more — a very noticeable difference for a UI that opens in a sidebar panel.</div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- Margins.gs -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="margins-gs">Margins.gs</h2>
+            <div class="file-role"><span class="badge badge-server">Server-side</span> Document writer</div>
+            <p><code class="inline">setCustomPageSizeWithMargins()</code> is the core write operation — the function
+                that actually changes the document. It receives all six values (width, height, and four margins) already
+                converted to points by the client, then calls the six corresponding setter methods on the document body.
+                The order matters slightly: height and width are set before margins, which is the same order Google's
+                own page setup dialog uses.</p>
+            <p>Errors are explicitly caught, logged, and re-thrown. The re-throw is important: it causes the <code
+                    class="inline">.withFailureHandler()</code> registered on the client side to fire, which shows an
+                error toast. Without the re-throw, a Docs API error would silently swallow the failure and the user
+                would never know the apply didn't work.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">Margins.gs</span><span class="code-lang">GS</span>
+                </div>
+                <pre><code><span class="kw">function</span> <span class="fn">setCustomPageSizeWithMargins</span><span class="punc">(</span><span class="var">settings</span><span class="punc">,</span> <span class="var">unit</span><span class="punc">) {</span>
+  <span class="kw">const</span> <span class="var">body</span> <span class="op">=</span> <span class="cls">DocumentApp</span><span class="punc">.</span><span class="prop">getActiveDocument</span><span class="punc">().</span><span class="prop">getBody</span><span class="punc">();</span>
+  <span class="kw">try</span> <span class="punc">{</span>
+    <span class="var">body</span><span class="punc">.</span><span class="prop">setPageHeight</span><span class="punc">(</span><span class="var">settings</span><span class="punc">.</span><span class="var">height</span><span class="punc">);</span>
+    <span class="var">body</span><span class="punc">.</span><span class="prop">setPageWidth</span><span class="punc">(</span><span class="var">settings</span><span class="punc">.</span><span class="var">width</span><span class="punc">);</span>
+    <span class="var">body</span><span class="punc">.</span><span class="prop">setMarginTop</span><span class="punc">(</span><span class="var">settings</span><span class="punc">.</span><span class="var">topMargin</span><span class="punc">);</span>
+    <span class="var">body</span><span class="punc">.</span><span class="prop">setMarginBottom</span><span class="punc">(</span><span class="var">settings</span><span class="punc">.</span><span class="var">bottomMargin</span><span class="punc">);</span>
+    <span class="var">body</span><span class="punc">.</span><span class="prop">setMarginLeft</span><span class="punc">(</span><span class="var">settings</span><span class="punc">.</span><span class="var">leftMargin</span><span class="punc">);</span>
+    <span class="var">body</span><span class="punc">.</span><span class="prop">setMarginRight</span><span class="punc">(</span><span class="var">settings</span><span class="punc">.</span><span class="var">rightMargin</span><span class="punc">);</span>
+  <span class="punc">}</span> <span class="kw">catch</span> <span class="punc">(</span><span class="var">error</span><span class="punc">) {</span>
+    <span class="cls">Logger</span><span class="punc">.</span><span class="prop">log</span><span class="punc">(</span><span class="str">`Error: </span><span class="punc">${</span><span class="var">error</span><span class="punc">}</span><span class="str">`</span><span class="punc">);</span>
+    <span class="kw">throw</span> <span class="var">error</span><span class="punc">;</span> <span class="cmt">// re-throw so withFailureHandler() fires on client</span>
+  <span class="punc">}</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- Reset.gs -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="reset-gs">Reset.gs</h2>
+            <div class="file-role"><span class="badge badge-server">Server-side</span> Default restoration</div>
+            <p>Google Docs' default document is US Letter: 8.5 × 11 inches with 1-inch margins on all sides. Since the
+                Docs API works in points, these values are hardcoded as their point equivalents — no conversion math
+                needed at runtime.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">Reset.gs</span><span class="code-lang">GS</span>
+                </div>
+                <pre><code><span class="cmt">// 1 inch = 72 points, so:</span>
+<span class="cmt">//   8.5 inches = 612 points</span>
+<span class="cmt">//   11  inches = 792 points</span>
+<span class="cmt">//   1   inch   =  72 points (margins)</span>
+
+<span class="var">body</span><span class="punc">.</span><span class="prop">setPageHeight</span><span class="punc">(</span><span class="num">11</span>  <span class="op">*</span> <span class="num">72</span><span class="punc">);</span>  <span class="cmt">// 792pt</span>
+<span class="var">body</span><span class="punc">.</span><span class="prop">setPageWidth</span><span class="punc">(</span><span class="num">8.5</span> <span class="op">*</span> <span class="num">72</span><span class="punc">);</span>  <span class="cmt">// 612pt</span>
+<span class="var">body</span><span class="punc">.</span><span class="prop">setMarginTop</span><span class="punc">(</span><span class="num">72</span><span class="punc">);</span>
+<span class="var">body</span><span class="punc">.</span><span class="prop">setMarginBottom</span><span class="punc">(</span><span class="num">72</span><span class="punc">);</span>
+<span class="var">body</span><span class="punc">.</span><span class="prop">setMarginLeft</span><span class="punc">(</span><span class="num">72</span><span class="punc">);</span>
+<span class="var">body</span><span class="punc">.</span><span class="prop">setMarginRight</span><span class="punc">(</span><span class="num">72</span><span class="punc">);</span></code></pre>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- Sidebar.html -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="sidebar-html">Sidebar.html</h2>
+            <div class="file-role"><span class="badge badge-client">Client-side</span> Main HTML structure</div>
+
+            <h3 class="section-heading" id="sidebar-structure">Structure &amp; includes</h3>
+            <p>This file is the root template. It defines all the DOM elements the user interacts with — inputs,
+                dropdowns, buttons, radio buttons, modals — but contains no CSS or JavaScript itself. Those are pulled
+                in at render time via the <code class="inline">include()</code> helper and scriptlet tags.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">Sidebar.html — include pattern</span><span
+                        class="code-lang">HTML</span></div>
+                <pre><code><span class="punc">&lt;</span><span class="kw">head</span><span class="punc">&gt;</span>
+  <span class="cmt">&lt;!-- CSS inlined here at compile time --&gt;</span>
+  <span class="punc">&lt;?!=</span> <span class="fn">include</span><span class="punc">(</span><span class="str">'SidebarCSS'</span><span class="punc">)</span> <span class="punc">?&gt;</span>
+<span class="punc">&lt;/</span><span class="kw">head</span><span class="punc">&gt;</span>
+<span class="punc">&lt;</span><span class="kw">body</span><span class="punc">&gt;</span>
+  <span class="cmt">&lt;!-- ... all DOM elements ... --&gt;</span>
+
+  <span class="cmt">&lt;!-- JS files inlined at bottom of body, in dependency order --&gt;</span>
+  <span class="punc">&lt;?!=</span> <span class="fn">include</span><span class="punc">(</span><span class="str">'SidebarUtils'</span><span class="punc">)</span> <span class="punc">?&gt;</span>
+  <span class="punc">&lt;?!=</span> <span class="fn">include</span><span class="punc">(</span><span class="str">'SidebarLogic'</span><span class="punc">)</span> <span class="punc">?&gt;</span>
+  <span class="punc">&lt;?!=</span> <span class="fn">include</span><span class="punc">(</span><span class="str">'SidebarColorPicker'</span><span class="punc">)</span> <span class="punc">?&gt;</span>
+<span class="punc">&lt;/</span><span class="kw">body</span><span class="punc">&gt;</span></code></pre>
+            </div>
+
+            <p>The order of the JS includes matters: <code class="inline">SidebarUtils</code> defines shared helpers
+                that both <code class="inline">SidebarLogic</code> and <code class="inline">SidebarColorPicker</code>
+                depend on (like <code class="inline">CONVERSIONS</code>, <code class="inline">showToast</code>, and the
+                color math functions), so it must come first.</p>
+
+            <h3 class="section-heading" id="sidebar-modals">Modal system</h3>
+            <p>The sidebar contains three separate modals baked into the HTML: a Reset Confirmation modal (with a live
+                current-vs-default comparison table), a Save Preset modal, and a reusable Generic Confirm modal used for
+                deletions. All three follow the same pattern — a <code class="inline">.modal-background</code> overlay
+                and a <code class="inline">.modal</code> wrapper, both toggled with an <code
+                    class="inline">.active</code> class that drives CSS transitions.</p>
+            <p>The Generic Confirm modal is particularly flexible: its title, message, confirm button text, and an
+                optional extra HTML block (used to show a color swatch or preset card inside the confirmation) are all
+                set dynamically by <code class="inline">ModalManager.genericConfirm.show()</code> in the logic layer.
+            </p>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- SidebarUtils.html -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="sidebarutils">SidebarUtils.html</h2>
+            <div class="file-role"><span class="badge badge-client">Client-side</span> Shared utilities, color math,
+                toast system</div>
+            <p>This file loads first and defines everything the other client-side files depend on. It has no UI of its
+                own — it's a pure utility layer.</p>
+
+            <h3 class="section-heading" id="utils-conversions">The CONVERSIONS object</h3>
+            <p>Rather than scattering conversion math throughout the codebase, all unit logic lives in one place: a
+                <code class="inline">CONVERSIONS</code> lookup object keyed by unit name. Each entry has a <code
+                    class="inline">toPoints()</code> function, a <code class="inline">fromPoints()</code> function, and
+                a display <code class="inline">label</code>. Any code that needs to convert a value just calls <code
+                    class="inline">CONVERSIONS[unit].toPoints(value)</code> or <code
+                    class="inline">CONVERSIONS[unit].fromPoints(value)</code>.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarUtils.html — CONVERSIONS</span><span
+                        class="code-lang">JS</span></div>
+                <pre><code><span class="kw">const</span> <span class="cls">CONVERSIONS</span> <span class="op">=</span> <span class="punc">{</span>
+  <span class="var">inches</span><span class="punc">: {</span>
+    <span class="var">label</span><span class="punc">:</span> <span class="str">"inches"</span><span class="punc">,</span>
+    <span class="var">toPoints</span><span class="punc">:</span>   <span class="punc">(</span><span class="var">v</span><span class="punc">) =&gt;</span> <span class="var">v</span> <span class="op">*</span> <span class="num">72</span><span class="punc">,</span>
+    <span class="var">fromPoints</span><span class="punc">: (</span><span class="var">v</span><span class="punc">) =&gt;</span> <span class="var">v</span> <span class="op">/</span> <span class="num">72</span>
+  <span class="punc">},</span>
+  <span class="var">cm</span><span class="punc">: {</span>
+    <span class="var">label</span><span class="punc">:</span> <span class="str">"cm"</span><span class="punc">,</span>
+    <span class="cmt">// 1 cm = 72/2.54 points ≈ 28.3465pt</span>
+    <span class="var">toPoints</span><span class="punc">:</span>   <span class="punc">(</span><span class="var">v</span><span class="punc">) =&gt; (</span><span class="var">v</span> <span class="op">/</span> <span class="num">2.54</span><span class="punc">)</span> <span class="op">*</span> <span class="num">72</span><span class="punc">,</span>
+    <span class="var">fromPoints</span><span class="punc">: (</span><span class="var">v</span><span class="punc">) =&gt; (</span><span class="var">v</span> <span class="op">*</span> <span class="num">2.54</span><span class="punc">)</span> <span class="op">/</span> <span class="num">72</span>
+  <span class="punc">},</span>
+  <span class="var">points</span><span class="punc">: {</span>
+    <span class="var">label</span><span class="punc">:</span> <span class="str">"points"</span><span class="punc">,</span>
+    <span class="var">toPoints</span><span class="punc">:</span>   <span class="punc">(</span><span class="var">v</span><span class="punc">) =&gt;</span> <span class="var">v</span><span class="punc">,</span>  <span class="cmt">// no-op</span>
+    <span class="var">fromPoints</span><span class="punc">: (</span><span class="var">v</span><span class="punc">) =&gt;</span> <span class="var">v</span>   <span class="cmt">// no-op</span>
+  <span class="punc">}</span>
+<span class="punc">};</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="utils-color-math">Color math: HSL ↔ RGB ↔ Hex</h3>
+            <p>The color picker works in HSL internally (hue, saturation, lightness) because it's the most natural model
+                for a gradient canvas — the hue slider sets H, and the X/Y axes of the canvas represent S and L
+                respectively. But the Docs API and CSS both work in RGB/hex. So the client needs the full conversion
+                chain in both directions.</p>
+            <p><strong>HSL → RGB</strong> follows the standard algorithm. The key insight is that the six hue sectors
+                (each 60° wide) map to different arrangements of the three color components. The chromaticity <code
+                    class="inline">c</code> determines the color's vividness, and <code class="inline">x</code> is the
+                intermediate value for the second-strongest component in the current sector. The lightness offset <code
+                    class="inline">m</code> shifts the entire result up or down the brightness scale.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarUtils.html — hslToRgb()</span><span
+                        class="code-lang">JS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">hslToRgb</span><span class="punc">(</span><span class="var">h</span><span class="punc">,</span> <span class="var">s</span><span class="punc">,</span> <span class="var">l</span><span class="punc">) {</span>
+  <span class="var">h</span> <span class="op">=</span> <span class="punc">((</span><span class="var">h</span> <span class="op">%</span> <span class="num">360</span><span class="punc">)</span> <span class="op">+</span> <span class="num">360</span><span class="punc">)</span> <span class="op">%</span> <span class="num">360</span><span class="punc">;</span>  <span class="cmt">// normalize hue to [0, 360)</span>
+  <span class="var">s</span> <span class="op">=</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">max</span><span class="punc">(</span><span class="num">0</span><span class="punc">,</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">min</span><span class="punc">(</span><span class="num">1</span><span class="punc">,</span> <span class="var">s</span><span class="punc">));</span>  <span class="cmt">// clamp saturation</span>
+  <span class="var">l</span> <span class="op">=</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">max</span><span class="punc">(</span><span class="num">0</span><span class="punc">,</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">min</span><span class="punc">(</span><span class="num">1</span><span class="punc">,</span> <span class="var">l</span><span class="punc">));</span>  <span class="cmt">// clamp lightness</span>
+
+  <span class="kw">if</span> <span class="punc">(</span><span class="var">s</span> <span class="op">===</span> <span class="num">0</span><span class="punc">) {</span>
+    <span class="cmt">// Achromatic (grey): all channels equal lightness</span>
+    <span class="kw">const</span> <span class="var">v</span> <span class="op">=</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">round</span><span class="punc">(</span><span class="var">l</span> <span class="op">*</span> <span class="num">255</span><span class="punc">);</span>
+    <span class="kw">return</span> <span class="punc">[</span><span class="var">v</span><span class="punc">,</span> <span class="var">v</span><span class="punc">,</span> <span class="var">v</span><span class="punc">];</span>
+  <span class="punc">}</span>
+
+  <span class="cmt">// c = chroma (color vividness, 0 at L=0 or L=1, max at L=0.5)</span>
+  <span class="kw">const</span> <span class="var">c</span> <span class="op">=</span> <span class="punc">(</span><span class="num">1</span> <span class="op">-</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">abs</span><span class="punc">(</span><span class="num">2</span> <span class="op">*</span> <span class="var">l</span> <span class="op">-</span> <span class="num">1</span><span class="punc">))</span> <span class="op">*</span> <span class="var">s</span><span class="punc">;</span>
+  <span class="cmt">// x = secondary component for this hue sector</span>
+  <span class="kw">const</span> <span class="var">x</span> <span class="op">=</span> <span class="var">c</span> <span class="op">*</span> <span class="punc">(</span><span class="num">1</span> <span class="op">-</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">abs</span><span class="punc">((</span><span class="var">h</span> <span class="op">/</span> <span class="num">60</span><span class="punc">)</span> <span class="op">%</span> <span class="num">2</span> <span class="op">-</span> <span class="num">1</span><span class="punc">));</span>
+  <span class="cmt">// m = lightness offset (shifts all channels up/down)</span>
+  <span class="kw">const</span> <span class="var">m</span> <span class="op">=</span> <span class="var">l</span> <span class="op">-</span> <span class="var">c</span> <span class="op">/</span> <span class="num">2</span><span class="punc">;</span>
+
+  <span class="kw">let</span> <span class="var">r</span><span class="punc">,</span> <span class="var">g</span><span class="punc">,</span> <span class="var">b</span><span class="punc">;</span>
+  <span class="cmt">// Each 60° sector has a different dominant/secondary channel</span>
+  <span class="kw">if</span>      <span class="punc">(</span><span class="var">h</span> <span class="op">&lt;</span>  <span class="num">60</span><span class="punc">)</span> <span class="punc">[</span><span class="var">r</span><span class="punc">,</span><span class="var">g</span><span class="punc">,</span><span class="var">b</span><span class="punc">] = [</span><span class="var">c</span><span class="punc">,</span><span class="var">x</span><span class="punc">,</span><span class="num">0</span><span class="punc">];</span>  <span class="cmt">// red → yellow</span>
+  <span class="kw">else if</span> <span class="punc">(</span><span class="var">h</span> <span class="op">&lt;</span> <span class="num">120</span><span class="punc">)</span> <span class="punc">[</span><span class="var">r</span><span class="punc">,</span><span class="var">g</span><span class="punc">,</span><span class="var">b</span><span class="punc">] = [</span><span class="var">x</span><span class="punc">,</span><span class="var">c</span><span class="punc">,</span><span class="num">0</span><span class="punc">];</span>  <span class="cmt">// yellow → green</span>
+  <span class="kw">else if</span> <span class="punc">(</span><span class="var">h</span> <span class="op">&lt;</span> <span class="num">180</span><span class="punc">)</span> <span class="punc">[</span><span class="var">r</span><span class="punc">,</span><span class="var">g</span><span class="punc">,</span><span class="var">b</span><span class="punc">] = [</span><span class="num">0</span><span class="punc">,</span><span class="var">c</span><span class="punc">,</span><span class="var">x</span><span class="punc">];</span>  <span class="cmt">// green → cyan</span>
+  <span class="kw">else if</span> <span class="punc">(</span><span class="var">h</span> <span class="op">&lt;</span> <span class="num">240</span><span class="punc">)</span> <span class="punc">[</span><span class="var">r</span><span class="punc">,</span><span class="var">g</span><span class="punc">,</span><span class="var">b</span><span class="punc">] = [</span><span class="num">0</span><span class="punc">,</span><span class="var">x</span><span class="punc">,</span><span class="var">c</span><span class="punc">];</span>  <span class="cmt">// cyan → blue</span>
+  <span class="kw">else if</span> <span class="punc">(</span><span class="var">h</span> <span class="op">&lt;</span> <span class="num">300</span><span class="punc">)</span> <span class="punc">[</span><span class="var">r</span><span class="punc">,</span><span class="var">g</span><span class="punc">,</span><span class="var">b</span><span class="punc">] = [</span><span class="var">x</span><span class="punc">,</span><span class="num">0</span><span class="punc">,</span><span class="var">c</span><span class="punc">];</span>  <span class="cmt">// blue → magenta</span>
+  <span class="kw">else</span>                <span class="punc">[</span><span class="var">r</span><span class="punc">,</span><span class="var">g</span><span class="punc">,</span><span class="var">b</span><span class="punc">] = [</span><span class="var">c</span><span class="punc">,</span><span class="num">0</span><span class="punc">,</span><span class="var">x</span><span class="punc">];</span>  <span class="cmt">// magenta → red</span>
+
+  <span class="kw">return</span> <span class="punc">[</span>
+    <span class="cls">Math</span><span class="punc">.</span><span class="prop">round</span><span class="punc">((</span><span class="var">r</span> <span class="op">+</span> <span class="var">m</span><span class="punc">)</span> <span class="op">*</span> <span class="num">255</span><span class="punc">),</span>
+    <span class="cls">Math</span><span class="punc">.</span><span class="prop">round</span><span class="punc">((</span><span class="var">g</span> <span class="op">+</span> <span class="var">m</span><span class="punc">)</span> <span class="op">*</span> <span class="num">255</span><span class="punc">),</span>
+    <span class="cls">Math</span><span class="punc">.</span><span class="prop">round</span><span class="punc">((</span><span class="var">b</span> <span class="op">+</span> <span class="var">m</span><span class="punc">)</span> <span class="op">*</span> <span class="num">255</span><span class="punc">)</span>
+  <span class="punc">];</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <p><strong>RGB → HSL</strong> is the reverse path, used when syncing the canvas and hue slider to a hex
+                color the user has typed or selected from a preset. It finds the dominant channel (max), uses the
+                difference between max and min to calculate chroma and saturation, then determines the hue sector from
+                which channel is dominant.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarUtils.html — rgbToHsl()</span><span
+                        class="code-lang">JS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">rgbToHsl</span><span class="punc">(</span><span class="var">r</span><span class="punc">,</span> <span class="var">g</span><span class="punc">,</span> <span class="var">b</span><span class="punc">) {</span>
+  <span class="var">r</span> <span class="op">/=</span> <span class="num">255</span><span class="punc">;</span> <span class="var">g</span> <span class="op">/=</span> <span class="num">255</span><span class="punc">;</span> <span class="var">b</span> <span class="op">/=</span> <span class="num">255</span><span class="punc">;</span>
+  <span class="kw">const</span> <span class="var">max</span> <span class="op">=</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">max</span><span class="punc">(</span><span class="var">r</span><span class="punc">,</span> <span class="var">g</span><span class="punc">,</span> <span class="var">b</span><span class="punc">),</span> <span class="var">min</span> <span class="op">=</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">min</span><span class="punc">(</span><span class="var">r</span><span class="punc">,</span> <span class="var">g</span><span class="punc">,</span> <span class="var">b</span><span class="punc">);</span>
+  <span class="kw">let</span> <span class="var">h</span><span class="punc">,</span> <span class="var">s</span><span class="punc">,</span> <span class="var">l</span> <span class="op">=</span> <span class="punc">(</span><span class="var">max</span> <span class="op">+</span> <span class="var">min</span><span class="punc">)</span> <span class="op">/</span> <span class="num">2</span><span class="punc">;</span>
+
+  <span class="kw">if</span> <span class="punc">(</span><span class="var">max</span> <span class="op">===</span> <span class="var">min</span><span class="punc">) {</span>
+    <span class="var">h</span> <span class="op">=</span> <span class="var">s</span> <span class="op">=</span> <span class="num">0</span><span class="punc">;</span>  <span class="cmt">// achromatic grey</span>
+  <span class="punc">}</span> <span class="kw">else</span> <span class="punc">{</span>
+    <span class="kw">const</span> <span class="var">d</span> <span class="op">=</span> <span class="var">max</span> <span class="op">-</span> <span class="var">min</span><span class="punc">;</span>
+    <span class="cmt">// Saturation formula differs above/below L=0.5</span>
+    <span class="var">s</span> <span class="op">=</span> <span class="var">l</span> <span class="op">&gt;</span> <span class="num">0.5</span>
+      <span class="op">?</span> <span class="var">d</span> <span class="op">/</span> <span class="punc">(</span><span class="num">2</span> <span class="op">-</span> <span class="var">max</span> <span class="op">-</span> <span class="var">min</span><span class="punc">)</span>
+      <span class="op">:</span> <span class="var">d</span> <span class="op">/</span> <span class="punc">(</span><span class="var">max</span> <span class="op">+</span> <span class="var">min</span><span class="punc">);</span>
+    <span class="kw">switch</span> <span class="punc">(</span><span class="var">max</span><span class="punc">) {</span>
+      <span class="kw">case</span> <span class="var">r</span><span class="punc">:</span> <span class="var">h</span> <span class="op">=</span> <span class="punc">(</span><span class="var">g</span> <span class="op">-</span> <span class="var">b</span><span class="punc">)</span> <span class="op">/</span> <span class="var">d</span> <span class="op">+</span> <span class="punc">(</span><span class="var">g</span> <span class="op">&lt;</span> <span class="var">b</span> <span class="op">?</span> <span class="num">6</span> <span class="op">:</span> <span class="num">0</span><span class="punc">);</span> <span class="kw">break</span><span class="punc">;</span>
+      <span class="kw">case</span> <span class="var">g</span><span class="punc">:</span> <span class="var">h</span> <span class="op">=</span> <span class="punc">(</span><span class="var">b</span> <span class="op">-</span> <span class="var">r</span><span class="punc">)</span> <span class="op">/</span> <span class="var">d</span> <span class="op">+</span> <span class="num">2</span><span class="punc">;</span>             <span class="kw">break</span><span class="punc">;</span>
+      <span class="kw">case</span> <span class="var">b</span><span class="punc">:</span> <span class="var">h</span> <span class="op">=</span> <span class="punc">(</span><span class="var">r</span> <span class="op">-</span> <span class="var">g</span><span class="punc">)</span> <span class="op">/</span> <span class="var">d</span> <span class="op">+</span> <span class="num">4</span><span class="punc">;</span>             <span class="kw">break</span><span class="punc">;</span>
+    <span class="punc">}</span>
+    <span class="var">h</span> <span class="op">/=</span> <span class="num">6</span><span class="punc">;</span>  <span class="cmt">// normalize to [0, 1], then multiply by 360 below</span>
+  <span class="punc">}</span>
+  <span class="kw">return</span> <span class="punc">[</span><span class="cls">Math</span><span class="punc">.</span><span class="prop">round</span><span class="punc">(</span><span class="var">h</span> <span class="op">*</span> <span class="num">360</span><span class="punc">),</span> <span class="var">s</span><span class="punc">,</span> <span class="var">l</span><span class="punc">];</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="utils-floats">Float comparison</h3>
+            <p>Floating-point arithmetic is famously imprecise. <code class="inline">8.5 * 72</code> should be <code
+                    class="inline">612</code>, but JavaScript may return <code class="inline">611.9999999999999</code>.
+                Direct equality checks (<code class="inline">===</code>) would then falsely conclude a document isn't at
+                its default size and incorrectly enable the Reset button. <code class="inline">compareFloats()</code>
+                solves this by checking whether two values are within a small tolerance of each other.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarUtils.html — compareFloats()</span><span
+                        class="code-lang">JS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">compareFloats</span><span class="punc">(</span><span class="var">a</span><span class="punc">,</span> <span class="var">b</span><span class="punc">,</span> <span class="var">tolerance</span> <span class="op">=</span> <span class="num">0.001</span><span class="punc">) {</span>
+  <span class="kw">return</span> <span class="cls">Math</span><span class="punc">.</span><span class="prop">abs</span><span class="punc">(</span><span class="var">a</span> <span class="op">-</span> <span class="var">b</span><span class="punc">)</span> <span class="op">&lt;=</span> <span class="var">tolerance</span><span class="punc">;</span>
+<span class="punc">}</span>
+
+<span class="cmt">// Used everywhere a numeric equality check is needed, e.g.:</span>
+<span class="kw">const</span> <span class="var">isDefault</span> <span class="op">=</span>
+  <span class="fn">compareFloats</span><span class="punc">(</span><span class="num">612</span><span class="punc">,</span> <span class="var">width</span><span class="punc">)</span>   <span class="cmt">// 8.5in in points</span>
+  <span class="op">&amp;&amp;</span> <span class="fn">compareFloats</span><span class="punc">(</span><span class="num">792</span><span class="punc">,</span> <span class="var">height</span><span class="punc">)</span>  <span class="cmt">// 11in in points</span>
+  <span class="op">&amp;&amp;</span> <span class="fn">compareFloats</span><span class="punc">(</span><span class="num">72</span><span class="punc">,</span> <span class="var">topMargin</span><span class="punc">);</span> <span class="cmt">// 1in in points</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="utils-toast">Toast notification system</h3>
+            <p>All toast messages are defined declaratively in a <code class="inline">TOAST_TYPES</code> config object —
+                separated entirely from the display logic. Each type (success, error, warning, info) has its own color
+                scheme and an array of numbered messages. Message functions can accept a <code
+                    class="inline">unit</code> string argument to produce dynamic text like "Page size updated in
+                centimeters."</p>
+            <p><code class="inline">ToastManager.show(typeKey, messageIndex, unit, duration)</code> handles everything:
+                applying styles, setting content, resetting and replaying the progress bar animation, and scheduling
+                auto-dismiss timers. Calling it again before a previous toast has dismissed cancels the old timers
+                first, so toasts never pile up.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarUtils.html — toast message config
+                        (excerpt)</span><span class="code-lang">JS</span></div>
+                <pre><code><span class="kw">const</span> <span class="cls">TOAST_TYPES</span> <span class="op">=</span> <span class="punc">{</span>
+  <span class="var">success</span><span class="punc">: {</span>
+    <span class="var">icon</span><span class="punc">:</span> <span class="str">"fa-check"</span><span class="punc">,</span> <span class="var">iconClass</span><span class="punc">:</span> <span class="str">"success"</span><span class="punc">,</span>
+    <span class="var">textColor</span><span class="punc">:</span> <span class="str">"#155724"</span><span class="punc">,</span> <span class="var">backgroundColor</span><span class="punc">:</span> <span class="str">"#d4edda"</span><span class="punc">,</span>
+    <span class="var">messages</span><span class="punc">: [</span>
+      <span class="cmt">// index 0: plain string</span>
+      <span class="punc">{</span> <span class="var">title</span><span class="punc">:</span> <span class="str">"Updated!"</span><span class="punc">,</span> <span class="var">message</span><span class="punc">:</span> <span class="punc">(</span><span class="var">unit</span><span class="punc">) =&gt;</span> <span class="str">`Updated in </span><span class="punc">${</span><span class="var">unit</span><span class="punc">}</span><span class="str">`</span> <span class="punc">},</span>
+      <span class="cmt">// index 1: function that receives unit arg</span>
+      <span class="punc">{</span> <span class="var">title</span><span class="punc">:</span> <span class="str">"Success!"</span><span class="punc">,</span> <span class="var">message</span><span class="punc">:</span> <span class="str">"Document reset to default settings!"</span> <span class="punc">}</span>
+    <span class="punc">]</span>
+  <span class="punc">},</span>
+  <span class="cmt">// ... error, warning, info ...</span>
+<span class="punc">};</span>
+
+<span class="cmt">// Calling it anywhere in the codebase:</span>
+<span class="fn">showToast</span><span class="punc">(</span><span class="str">'success'</span><span class="punc">,</span> <span class="num">0</span><span class="punc">,</span> <span class="str">'centimeters'</span><span class="punc">,</span> <span class="num">5000</span><span class="punc">);</span>
+<span class="cmt">// → "Updated in centimeters" for 5 seconds</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="utils-spinner">Spinner &amp; animation helpers</h3>
+            <p>The loading spinner is a CSS SVG animation that overlays the entire sidebar with a frosted glass effect
+                during server calls. <code class="inline">showSpinner()</code> sets <code
+                    class="inline">display: flex</code> first, then adds the <code class="inline">.visible</code> class
+                on the next frame — this two-step approach is necessary because CSS transitions don't fire if <code
+                    class="inline">display</code> changes in the same frame as the opacity/transform transition starts.
+            </p>
+            <p><code class="inline">waitForAnimations()</code> is used after server calls complete to delay the success
+                toast until any in-progress CSS animations (like the tumble entrance) have finished, preventing the
+                toast from appearing over a still-animating UI.</p>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- SidebarLogic.html -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="sidebarlogic">SidebarLogic.html</h2>
+            <div class="file-role"><span class="badge badge-client">Client-side</span> Core application logic</div>
+
+            <h3 class="section-heading" id="logic-state">AppState — the single source of truth</h3>
+            <p>All mutable UI state lives in one object: <code class="inline">AppState</code>. Internal page dimensions
+                are always stored in points, regardless of which unit is displayed. This means conversions only happen
+                at the display layer — writing values into inputs and reading them back out. Everywhere else, the code
+                works in one consistent unit.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarLogic.html — AppState</span><span
+                        class="code-lang">JS</span></div>
+                <pre><code><span class="kw">const</span> <span class="cls">AppState</span> <span class="op">=</span> <span class="punc">{</span>
+  <span class="cmt">// All page dimensions stored internally in points</span>
+  <span class="var">internalValues</span><span class="punc">: {</span>
+    <span class="var">width</span><span class="punc">:</span> <span class="num">0</span><span class="punc">,</span> <span class="var">height</span><span class="punc">:</span> <span class="num">0</span><span class="punc">,</span>
+    <span class="var">topMargin</span><span class="punc">:</span> <span class="num">0</span><span class="punc">,</span> <span class="var">bottomMargin</span><span class="punc">:</span> <span class="num">0</span><span class="punc">,</span>
+    <span class="var">leftMargin</span><span class="punc">:</span> <span class="num">0</span><span class="punc">,</span> <span class="var">rightMargin</span><span class="punc">:</span> <span class="num">0</span>
+  <span class="punc">},</span>
+  <span class="var">modifiedInputs</span><span class="punc">: {},</span>   <span class="cmt">// tracks which inputs differ from saved state</span>
+  <span class="var">invalidInputs</span><span class="punc">: {},</span>    <span class="cmt">// tracks which inputs have failed validation</span>
+  <span class="var">flags</span><span class="punc">: {</span>
+    <span class="var">isProgrammatic</span><span class="punc">:</span> <span class="kw">false</span><span class="punc">,</span>  <span class="cmt">// suppresses modification detection during script-driven updates</span>
+    <span class="var">isLandscape</span><span class="punc">:</span> <span class="kw">false</span><span class="punc">,</span>
+    <span class="var">marginsLinked</span><span class="punc">:</span> <span class="kw">false</span>
+  <span class="punc">},</span>
+  <span class="var">currentUnit</span><span class="punc">:</span> <span class="str">"inches"</span>
+<span class="punc">};</span></code></pre>
+            </div>
+
+            <p>The <code class="inline">isProgrammatic</code> flag is particularly important. When the script itself
+                changes input values (e.g., after applying settings, switching units, or clearing changes), it sets this
+                flag to <code class="inline">true</code> first. The <code class="inline">markInputAsModified()</code>
+                function checks this flag and skips modification detection entirely, preventing false "modified" states
+                from appearing after programmatic updates.</p>
+
+            <h3 class="section-heading" id="logic-validation">Input validation</h3>
+            <p>Validation runs inside a debounced handler that fires 300ms after the user stops typing. Two categories
+                of errors are checked:</p>
+            <ul class="doc-list">
+                <li><strong>Out-of-range values</strong> — dimensions must be between 0.1 inches (7.2pt) and 120 inches
+                    (8640pt). Values outside this range would either cause the Docs API to throw or produce a
+                    nonsensical document.</li>
+                <li><strong>Margin overlap</strong> — the combined left + right margins must be smaller than the page
+                    width (with a small buffer), and combined top + bottom margins must be smaller than the page height.
+                    If margins would leave zero or negative space for content, an error toast is shown immediately.</li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarLogic.html — margin overlap
+                        check</span><span class="code-lang">JS</span></div>
+                <pre><code><span class="kw">const</span> <span class="var">buffer</span> <span class="op">=</span> <span class="cls">CONVERSIONS</span><span class="punc">[</span><span class="var">unit</span><span class="punc">].</span><span class="prop">fromPoints</span><span class="punc">(</span><span class="num">7.2</span><span class="punc">);</span>  <span class="cmt">// ~0.1 inches minimum content area</span>
+
+<span class="kw">if</span> <span class="punc">((</span><span class="var">l</span> <span class="op">+</span> <span class="var">r</span> <span class="op">&gt;=</span> <span class="var">w</span> <span class="op">-</span> <span class="var">buffer</span><span class="punc">)</span> <span class="op">||</span> <span class="punc">(</span><span class="var">t</span> <span class="op">+</span> <span class="var">b</span> <span class="op">&gt;=</span> <span class="var">h</span> <span class="op">-</span> <span class="var">buffer</span><span class="punc">)) {</span>
+  <span class="cls">AppState</span><span class="punc">.</span><span class="var">invalidInputs</span><span class="punc">[</span><span class="str">'marginOverlap'</span><span class="punc">]</span> <span class="op">=</span> <span class="kw">true</span><span class="punc">;</span>
+  <span class="fn">showToast</span><span class="punc">(</span><span class="str">'error'</span><span class="punc">,</span> <span class="num">1</span><span class="punc">,</span> <span class="str">"Margins cannot be larger than the page size"</span><span class="punc">,</span> <span class="num">4000</span><span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="logic-orientation">Orientation swap with margin transposition</h3>
+            <p>Switching orientation isn't just swapping width and height. When you rotate a page, the margins rotate
+                with it — what was the top margin becomes the left margin, and so on. The swap logic handles this
+                explicitly by transposing vertical margins (top/bottom) with horizontal margins (left/right) at the same
+                time it swaps the dimensions.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarLogic.html — applyOrientation()</span><span
+                        class="code-lang">JS</span></div>
+                <pre><code><span class="cmt">// Only swap if the current orientation doesn't match the target</span>
+<span class="kw">if</span> <span class="punc">((</span><span class="var">orientation</span> <span class="op">===</span> <span class="str">"landscape"</span> <span class="op">&amp;&amp;</span> <span class="var">vals</span><span class="punc">.</span><span class="var">w</span> <span class="op">&lt;</span> <span class="var">vals</span><span class="punc">.</span><span class="var">h</span><span class="punc">)</span>
+ <span class="op">||</span> <span class="punc">(</span><span class="var">orientation</span> <span class="op">===</span> <span class="str">"portrait"</span>  <span class="op">&amp;&amp;</span> <span class="var">vals</span><span class="punc">.</span><span class="var">w</span> <span class="op">&gt;</span> <span class="var">vals</span><span class="punc">.</span><span class="var">h</span><span class="punc">)) {</span>
+
+  <span class="cmt">// Swap dimensions</span>
+  <span class="var">inputs</span><span class="punc">.</span><span class="var">width</span><span class="punc">.</span><span class="var">value</span>  <span class="op">=</span> <span class="var">vals</span><span class="punc">.</span><span class="var">h</span><span class="punc">.</span><span class="prop">toFixed</span><span class="punc">(</span><span class="num">2</span><span class="punc">);</span>
+  <span class="var">inputs</span><span class="punc">.</span><span class="var">height</span><span class="punc">.</span><span class="var">value</span> <span class="op">=</span> <span class="var">vals</span><span class="punc">.</span><span class="var">w</span><span class="punc">.</span><span class="prop">toFixed</span><span class="punc">(</span><span class="num">2</span><span class="punc">);</span>
+
+  <span class="cmt">// Transpose margins: top ↔ left, bottom ↔ right</span>
+  <span class="var">inputs</span><span class="punc">.</span><span class="var">top</span><span class="punc">.</span><span class="var">value</span>    <span class="op">=</span> <span class="var">vals</span><span class="punc">.</span><span class="var">l</span><span class="punc">.</span><span class="prop">toFixed</span><span class="punc">(</span><span class="num">2</span><span class="punc">);</span>
+  <span class="var">inputs</span><span class="punc">.</span><span class="var">left</span><span class="punc">.</span><span class="var">value</span>   <span class="op">=</span> <span class="var">vals</span><span class="punc">.</span><span class="var">t</span><span class="punc">.</span><span class="prop">toFixed</span><span class="punc">(</span><span class="num">2</span><span class="punc">);</span>
+  <span class="var">inputs</span><span class="punc">.</span><span class="var">bottom</span><span class="punc">.</span><span class="var">value</span> <span class="op">=</span> <span class="var">vals</span><span class="punc">.</span><span class="var">r</span><span class="punc">.</span><span class="prop">toFixed</span><span class="punc">(</span><span class="num">2</span><span class="punc">);</span>
+  <span class="var">inputs</span><span class="punc">.</span><span class="var">right</span><span class="punc">.</span><span class="var">value</span>  <span class="op">=</span> <span class="var">vals</span><span class="punc">.</span><span class="var">b</span><span class="punc">.</span><span class="prop">toFixed</span><span class="punc">(</span><span class="num">2</span><span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="logic-unit-switch">Unit switching</h3>
+            <p>When the user changes the unit selector, the currently displayed input values are converted to the new
+                unit — not the saved internal values. This is an important distinction: if a user has typed a modified
+                value they haven't applied yet, that modified value is what gets converted and preserved, not the
+                last-saved state.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarLogic.html — unit selector change
+                        handler</span><span class="code-lang">JS</span></div>
+                <pre><code><span class="cls">AppState</span><span class="punc">.</span><span class="var">flags</span><span class="punc">.</span><span class="var">isProgrammatic</span> <span class="op">=</span> <span class="kw">true</span><span class="punc">;</span>  <span class="cmt">// suppress modification detection</span>
+
+<span class="cls">INPUT_KEYS</span><span class="punc">.</span><span class="prop">forEach</span><span class="punc">(</span><span class="var">key</span> <span class="op">=&gt;</span> <span class="punc">{</span>
+  <span class="kw">const</span> <span class="var">input</span> <span class="op">=</span> <span class="cls">document</span><span class="punc">.</span><span class="prop">getElementById</span><span class="punc">(</span><span class="var">key</span><span class="punc">);</span>
+  <span class="kw">const</span> <span class="var">currentValue</span> <span class="op">=</span> <span class="fn">parseSafeFloat</span><span class="punc">(</span><span class="var">input</span><span class="punc">.</span><span class="var">value</span><span class="punc">);</span>
+
+  <span class="cmt">// Convert what the user typed (in old unit) → points → new unit</span>
+  <span class="kw">const</span> <span class="var">inPoints</span> <span class="op">=</span> <span class="cls">CONVERSIONS</span><span class="punc">[</span><span class="var">oldUnit</span><span class="punc">].</span><span class="prop">toPoints</span><span class="punc">(</span><span class="var">currentValue</span><span class="punc">);</span>
+  <span class="var">input</span><span class="punc">.</span><span class="var">value</span> <span class="op">=</span> <span class="prop">parseFloat</span><span class="punc">(</span>
+    <span class="cls">CONVERSIONS</span><span class="punc">[</span><span class="var">newUnit</span><span class="punc">].</span><span class="prop">fromPoints</span><span class="punc">(</span><span class="var">inPoints</span><span class="punc">)</span>
+  <span class="punc">).</span><span class="prop">toFixed</span><span class="punc">(</span><span class="num">2</span><span class="punc">);</span>
+<span class="punc">});</span>
+
+<span class="cls">AppState</span><span class="punc">.</span><span class="var">flags</span><span class="punc">.</span><span class="var">isProgrammatic</span> <span class="op">=</span> <span class="kw">false</span><span class="punc">;</span>
+<span class="cls">AppState</span><span class="punc">.</span><span class="var">currentUnit</span> <span class="op">=</span> <span class="var">newUnit</span><span class="punc">;</span>
+<span class="var">google</span><span class="punc">.</span><span class="var">script</span><span class="punc">.</span><span class="prop">run</span><span class="punc">.</span><span class="fn">saveUserUnitPreference</span><span class="punc">(</span><span class="var">newUnit</span><span class="punc">);</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="logic-presets">Custom preset save flow</h3>
+            <p>Saving a preset has several layers of protection that run in sequence before any server call is made:</p>
+            <ul class="doc-list">
+                <li><strong>Invalid dimension check</strong> — if either width or height is currently flagged invalid,
+                    the save modal never opens.</li>
+                <li><strong>Duplicate dimension check</strong> — the client iterates over all existing presets (both
+                    built-in and custom) and uses <code class="inline">compareFloats()</code> to check if the current
+                    dimensions already exist. If they do, a warning toast is shown with the name of the matching preset.
+                </li>
+                <li><strong>Overwrite confirmation</strong> — if the user types a name that matches an existing custom
+                    preset's key, the Confirm button changes to "Overwrite" and turns red. A second click is required to
+                    proceed.</li>
+                <li><strong>20-preset limit</strong> — checked on both client (before the modal opens) and server (which
+                    throws <code class="inline">MAX_LIMIT_REACHED</code> as a safety net).</li>
+            </ul>
+
+            <h3 class="section-heading" id="logic-buttons">Button state management</h3>
+            <p>The Apply and Clear buttons are only enabled when there is at least one modified input <em>and</em> no
+                invalid inputs. The Reset button is only enabled when the current document settings differ from the
+                default Letter configuration. These checks run after every input event, unit change, and server
+                response.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarLogic.html —
+                        updatePageSettingsButtonsState()</span><span class="code-lang">JS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">updatePageSettingsButtonsState</span><span class="punc">() {</span>
+  <span class="kw">const</span> <span class="var">anyModified</span> <span class="op">=</span> <span class="cls">Object</span><span class="punc">.</span><span class="prop">values</span><span class="punc">(</span><span class="cls">AppState</span><span class="punc">.</span><span class="var">modifiedInputs</span><span class="punc">).</span><span class="prop">some</span><span class="punc">(</span><span class="var">v</span> <span class="op">=&gt;</span> <span class="var">v</span><span class="punc">);</span>
+  <span class="kw">const</span> <span class="var">anyInvalid</span> <span class="op">=</span> <span class="cls">Object</span><span class="punc">.</span><span class="prop">values</span><span class="punc">(</span><span class="cls">AppState</span><span class="punc">.</span><span class="var">invalidInputs</span><span class="punc">).</span><span class="prop">some</span><span class="punc">(</span><span class="var">v</span> <span class="op">=&gt;</span> <span class="var">v</span><span class="punc">);</span>
+
+  <span class="cmt">// Apply: needs at least one change AND no errors</span>
+  <span class="var">applyButton</span><span class="punc">.</span><span class="var">disabled</span> <span class="op">=</span> <span class="op">!</span><span class="var">anyModified</span> <span class="op">||</span> <span class="var">anyInvalid</span><span class="punc">;</span>
+  <span class="cmt">// Clear: only needs at least one change</span>
+  <span class="var">clearButton</span><span class="punc">.</span><span class="var">disabled</span> <span class="op">=</span> <span class="op">!</span><span class="var">anyModified</span><span class="punc">;</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="logic-init">Initialization sequence</h3>
+            <p>On <code class="inline">DOMContentLoaded</code>, the sidebar makes a single call to <code
+                    class="inline">getInitialSidebarData()</code>. The response contains everything needed to bootstrap
+                the UI: unit preference, custom presets, and current page settings. From there, <code
+                    class="inline">initializePageSettings()</code> populates <code class="inline">AppState</code>, fills
+                the input fields, checks orientation, and wires up all event listeners.</p>
+            <p>Event listeners are attached <em>after</em> the initial data is loaded, not before — this prevents the
+                debounced input handler from firing spuriously during programmatic population of the fields.</p>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- SidebarColorPicker.html -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="colorpicker">SidebarColorPicker.html</h2>
+            <div class="file-role"><span class="badge badge-client">Client-side</span> Color picker feature</div>
+
+            <h3 class="section-heading" id="picker-canvas">Gradient canvas rendering</h3>
+            <p>The color gradient is drawn by iterating over every pixel in the canvas and computing its color from its
+                position. The X axis maps to saturation (0 at the left, 1 at the right) and the Y axis maps to lightness
+                (1 at the top, 0 at the bottom). For each pixel, <code class="inline">hslToRgb()</code> is called with
+                the current hue from the slider and the positional S/L values. The result is written directly into a
+                flat <code class="inline">ImageData</code> array — 4 bytes per pixel (RGBA) — and put onto the canvas in
+                one operation.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarColorPicker.html —
+                        drawGradient()</span><span class="code-lang">JS</span></div>
+                <pre><code><span class="kw">function</span> <span class="fn">drawGradient</span><span class="punc">(</span><span class="var">hue</span><span class="punc">) {</span>
+  <span class="kw">const</span> <span class="punc">{</span> <span class="var">width</span><span class="punc">,</span> <span class="var">height</span> <span class="punc">}</span> <span class="op">=</span> <span class="cls">ColorPickerUI</span><span class="punc">.</span><span class="var">canvas</span><span class="punc">;</span>
+  <span class="kw">const</span> <span class="var">imageData</span> <span class="op">=</span> <span class="cls">ColorPickerUI</span><span class="punc">.</span><span class="var">ctx</span><span class="punc">.</span><span class="prop">createImageData</span><span class="punc">(</span><span class="var">width</span><span class="punc">,</span> <span class="var">height</span><span class="punc">);</span>
+  <span class="kw">const</span> <span class="var">data</span> <span class="op">=</span> <span class="var">imageData</span><span class="punc">.</span><span class="var">data</span><span class="punc">;</span>  <span class="cmt">// flat Uint8ClampedArray, 4 bytes per pixel</span>
+
+  <span class="kw">for</span> <span class="punc">(</span><span class="kw">let</span> <span class="var">y</span> <span class="op">=</span> <span class="num">0</span><span class="punc">;</span> <span class="var">y</span> <span class="op">&lt;</span> <span class="var">height</span><span class="punc">;</span> <span class="var">y</span><span class="op">++</span><span class="punc">) {</span>
+    <span class="kw">for</span> <span class="punc">(</span><span class="kw">let</span> <span class="var">x</span> <span class="op">=</span> <span class="num">0</span><span class="punc">;</span> <span class="var">x</span> <span class="op">&lt;</span> <span class="var">width</span><span class="punc">;</span> <span class="var">x</span><span class="op">++</span><span class="punc">) {</span>
+      <span class="kw">const</span> <span class="var">s</span> <span class="op">=</span> <span class="var">x</span> <span class="op">/</span> <span class="punc">(</span><span class="var">width</span>  <span class="op">-</span> <span class="num">1</span><span class="punc">);</span>  <span class="cmt">// x → saturation 0..1</span>
+      <span class="kw">const</span> <span class="var">l</span> <span class="op">=</span> <span class="num">1</span> <span class="op">-</span> <span class="punc">(</span><span class="var">y</span> <span class="op">/</span> <span class="punc">(</span><span class="var">height</span> <span class="op">-</span> <span class="num">1</span><span class="punc">));</span>  <span class="cmt">// y → lightness 1..0 (inverted)</span>
+      <span class="kw">const</span> <span class="punc">[</span><span class="var">r</span><span class="punc">,</span> <span class="var">g</span><span class="punc">,</span> <span class="var">b</span><span class="punc">]</span> <span class="op">=</span> <span class="fn">hslToRgb</span><span class="punc">(</span><span class="var">hue</span><span class="punc">,</span> <span class="var">s</span><span class="punc">,</span> <span class="var">l</span><span class="punc">);</span>
+      <span class="kw">const</span> <span class="var">i</span> <span class="op">=</span> <span class="punc">(</span><span class="var">y</span> <span class="op">*</span> <span class="var">width</span> <span class="op">+</span> <span class="var">x</span><span class="punc">)</span> <span class="op">*</span> <span class="num">4</span><span class="punc">;</span>  <span class="cmt">// byte index in flat array</span>
+      <span class="var">data</span><span class="punc">[</span><span class="var">i</span><span class="punc">]</span>     <span class="op">=</span> <span class="var">r</span><span class="punc">;</span>
+      <span class="var">data</span><span class="punc">[</span><span class="var">i</span><span class="op">+</span><span class="num">1</span><span class="punc">]</span>   <span class="op">=</span> <span class="var">g</span><span class="punc">;</span>
+      <span class="var">data</span><span class="punc">[</span><span class="var">i</span><span class="op">+</span><span class="num">2</span><span class="punc">]</span>   <span class="op">=</span> <span class="var">b</span><span class="punc">;</span>
+      <span class="var">data</span><span class="punc">[</span><span class="var">i</span><span class="op">+</span><span class="num">3</span><span class="punc">]</span>   <span class="op">=</span> <span class="num">255</span><span class="punc">;</span>  <span class="cmt">// alpha: fully opaque</span>
+    <span class="punc">}</span>
+  <span class="punc">}</span>
+  <span class="cls">ColorPickerUI</span><span class="punc">.</span><span class="var">ctx</span><span class="punc">.</span><span class="prop">putImageData</span><span class="punc">(</span><span class="var">imageData</span><span class="punc">,</span> <span class="num">0</span><span class="punc">,</span> <span class="num">0</span><span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <div class="callout note">
+                <span class="callout-icon">ℹ️</span>
+                <div class="callout-body"><strong>Why not CSS gradients?</strong>A CSS gradient approach (e.g., layering
+                    a white-to-hue gradient over a white-to-black gradient) would be simpler to write but less accurate
+                    — the color at any given pixel wouldn't precisely match an HSL value, making it impossible to
+                    reliably reverse the position back to a hex color. Pixel-level <code class="inline">ImageData</code>
+                    rendering ensures the canvas is an exact representation of the HSL color space at the current hue.
+                </div>
+            </div>
+
+            <h3 class="section-heading" id="picker-hex">Smart hex input with ghost-text prediction</h3>
+            <p>The hex input field has a ghost-text overlay system that predicts the completed hex value as you type.
+                It's implemented using two stacked <code class="inline">&lt;input&gt;</code> elements: the visible
+                foreground input the user types into, and a disabled background input that shows the predicted
+                completion in a muted color. Both are the same size and font, positioned on top of each other so the
+                ghost text appears to extend the user's real input.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarColorPicker.html — ghost text prediction
+                        logic</span><span class="code-lang">JS</span></div>
+                <pre><code><span class="var">hexInput</span><span class="punc">.</span><span class="prop">addEventListener</span><span class="punc">(</span><span class="str">"input"</span><span class="punc">, (</span><span class="var">e</span><span class="punc">) =&gt; {</span>
+  <span class="kw">const</span> <span class="var">hexOnly</span> <span class="op">=</span> <span class="var">e</span><span class="punc">.</span><span class="var">target</span><span class="punc">.</span><span class="var">value</span><span class="punc">.</span><span class="prop">replace</span><span class="punc">(</span><span class="str">/[^a-fA-F0-9]/g</span><span class="punc">,</span> <span class="str">''</span><span class="punc">);</span>
+
+  <span class="kw">if</span> <span class="punc">(</span><span class="var">hexOnly</span><span class="punc">.</span><span class="var">length</span> <span class="op">===</span> <span class="num">1</span><span class="punc">) {</span>
+    <span class="cmt">// Single char → repeat 5 times: "f" predicts "ffffff"</span>
+    <span class="var">ghostInput</span><span class="punc">.</span><span class="var">value</span> <span class="op">=</span> <span class="str">"#"</span> <span class="op">+</span> <span class="var">hexOnly</span> <span class="op">+</span> <span class="var">hexOnly</span><span class="punc">.</span><span class="prop">repeat</span><span class="punc">(</span><span class="num">5</span><span class="punc">);</span>
+  <span class="punc">}</span> <span class="kw">else if</span> <span class="punc">(</span><span class="var">hexOnly</span><span class="punc">.</span><span class="var">length</span> <span class="op">===</span> <span class="num">3</span><span class="punc">) {</span>
+    <span class="cmt">// 3-char shorthand → expand inline: "abc" → live preview of "#aabbcc"</span>
+    <span class="kw">const</span> <span class="var">expanded</span> <span class="op">=</span> <span class="var">hexOnly</span><span class="punc">.</span><span class="prop">split</span><span class="punc">(</span><span class="str">''</span><span class="punc">).</span><span class="prop">map</span><span class="punc">(</span><span class="var">c</span> <span class="op">=&gt;</span> <span class="var">c</span> <span class="op">+</span> <span class="var">c</span><span class="punc">).</span><span class="prop">join</span><span class="punc">(</span><span class="str">''</span><span class="punc">);</span>
+    <span class="fn">syncUIFromHex</span><span class="punc">(</span><span class="str">'#'</span> <span class="op">+</span> <span class="var">expanded</span><span class="punc">);</span>
+  <span class="punc">}</span> <span class="kw">else if</span> <span class="punc">(</span><span class="var">hexOnly</span><span class="punc">.</span><span class="var">length</span> <span class="op">===</span> <span class="num">6</span><span class="punc">) {</span>
+    <span class="cmt">// Complete → sync immediately</span>
+    <span class="fn">syncUIFromHex</span><span class="punc">(</span><span class="str">'#'</span> <span class="op">+</span> <span class="var">hexOnly</span><span class="punc">.</span><span class="prop">toLowerCase</span><span class="punc">());</span>
+  <span class="punc">}</span>
+<span class="punc">});</span>
+
+<span class="cmt">// Tab accepts the ghost prediction</span>
+<span class="var">hexInput</span><span class="punc">.</span><span class="prop">addEventListener</span><span class="punc">(</span><span class="str">"keydown"</span><span class="punc">, (</span><span class="var">e</span><span class="punc">) =&gt; {</span>
+  <span class="kw">if</span> <span class="punc">(</span><span class="var">e</span><span class="punc">.</span><span class="var">key</span> <span class="op">===</span> <span class="str">"Tab"</span> <span class="op">&amp;&amp;</span> <span class="var">ghostInput</span><span class="punc">.</span><span class="var">value</span><span class="punc">) {</span>
+    <span class="var">e</span><span class="punc">.</span><span class="prop">preventDefault</span><span class="punc">();</span>
+    <span class="kw">const</span> <span class="var">finalHex</span> <span class="op">=</span> <span class="str">'#'</span> <span class="op">+</span> <span class="var">ghostInput</span><span class="punc">.</span><span class="var">value</span>
+      <span class="punc">.</span><span class="prop">replace</span><span class="punc">(</span><span class="str">/[^a-fA-F0-9]/g</span><span class="punc">,</span> <span class="str">''</span><span class="punc">)</span>
+      <span class="punc">.</span><span class="prop">toLowerCase</span><span class="punc">();</span>
+    <span class="var">hexInput</span><span class="punc">.</span><span class="var">value</span> <span class="op">=</span> <span class="var">finalHex</span><span class="punc">;</span>
+    <span class="fn">syncUIFromHex</span><span class="punc">(</span><span class="var">finalHex</span><span class="punc">);</span>
+  <span class="punc">}</span>
+<span class="punc">});</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="picker-custom">Custom color management</h3>
+            <p>Custom colors use an <strong>optimistic UI</strong> pattern: when the user saves a color, the swatch
+                appears in the grid immediately — before any server confirmation. The server call happens asynchronously
+                in the background. If it fails, an error toast appears, but the swatch is already there. This makes the
+                interaction feel instant rather than waiting for a round trip.</p>
+            <p>Right-clicking a swatch triggers a delete confirmation modal, built dynamically using <code
+                    class="inline">ModalManager.genericConfirm.show()</code> with a custom HTML block showing the
+                color's hex value and a circular preview. Deletion is also optimistic — the swatch animates out (CSS
+                scale to 0) and is removed from the DOM immediately, then the server call fires.</p>
+
+            <h3 class="section-heading" id="picker-server">Server actions: Apply and Reset</h3>
+            <p>Both the Apply and Reset color buttons use the same async wrapper pattern: show spinner → await server
+                call → hide spinner → show toast. The server receives an RGB float object (<code
+                    class="inline">{ red, green, blue }</code> in 0–1 range) and writes it to the document. On success,
+                <code class="inline">ColorState.currentPageColor</code> is updated so the Apply button correctly becomes
+                disabled (since the page color now matches the selected color).</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarColorPicker.html — apply color
+                        action</span><span class="code-lang">JS</span></div>
+                <pre><code><span class="var">applyButton</span><span class="punc">.</span><span class="prop">addEventListener</span><span class="punc">(</span><span class="str">"click"</span><span class="punc">,</span> <span class="kw">async</span> <span class="punc">() =&gt; {</span>
+  <span class="kw">const</span> <span class="var">hex</span> <span class="op">=</span> <span class="var">hexInput</span><span class="punc">.</span><span class="var">value</span><span class="punc">;</span>
+
+  <span class="cmt">// Parse hex → normalized RGB floats for the server</span>
+  <span class="kw">const</span> <span class="var">rgbVals</span> <span class="op">=</span> <span class="var">hex</span><span class="punc">.</span><span class="prop">match</span><span class="punc">(</span><span class="str">/\w\w/g</span><span class="punc">).</span><span class="prop">map</span><span class="punc">(</span><span class="var">x</span> <span class="op">=&gt;</span> <span class="prop">parseInt</span><span class="punc">(</span><span class="var">x</span><span class="punc">,</span> <span class="num">16</span><span class="punc">)</span> <span class="op">/</span> <span class="num">255</span><span class="punc">);</span>
+  <span class="kw">const</span> <span class="var">rgbObj</span> <span class="op">=</span> <span class="punc">{</span> <span class="var">red</span><span class="punc">:</span> <span class="var">rgbVals</span><span class="punc">[</span><span class="num">0</span><span class="punc">],</span> <span class="var">green</span><span class="punc">:</span> <span class="var">rgbVals</span><span class="punc">[</span><span class="num">1</span><span class="punc">],</span> <span class="var">blue</span><span class="punc">:</span> <span class="var">rgbVals</span><span class="punc">[</span><span class="num">2</span><span class="punc">]</span> <span class="punc">};</span>
+
+  <span class="kw">await</span> <span class="fn">runColorAction</span><span class="punc">(() =&gt;</span> <span class="kw">new</span> <span class="cls">Promise</span><span class="punc">(</span><span class="var">resolve</span> <span class="op">=&gt;</span> <span class="punc">{</span>
+    <span class="var">google</span><span class="punc">.</span><span class="var">script</span><span class="punc">.</span><span class="prop">run</span>
+      <span class="punc">.</span><span class="prop">withSuccessHandler</span><span class="punc">(() =&gt; {</span>
+        <span class="cls">ColorState</span><span class="punc">.</span><span class="var">currentPageColor</span> <span class="op">=</span> <span class="var">hex</span><span class="punc">;</span>  <span class="cmt">// update local state</span>
+        <span class="fn">updateApplyButtonState</span><span class="punc">();</span>
+        <span class="fn">updateResetColorButtonState</span><span class="punc">();</span>
+        <span class="fn">resolve</span><span class="punc">();</span>
+      <span class="punc">})</span>
+      <span class="punc">.</span><span class="prop">withFailureHandler</span><span class="punc">(() =&gt;</span> <span class="fn">resolve</span><span class="punc">())</span>
+      <span class="punc">.</span><span class="fn">setPageColor</span><span class="punc">(</span><span class="var">rgbObj</span><span class="punc">);</span>
+  <span class="punc">}),</span> <span class="num">4</span><span class="punc">);</span>
+<span class="punc">});</span></code></pre>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ============================================================ -->
+            <!-- SidebarCSS.html -->
+            <!-- ============================================================ -->
+            <h2 class="file-heading" id="sidebarcss">SidebarCSS.html</h2>
+            <div class="file-role"><span class="badge badge-client">Client-side</span> All styling</div>
+
+            <h3 class="section-heading" id="css-tokens">Design tokens</h3>
+            <p>Every color used in the sidebar is defined as a CSS custom property on <code class="inline">:root</code>,
+                organized into semantic groups. Nothing is hardcoded at the component level — a button's hover color
+                references <code class="inline">var(--color-button-secondary-hover)</code>, not a hex value. This makes
+                the entire color scheme adjustable from one place and makes it immediately clear what role each color
+                plays.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarCSS.html — design token structure
+                        (excerpt)</span><span class="code-lang">CSS</span></div>
+                <pre><code><span class="var">:root</span> <span class="punc">{</span>
+  <span class="cmt">/* Text */</span>
+  <span class="prop">--color-text-primary</span><span class="punc">:</span>   <span class="str">#202124</span><span class="punc">;</span>   <span class="cmt">/* body text */</span>
+  <span class="prop">--color-text-secondary</span><span class="punc">:</span> <span class="str">#5f6368</span><span class="punc">;</span>   <span class="cmt">/* labels, muted text */</span>
+  <span class="prop">--color-text-disabled</span><span class="punc">:</span>  <span class="str">#666666</span><span class="punc">;</span>
+
+  <span class="cmt">/* Accents */</span>
+  <span class="prop">--color-accent-blue</span><span class="punc">:</span>    <span class="str">#4285f4</span><span class="punc">;</span>   <span class="cmt">/* focus rings, active states */</span>
+  <span class="prop">--color-button-primary</span><span class="punc">:</span> <span class="str">#1a73e8</span><span class="punc">;</span>   <span class="cmt">/* primary button fill */</span>
+
+  <span class="cmt">/* Feedback colors */</span>
+  <span class="prop">--color-toast-success</span><span class="punc">:</span>  <span class="str">#4caf50</span><span class="punc">;</span>
+  <span class="prop">--color-toast-error</span><span class="punc">:</span>    <span class="str">#f44336</span><span class="punc">;</span>
+  <span class="prop">--color-toast-warning</span><span class="punc">:</span>  <span class="str">#ff9800</span><span class="punc">;</span>
+
+  <span class="cmt">/* Shadows & overlays */</span>
+  <span class="prop">--color-shadow-glow-low</span><span class="punc">:</span> <span class="str">rgba(16, 150, 221, 0.35)</span><span class="punc">;</span>
+  <span class="prop">--color-overlay-background-low</span><span class="punc">:</span> <span class="str">rgba(240, 244, 249, 0.3)</span><span class="punc">;</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <h3 class="section-heading" id="css-animation">The tumble entrance animation</h3>
+            <p>When the sidebar opens, every UI element animates in with a "hard slam" effect — dropping from above with
+                a randomized rotation and a subtle bounce on impact. The animation is defined as a single <code
+                    class="inline">@keyframes</code> rule. Each element's starting rotation is set via a CSS custom
+                property (<code class="inline">--random-rotation</code>), which JavaScript sets to a random value
+                between -20° and +20° for each element during <code class="inline">DOMContentLoaded</code>. Elements are
+                staggered by applying incrementing <code class="inline">animation-delay</code> values so they land in
+                sequence rather than all at once.</p>
+
+            <div class="code-block">
+                <div class="code-header"><span class="code-filename">SidebarCSS.html — hard-slam keyframes</span><span
+                        class="code-lang">CSS</span></div>
+                <pre><code><span class="var">@keyframes</span> <span class="fn">hard-slam</span> <span class="punc">{</span>
+  <span class="num">0%</span>   <span class="punc">{</span>
+    <span class="prop">opacity</span><span class="punc">:</span> <span class="num">0</span><span class="punc">;</span>
+    <span class="prop">transform</span><span class="punc">:</span> <span class="fn">translateY</span><span class="punc">(</span><span class="str">-800px</span><span class="punc">)</span> <span class="fn">rotate</span><span class="punc">(</span><span class="str">var(--random-rotation, 10deg)</span><span class="punc">);</span>
+  <span class="punc">}</span>
+  <span class="num">75%</span>  <span class="punc">{</span>
+    <span class="prop">opacity</span><span class="punc">:</span> <span class="num">1</span><span class="punc">;</span>
+    <span class="prop">transform</span><span class="punc">:</span> <span class="fn">translateY</span><span class="punc">(</span><span class="num">0</span><span class="punc">)</span> <span class="fn">rotate</span><span class="punc">(</span><span class="num">0deg</span><span class="punc">);</span>   <span class="cmt">/* slam into position */</span>
+  <span class="punc">}</span>
+  <span class="num">85%</span>  <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="fn">translateY</span><span class="punc">(</span><span class="num">3px</span><span class="punc">);</span> <span class="punc">}</span>   <span class="cmt">/* impact overshoot */</span>
+  <span class="num">100%</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="fn">translateY</span><span class="punc">(</span><span class="num">0</span><span class="punc">);</span> <span class="punc">}</span>    <span class="cmt">/* settle */</span>
+<span class="punc">}</span>
+
+<span class="cmt">/* JavaScript sets this per-element on DOMContentLoaded: */</span>
+<span class="cmt">/* el.style.setProperty('--random-rotation', `${Math.random() * 40 - 20}deg`); */</span>
+<span class="cmt">/* el.style.animationDelay = `${index * 0.1}s`; */</span></code></pre>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const links = document.querySelectorAll('aside a');
+        const sections = document.querySelectorAll('h2.file-heading, h3.section-heading');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    links.forEach(l => l.classList.remove('active'));
+                    const active = document.querySelector(`aside a[href="#${id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-56px 0px -70% 0px', threshold: 0 });
+
+        sections.forEach(s => observer.observe(s));
+
+        links.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>
