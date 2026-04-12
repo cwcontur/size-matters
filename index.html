@@ -569,92 +569,97 @@
                     <p>Save up to 30 of your own colors for quick reuse. They persist across sessions and right-clicking
                         any saved swatch lets you remove it.</p>
                 </div>
+                <div class="feat-card">
+                    <div class="feat-icon"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V5h14v14zM7 17h3v-7H7v7zm4-9h2v9h-2V8zm3 4h3v5h-3v-5z" />
+                        </svg></div>
+                    <h3>Live aspect ratio preview</h3>
+                    <p>A small page silhouette updates in real time as you type dimensions, giving you an instant visual
+                        sense of your page's proportions before applying anything.</p>
+                </div>
+                <div class="free-banner">
+                    <h3>100% free. No subscriptions. No nonsense.</h3>
+                    <p>Size Matters is completely free to use. Setting your own page size is a basic document feature —
+                        you shouldn't have to pay a monthly fee for it.</p>
+                </div>
             </div>
         </div>
 
-        <div style="padding:0 24px 56px;max-width:1000px;margin:0 auto">
-            <div class="free-banner">
-                <h3>100% free. No subscriptions. No nonsense.</h3>
-                <p>Size Matters is completely free to use. Setting your own page size is a basic document feature — you
-                    shouldn't have to pay a monthly fee for it.</p>
-            </div>
-        </div>
-    </div>
+        <!-- HOW IT WORKS -->
+        <div id="page-howitworks" class="page">
+            <div class="legal" style="max-width:860px">
+                <h1>How it works</h1>
+                <p class="meta">A breakdown of the extension's architecture and key implementation details.</p>
 
-    <!-- HOW IT WORKS -->
-    <div id="page-howitworks" class="page">
-        <div class="legal" style="max-width:860px">
-            <h1>How it works</h1>
-            <p class="meta">A breakdown of the extension's architecture and key implementation details.</p>
+                <p>Size Matters is built entirely with Google Apps Script — no external servers, no build tools, no
+                    dependencies beyond what Google provides. The extension consists of a handful of <code>.gs</code>
+                    server-side files and a set of HTML template files that form the sidebar UI. Here's how each piece
+                    fits together.</p>
 
-            <p>Size Matters is built entirely with Google Apps Script — no external servers, no build tools, no
-                dependencies beyond what Google provides. The extension consists of a handful of <code>.gs</code>
-                server-side files and a set of HTML template files that form the sidebar UI. Here's how each piece fits
-                together.</p>
-
-            <!-- ARCHITECTURE OVERVIEW -->
-            <div class="arch-grid">
-                <div class="arch-card">
-                    <div class="arch-label">Server-side (.gs)</div>
-                    <div class="arch-files">
-                        <span class="file-tag">appscript.json</span>
-                        <span class="file-tag">Main.gs</span>
-                        <span class="file-tag">Margins.gs</span>
-                        <span class="file-tag">Reset.gs</span>
-                        <span class="file-tag">Colours.gs</span>
-                        <span class="file-tag">CurrentPageSettings.gs</span>
-                        <span class="file-tag">Cached.gs</span>
+                <!-- ARCHITECTURE OVERVIEW -->
+                <div class="arch-grid">
+                    <div class="arch-card">
+                        <div class="arch-label">Server-side (.gs)</div>
+                        <div class="arch-files">
+                            <span class="file-tag">appscript.json</span>
+                            <span class="file-tag">Main.gs</span>
+                            <span class="file-tag">Margins.gs</span>
+                            <span class="file-tag">Reset.gs</span>
+                            <span class="file-tag">Colours.gs</span>
+                            <span class="file-tag">CurrentPageSettings.gs</span>
+                            <span class="file-tag">Cached.gs</span>
+                        </div>
+                        <p class="arch-desc">Runs on Google's servers. Interacts with the Docs API. Manages user-scoped
+                            persistence via PropertiesService.</p>
                     </div>
-                    <p class="arch-desc">Runs on Google's servers. Interacts with the Docs API. Manages user-scoped
-                        persistence via PropertiesService.</p>
-                </div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-card">
-                    <div class="arch-label">Client-side (HTML)</div>
-                    <div class="arch-files">
-                        <span class="file-tag">Sidebar.html</span>
-                        <span class="file-tag">SidebarCSS.html</span>
-                        <span class="file-tag">SidebarUtils.html</span>
-                        <span class="file-tag">SidebarLogic.html</span>
-                        <span class="file-tag">SidebarColorPicker.html</span>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-card">
+                        <div class="arch-label">Client-side (HTML)</div>
+                        <div class="arch-files">
+                            <span class="file-tag">Sidebar.html</span>
+                            <span class="file-tag">SidebarCSS.html</span>
+                            <span class="file-tag">SidebarUtils.html</span>
+                            <span class="file-tag">SidebarLogic.html</span>
+                            <span class="file-tag">SidebarColorPicker.html</span>
+                        </div>
+                        <p class="arch-desc">Runs in the sidebar iframe. Manages UI state, input validation, and calls
+                            the server via <code>google.script.run</code>.</p>
                     </div>
-                    <p class="arch-desc">Runs in the sidebar iframe. Manages UI state, input validation, and calls the
-                        server via <code>google.script.run</code>.</p>
                 </div>
-            </div>
 
-            <!-- FILE BREAKDOWNS -->
-            <h2>appscript.json — project manifest</h2>
-            <p>The manifest declares the V8 runtime and the two OAuth scopes the extension uses. Nothing more is
-                requested — <code>documents.currentonly</code> grants access only to the currently open document, and
-                <code>script.container.ui</code> allows the sidebar panel to be shown.
-            </p>
-            <pre><code>"oauthScopes": [
+                <!-- FILE BREAKDOWNS -->
+                <h2>appscript.json — project manifest</h2>
+                <p>The manifest declares the V8 runtime and the two OAuth scopes the extension uses. Nothing more is
+                    requested — <code>documents.currentonly</code> grants access only to the currently open document,
+                    and <code>script.container.ui</code> allows the sidebar panel to be shown.</p>
+                <pre><code>"oauthScopes": [
   "https://www.googleapis.com/auth/documents.currentonly",
   "https://www.googleapis.com/auth/script.container.ui"
 ]</code></pre>
 
-            <h2>Main.gs — entry points</h2>
-            <p><code>onInstall()</code> and <code>onOpen()</code> are the standard Apps Script lifecycle hooks. They add
-                a "Size Matters" menu item to the Google Docs toolbar. <code>showSidebar()</code> compiles the HTML
-                template and opens it as a sidebar panel.</p>
-            <p>The <code>include()</code> helper is used by the HTML templates to stitch together multiple files at
-                render time — so <code>SidebarCSS.html</code>, <code>SidebarUtils.html</code>, and so on are all inlined
-                into the final sidebar output via <code>&lt;?!= include('filename') ?&gt;</code> template tags.</p>
-            <pre><code>function include(filename) {
+                <h2>Main.gs — entry points</h2>
+                <p><code>onInstall()</code> and <code>onOpen()</code> are the standard Apps Script lifecycle hooks. They
+                    add a "Size Matters" menu item to the Google Docs toolbar. <code>showSidebar()</code> compiles the
+                    HTML template and opens it as a sidebar panel.</p>
+                <p>The <code>include()</code> helper is used by the HTML templates to stitch together multiple files at
+                    render time — so <code>SidebarCSS.html</code>, <code>SidebarUtils.html</code>, and so on are all
+                    inlined into the final sidebar output via <code>&lt;?!= include('filename') ?&gt;</code> template
+                    tags.</p>
+                <pre><code>function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }</code></pre>
 
-            <h2>Cached.gs — user persistence</h2>
-            <p>All user preferences are stored with <code>PropertiesService.getUserProperties()</code>, which is scoped
-                per-user and persists across sessions. Three things are saved: the preferred unit of measurement, custom
-                page size presets (capped at 20), and custom saved colors (capped at 30).</p>
-            <p>Custom presets are stored as a JSON-serialized object keyed by a sanitized version of the preset name.
-                Before saving, the backend enforces the 20-preset cap and throws a catchable
-                <code>MAX_LIMIT_REACHED</code> error if it's hit — so the frontend can show an appropriate warning
-                without crashing.
-            </p>
-            <pre><code>// Preset keys are generated like this:
+                <h2>Cached.gs — user persistence</h2>
+                <p>All user preferences are stored with <code>PropertiesService.getUserProperties()</code>, which is
+                    scoped per-user and persists across sessions. Three things are saved: the preferred unit of
+                    measurement, custom page size presets (capped at 20), and custom saved colors (capped at 30).</p>
+                <p>Custom presets are stored as a JSON-serialized object keyed by a sanitized version of the preset
+                    name. Before saving, the backend enforces the 20-preset cap and throws a catchable
+                    <code>MAX_LIMIT_REACHED</code> error if it's hit — so the frontend can show an appropriate warning
+                    without crashing.
+                </p>
+                <pre><code>// Preset keys are generated like this:
 const safeKey = "custom_" + name.toLowerCase().replace(/[^a-z0-9]/g, "");
 
 // The limit check:
@@ -662,15 +667,15 @@ if (!presets[safeKey] && Object.keys(presets).length >= MAX_PRESETS) {
   throw new Error("MAX_LIMIT_REACHED");
 }</code></pre>
 
-            <h2>Colours.gs — page background color</h2>
-            <p>The Google Docs API represents colors as RGB floats between 0 and 1, not the 0–255 integers or hex
-                strings that a browser color picker works with. This file handles the conversion boundary.
-                <code>setPageColor()</code> accepts an RGB object with float components and writes it to
-                <code>body.setBackgroundColor()</code>, which expects a hex string — so it converts on the way in.
-                <code>getCurrentPageColor()</code> reads the hex string back from the API and converts it to floats for
-                the frontend.
-            </p>
-            <pre><code>// Server-side: floats (0–1) in, hex string to the API
+                <h2>Colours.gs — page background color</h2>
+                <p>The Google Docs API represents colors as RGB floats between 0 and 1, not the 0–255 integers or hex
+                    strings that a browser color picker works with. This file handles the conversion boundary.
+                    <code>setPageColor()</code> accepts an RGB object with float components and writes it to
+                    <code>body.setBackgroundColor()</code>, which expects a hex string — so it converts on the way in.
+                    <code>getCurrentPageColor()</code> reads the hex string back from the API and converts it to floats
+                    for the frontend.
+                </p>
+                <pre><code>// Server-side: floats (0–1) in, hex string to the API
 function rgbToHex(r, g, b) {
   const toHex = (c) => {
     const hex = Math.round(c * 255).toString(16);
@@ -678,18 +683,18 @@ function rgbToHex(r, g, b) {
   };
   return "#" + toHex(r) + toHex(g) + toHex(b);
 }</code></pre>
-            <p>Note: the client side has its own <code>rgbToHex</code>/<code>hexToRgb</code> functions that work with
-                0–255 integers instead — the two sides of the bridge use different scales by design.</p>
+                <p>Note: the client side has its own <code>rgbToHex</code>/<code>hexToRgb</code> functions that work
+                    with 0–255 integers instead — the two sides of the bridge use different scales by design.</p>
 
-            <h2>CurrentPageSettings.gs — reading document state</h2>
-            <p>The Docs API always returns page dimensions in points (1/72 of an inch).
-                <code>getCurrentPageSettings(unit)</code> fetches width, height, and all four margins, then converts
-                them to whatever unit the user has selected before returning the data.
-            </p>
-            <p><code>getInitialSidebarData()</code> is the most important function for startup performance — it bundles
-                the user's unit preference, their saved custom presets, and the current page settings into a single
-                server call, so the sidebar can fully initialize in one round trip instead of three.</p>
-            <pre><code>function getInitialSidebarData() {
+                <h2>CurrentPageSettings.gs — reading document state</h2>
+                <p>The Docs API always returns page dimensions in points (1/72 of an inch).
+                    <code>getCurrentPageSettings(unit)</code> fetches width, height, and all four margins, then converts
+                    them to whatever unit the user has selected before returning the data.
+                </p>
+                <p><code>getInitialSidebarData()</code> is the most important function for startup performance — it
+                    bundles the user's unit preference, their saved custom presets, and the current page settings into a
+                    single server call, so the sidebar can fully initialize in one round trip instead of three.</p>
+                <pre><code>function getInitialSidebarData() {
   const unit = getUserUnitPreference() || "inches";
   return {
     customPresets: getCustomPresets(),
@@ -698,74 +703,79 @@ function rgbToHex(r, g, b) {
   };
 }</code></pre>
 
-            <h2>Margins.gs — writing page settings</h2>
-            <p><code>setCustomPageSizeWithMargins(settings, unit)</code> is the core write operation. It receives all
-                six values (width, height, four margins) already converted to points by the frontend, then calls the six
-                corresponding <code>body.set*()</code> methods on the document. Errors are caught, logged, and re-thrown
-                — so the client-side <code>withFailureHandler</code> fires and shows an error toast rather than silently
-                failing.</p>
+                <h2>Margins.gs — writing page settings</h2>
+                <p><code>setCustomPageSizeWithMargins(settings, unit)</code> is the core write operation. It receives
+                    all six values (width, height, four margins) already converted to points by the frontend, then calls
+                    the six corresponding <code>body.set*()</code> methods on the document. Errors are caught, logged,
+                    and re-thrown — so the client-side <code>withFailureHandler</code> fires and shows an error toast
+                    rather than silently failing.</p>
 
-            <h2>Reset.gs — restoring defaults</h2>
-            <p>Google Docs' default page is US Letter: 8.5 × 11 inches with 1-inch margins on all sides. In points (the
-                unit the API uses), that's 612 × 792 with margins of 72. The reset function hardcodes these values
-                directly.</p>
-            <pre><code>body.setPageHeight(11 * 72);  // 792pt
+                <h2>Reset.gs — restoring defaults</h2>
+                <p>Google Docs' default page is US Letter: 8.5 × 11 inches with 1-inch margins on all sides. In points
+                    (the unit the API uses), that's 612 × 792 with margins of 72. The reset function hardcodes these
+                    values directly.</p>
+                <pre><code>body.setPageHeight(11 * 72);  // 792pt
 body.setPageWidth(8.5 * 72);  // 612pt
 body.setMarginTop(72);        // 1 inch on all sides
 body.setMarginBottom(72);
 body.setMarginLeft(72);
 body.setMarginRight(72);</code></pre>
 
-            <h2>SidebarUtils.html — shared client utilities</h2>
-            <p>This file loads first (included before the logic files) and defines the shared building blocks everything
-                else depends on. A few worth highlighting:</p>
-            <p><strong>CONVERSIONS</strong> — a lookup object with <code>toPoints()</code> and <code>fromPoints()</code>
-                for inches, cm, and points. Using a single central object means unit conversion logic is never
-                duplicated.</p>
-            <pre><code>const CONVERSIONS = {
+                <h2>SidebarUtils.html — shared client utilities</h2>
+                <p>This file loads first (included before the logic files) and defines the shared building blocks
+                    everything else depends on. A few worth highlighting:</p>
+                <p><strong>CONVERSIONS</strong> — a lookup object with <code>toPoints()</code> and
+                    <code>fromPoints()</code> for inches, cm, and points. Using a single central object means unit
+                    conversion logic is never duplicated.
+                </p>
+                <pre><code>const CONVERSIONS = {
   inches: { toPoints: (v) => v * 72,         fromPoints: (v) => v / 72 },
   cm:     { toPoints: (v) => (v / 2.54) * 72, fromPoints: (v) => (v * 2.54) / 72 },
   points: { toPoints: (v) => v,               fromPoints: (v) => v }
 };</code></pre>
-            <p><strong>compareFloats()</strong> — floating-point arithmetic means <code>8.5 * 72</code> doesn't always
-                equal exactly <code>612</code>. This helper wraps <code>Math.abs(a - b) &lt;= tolerance</code> and is
-                used everywhere a numeric comparison needs to be reliable.</p>
-            <p><strong>ToastManager</strong> — a single object that handles all toast notifications. All toast messages
-                are defined in a <code>TOAST_TYPES</code> config object (including support for message functions that
-                take a unit string), so adding a new notification never requires touching the display logic.</p>
-            <p>The file also includes test suites for unit conversion and color math that run automatically when
-                <code>CONFIG.debug</code> is set to true.
-            </p>
+                <p><strong>compareFloats()</strong> — floating-point arithmetic means <code>8.5 * 72</code> doesn't
+                    always equal exactly <code>612</code>. This helper wraps
+                    <code>Math.abs(a - b) &lt;= tolerance</code> and is used everywhere a numeric comparison needs to be
+                    reliable.
+                </p>
+                <p><strong>ToastManager</strong> — a single object that handles all toast notifications. All toast
+                    messages are defined in a <code>TOAST_TYPES</code> config object (including support for message
+                    functions that take a unit string), so adding a new notification never requires touching the display
+                    logic.</p>
+                <p>The file also includes test suites for unit conversion and color math that run automatically when
+                    <code>CONFIG.debug</code> is set to true.
+                </p>
 
-            <h2>SidebarLogic.html — core application logic</h2>
-            <p>The largest file. All page state is stored in <code>AppState</code>, with all internal values kept in
-                points regardless of what unit the user has selected. This means conversions only happen at the display
-                layer — when reading from inputs or writing to them — never during computation.</p>
-            <p><strong>Input validation</strong> happens in a debounced handler that fires 300ms after the user stops
-                typing. It checks for out-of-range values (enforcing a 0.1–120 inch safe zone) and also catches margin
-                overlap — where combined left + right or top + bottom margins would leave no room for content.</p>
-            <p><strong>Orientation swap</strong> is a good example of the logic being careful. Switching from portrait
-                to landscape doesn't just swap width and height — it also transposes top/bottom margins with left/right
-                margins, which is the correct behavior for a rotated page.</p>
-            <pre><code>// Portrait → Landscape: swap dimensions AND transpose margins
+                <h2>SidebarLogic.html — core application logic</h2>
+                <p>The largest file. All page state is stored in <code>AppState</code>, with all internal values kept in
+                    points regardless of what unit the user has selected. This means conversions only happen at the
+                    display layer — when reading from inputs or writing to them — never during computation.</p>
+                <p><strong>Input validation</strong> happens in a debounced handler that fires 300ms after the user
+                    stops typing. It checks for out-of-range values (enforcing a 0.1–120 inch safe zone) and also
+                    catches margin overlap — where combined left + right or top + bottom margins would leave no room for
+                    content.</p>
+                <p><strong>Orientation swap</strong> is a good example of the logic being careful. Switching from
+                    portrait to landscape doesn't just swap width and height — it also transposes top/bottom margins
+                    with left/right margins, which is the correct behavior for a rotated page.</p>
+                <pre><code>// Portrait → Landscape: swap dimensions AND transpose margins
 inputs.width.value  = vals.h.toFixed(2);  // old height becomes new width
 inputs.height.value = vals.w.toFixed(2);
 inputs.top.value    = vals.l.toFixed(2);  // old left becomes new top
 inputs.left.value   = vals.t.toFixed(2);
 inputs.bottom.value = vals.r.toFixed(2);
 inputs.right.value  = vals.b.toFixed(2);</code></pre>
-            <p><strong>Custom preset saving</strong> has several layers of protection: duplicate dimension detection
-                (before the modal even opens), overwrite confirmation (if the same preset name is reused), and a
-                20-preset hard cap enforced on both the client and server independently.</p>
-            <p><strong>Unit switching</strong> converts the live input values — not the saved internal state — so if a
-                user has typed a modified value that they haven't applied yet, that value is preserved and converted
-                correctly when they switch units.</p>
+                <p><strong>Custom preset saving</strong> has several layers of protection: duplicate dimension detection
+                    (before the modal even opens), overwrite confirmation (if the same preset name is reused), and a
+                    20-preset hard cap enforced on both the client and server independently.</p>
+                <p><strong>Unit switching</strong> converts the live input values — not the saved internal state — so if
+                    a user has typed a modified value that they haven't applied yet, that value is preserved and
+                    converted correctly when they switch units.</p>
 
-            <h2>SidebarColorPicker.html — the color picker</h2>
-            <p>The gradient canvas is drawn pixel-by-pixel using <code>ImageData</code> rather than CSS gradients, which
-                gives exact HSL control. The X axis is saturation (0→1), the Y axis is lightness (1→0), and the hue
-                comes from the slider above.</p>
-            <pre><code>for (let y = 0; y < height; y++) {
+                <h2>SidebarColorPicker.html — the color picker</h2>
+                <p>The gradient canvas is drawn pixel-by-pixel using <code>ImageData</code> rather than CSS gradients,
+                    which gives exact HSL control. The X axis is saturation (0→1), the Y axis is lightness (1→0), and
+                    the hue comes from the slider above.</p>
+                <pre><code>for (let y = 0; y < height; y++) {
   for (let x = 0; x < width; x++) {
     const saturation = x / (width - 1);
     const lightness  = 1 - (y / (height - 1));
@@ -773,231 +783,234 @@ inputs.right.value  = vals.b.toFixed(2);</code></pre>
     // write r,g,b,255 into ImageData at (x,y)...
   }
 }</code></pre>
-            <p>The hex input has a ghost-text prediction system: as you type, a translucent overlay input shows a
-                predicted completed hex value. Pressing Tab accepts the prediction. Single-character input predicts by
-                repeating the character (<code>f</code> → <code>ffffff</code>); three-character input expands shorthand
-                (<code>abc</code> → <code>aabbcc</code>).</p>
-            <p>Custom colors use optimistic UI updates — the color swatch appears in the grid immediately on click, and
-                the server save happens asynchronously in the background. If the save fails, an error toast appears but
-                the UI has already responded, making the interaction feel instant.</p>
+                <p>The hex input has a ghost-text prediction system: as you type, a translucent overlay input shows a
+                    predicted completed hex value. Pressing Tab accepts the prediction. Single-character input predicts
+                    by repeating the character (<code>f</code> → <code>ffffff</code>); three-character input expands
+                    shorthand (<code>abc</code> → <code>aabbcc</code>).</p>
+                <p>Custom colors use optimistic UI updates — the color swatch appears in the grid immediately on click,
+                    and the server save happens asynchronously in the background. If the save fails, an error toast
+                    appears but the UI has already responded, making the interaction feel instant.</p>
 
-            <h2>SidebarCSS.html — styling</h2>
-            <p>All colors are defined as CSS custom properties at the <code>:root</code> level, organized by role (text,
-                backgrounds, borders, buttons, toasts, etc.). This makes the entire color scheme easy to adjust from one
-                place and keeps component styles from hardcoding values.</p>
-            <p>The signature entrance animation — where sidebar elements drop in with a random rotation and a slight
-                bounce — is a single <code>@keyframes hard-slam</code> rule applied via the <code>.tumble</code> class,
-                with the rotation angle randomized per-element via a CSS variable set by JavaScript on load.</p>
-            <pre><code>@keyframes hard-slam {
+                <h2>SidebarCSS.html — styling</h2>
+                <p>All colors are defined as CSS custom properties at the <code>:root</code> level, organized by role
+                    (text, backgrounds, borders, buttons, toasts, etc.). This makes the entire color scheme easy to
+                    adjust from one place and keeps component styles from hardcoding values.</p>
+                <p>The signature entrance animation — where sidebar elements drop in with a random rotation and a slight
+                    bounce — is a single <code>@keyframes hard-slam</code> rule applied via the <code>.tumble</code>
+                    class, with the rotation angle randomized per-element via a CSS variable set by JavaScript on load.
+                </p>
+                <pre><code>@keyframes hard-slam {
   0%   { opacity: 0; transform: translateY(-800px) rotate(var(--random-rotation, 10deg)); }
   75%  { opacity: 1; transform: translateY(0) rotate(0deg); }
   85%  { transform: translateY(3px); }   /* subtle impact overshoot */
   100% { transform: translateY(0); }
 }</code></pre>
 
+            </div>
         </div>
-    </div>
 
-    <div id="page-privacy" class="page">
-        <div class="legal">
-            <h1>Privacy policy</h1>
-            <p class="meta">Last updated: April 12, 2026 &nbsp;·&nbsp; Size Matters for Google Docs</p>
+        <div id="page-privacy" class="page">
+            <div class="legal">
+                <h1>Privacy policy</h1>
+                <p class="meta">Last updated: April 12, 2026 &nbsp;·&nbsp; Size Matters for Google Docs</p>
 
-            <p>Your privacy is important. This policy explains what information Size Matters ("the Add-on") collects,
-                how it is used, and your rights regarding that information.</p>
+                <p>Your privacy is important. This policy explains what information Size Matters ("the Add-on")
+                    collects, how it is used, and your rights regarding that information.</p>
 
-            <h2>1. Information we collect</h2>
-            <p>Size Matters does <strong>not</strong> collect, transmit, or store any personally identifiable
-                information on external servers. The Add-on operates entirely within your browser session and Google
-                Docs environment.</p>
-            <p>The only data stored is:</p>
-            <ul>
-                <li><strong>Custom color cache:</strong> Any page colors you save are stored locally using Google Apps
-                    Script's PropertiesService, scoped to your individual Google account. This data never leaves
-                    Google's infrastructure and is not accessible to the developer.</li>
-            </ul>
+                <h2>1. Information we collect</h2>
+                <p>Size Matters does <strong>not</strong> collect, transmit, or store any personally identifiable
+                    information on external servers. The Add-on operates entirely within your browser session and Google
+                    Docs environment.</p>
+                <p>The only data stored is:</p>
+                <ul>
+                    <li><strong>Custom color cache:</strong> Any page colors you save are stored locally using Google
+                        Apps Script's PropertiesService, scoped to your individual Google account. This data never
+                        leaves Google's infrastructure and is not accessible to the developer.</li>
+                </ul>
 
-            <h2>2. How we use your information</h2>
-            <p>Because no personal data is collected, there is nothing to use, sell, share, or analyze. The Add-on
-                applies page size and formatting changes directly to your open document at your direction and does
-                nothing else.</p>
+                <h2>2. How we use your information</h2>
+                <p>Because no personal data is collected, there is nothing to use, sell, share, or analyze. The Add-on
+                    applies page size and formatting changes directly to your open document at your direction and does
+                    nothing else.</p>
 
-            <h2>3. Third-party services</h2>
-            <p>Size Matters does not integrate with any third-party analytics, advertising, or tracking services. No
-                data is shared with any third party.</p>
+                <h2>3. Third-party services</h2>
+                <p>Size Matters does not integrate with any third-party analytics, advertising, or tracking services. No
+                    data is shared with any third party.</p>
 
-            <h2>4. Google API scopes</h2>
-            <p>The Add-on requests only the minimum Google API permissions necessary to function:</p>
-            <ul>
-                <li><strong>documents.currentonly</strong> — grants access to the currently open document only. Size
-                    Matters uses this exclusively to read and write page size, margin, and background color settings. It
-                    cannot access any other documents in your Google Drive.</li>
-                <li><strong>script.container.ui</strong> — allows the Add-on to display its sidebar panel inside Google
-                    Docs.</li>
-            </ul>
-            <p>Importantly, <strong>Size Matters cannot see, read, or access the text content of your document in any
-                    way.</strong> The Add-on only interacts with document-level formatting properties — specifically
-                page dimensions, margins, and page color. Your writing stays completely private.</p>
+                <h2>4. Google API scopes</h2>
+                <p>The Add-on requests only the minimum Google API permissions necessary to function:</p>
+                <ul>
+                    <li><strong>documents.currentonly</strong> — grants access to the currently open document only. Size
+                        Matters uses this exclusively to read and write page size, margin, and background color
+                        settings. It cannot access any other documents in your Google Drive.</li>
+                    <li><strong>script.container.ui</strong> — allows the Add-on to display its sidebar panel inside
+                        Google Docs.</li>
+                </ul>
+                <p>Importantly, <strong>Size Matters cannot see, read, or access the text content of your document in
+                        any way.</strong> The Add-on only interacts with document-level formatting properties —
+                    specifically page dimensions, margins, and page color. Your writing stays completely private.</p>
 
-            <h2>5. Changes to this policy</h2>
-            <p>If this privacy policy changes, the updated version will be posted on this page with a revised date.
-                Continued use of the Add-on after changes constitutes acceptance of the new policy.</p>
+                <h2>5. Changes to this policy</h2>
+                <p>If this privacy policy changes, the updated version will be posted on this page with a revised date.
+                    Continued use of the Add-on after changes constitutes acceptance of the new policy.</p>
 
-            <h2>7. Contact</h2>
-            <p>If you have questions about this privacy policy, please contact us at <a
-                    href="mailto:contact@example.com">contact@example.com</a>.</p>
+                <h2>7. Contact</h2>
+                <p>If you have questions about this privacy policy, please contact us at <a
+                        href="mailto:contact@example.com">contact@example.com</a>.</p>
+            </div>
         </div>
-    </div>
 
-    <!-- TERMS OF SERVICE -->
-    <div id="page-tos" class="page">
-        <div class="legal">
-            <h1>Terms of service</h1>
-            <p class="meta">Last updated: April 12, 2026 &nbsp;·&nbsp; Size Matters for Google Docs</p>
+        <!-- TERMS OF SERVICE -->
+        <div id="page-tos" class="page">
+            <div class="legal">
+                <h1>Terms of service</h1>
+                <p class="meta">Last updated: April 12, 2026 &nbsp;·&nbsp; Size Matters for Google Docs</p>
 
-            <p>By installing or using the Size Matters Add-on for Google Docs ("the Add-on"), you agree to these Terms
-                of Service. Please read them carefully.</p>
+                <p>By installing or using the Size Matters Add-on for Google Docs ("the Add-on"), you agree to these
+                    Terms of Service. Please read them carefully.</p>
 
-            <h2>1. Description of service</h2>
-            <p>Size Matters is a free Google Docs Add-on that allows users to set custom page sizes, margins,
-                orientations, and colors in Google Docs. The Add-on is provided free of charge and without subscription.
-            </p>
+                <h2>1. Description of service</h2>
+                <p>Size Matters is a free Google Docs Add-on that allows users to set custom page sizes, margins,
+                    orientations, and colors in Google Docs. The Add-on is provided free of charge and without
+                    subscription.</p>
 
-            <h2>2. Acceptable use</h2>
-            <p>You may use the Add-on for any lawful purpose. You agree not to:</p>
-            <ul>
-                <li>Attempt to reverse-engineer, decompile, or extract the source code of the Add-on.</li>
-                <li>Use the Add-on in any way that violates Google's Terms of Service or Workspace policies.</li>
-                <li>Use the Add-on to facilitate any unlawful activity.</li>
-            </ul>
+                <h2>2. Acceptable use</h2>
+                <p>You may use the Add-on for any lawful purpose. You agree not to:</p>
+                <ul>
+                    <li>Attempt to reverse-engineer, decompile, or extract the source code of the Add-on.</li>
+                    <li>Use the Add-on in any way that violates Google's Terms of Service or Workspace policies.</li>
+                    <li>Use the Add-on to facilitate any unlawful activity.</li>
+                </ul>
 
-            <h2>3. No warranty</h2>
-            <p>The Add-on is provided "as is" and "as available," without warranty of any kind, express or implied. This
-                includes, without limitation, any implied warranties of merchantability, fitness for a particular
-                purpose, or non-infringement. We do not warrant that the Add-on will be uninterrupted, error-free, or
-                free of bugs.</p>
+                <h2>3. No warranty</h2>
+                <p>The Add-on is provided "as is" and "as available," without warranty of any kind, express or implied.
+                    This includes, without limitation, any implied warranties of merchantability, fitness for a
+                    particular purpose, or non-infringement. We do not warrant that the Add-on will be uninterrupted,
+                    error-free, or free of bugs.</p>
 
-            <h2>4. Limitation of liability</h2>
-            <p>To the fullest extent permitted by applicable law, the developer of Size Matters shall not be liable for
-                any indirect, incidental, special, consequential, or punitive damages arising out of or related to your
-                use of the Add-on, even if advised of the possibility of such damages.</p>
+                <h2>4. Limitation of liability</h2>
+                <p>To the fullest extent permitted by applicable law, the developer of Size Matters shall not be liable
+                    for any indirect, incidental, special, consequential, or punitive damages arising out of or related
+                    to your use of the Add-on, even if advised of the possibility of such damages.</p>
 
-            <h2>5. No fee</h2>
-            <p>Size Matters is and will remain free to use. There are no subscription fees, in-app purchases, or premium
-                tiers. If you are ever prompted for payment to use this Add-on, you are not using the official Size
-                Matters Add-on.</p>
+                <h2>5. No fee</h2>
+                <p>Size Matters is and will remain free to use. There are no subscription fees, in-app purchases, or
+                    premium tiers. If you are ever prompted for payment to use this Add-on, you are not using the
+                    official Size Matters Add-on.</p>
 
-            <h2>6. Third-party platforms</h2>
-            <p>The Add-on operates within Google Docs and is subject to Google's own Terms of Service. Your use of
-                Google Docs is governed separately by Google's policies, which we do not control.</p>
+                <h2>6. Third-party platforms</h2>
+                <p>The Add-on operates within Google Docs and is subject to Google's own Terms of Service. Your use of
+                    Google Docs is governed separately by Google's policies, which we do not control.</p>
 
-            <h2>7. Modifications</h2>
-            <p>We reserve the right to update or modify the Add-on and these Terms at any time. Changes will be
-                reflected on this page with an updated date. Continued use of the Add-on after changes constitutes your
-                acceptance of the revised terms.</p>
+                <h2>7. Modifications</h2>
+                <p>We reserve the right to update or modify the Add-on and these Terms at any time. Changes will be
+                    reflected on this page with an updated date. Continued use of the Add-on after changes constitutes
+                    your acceptance of the revised terms.</p>
 
-            <h2>8. Termination</h2>
-            <p>You may stop using the Add-on at any time by uninstalling it from your Google account. We reserve the
-                right to discontinue the Add-on at any time without notice.</p>
+                <h2>8. Termination</h2>
+                <p>You may stop using the Add-on at any time by uninstalling it from your Google account. We reserve the
+                    right to discontinue the Add-on at any time without notice.</p>
 
-            <h2>9. Contact</h2>
-            <p>For questions about these terms, contact us at <a
-                    href="mailto:contact@example.com">contact@example.com</a>.</p>
+                <h2>9. Contact</h2>
+                <p>For questions about these terms, contact us at <a
+                        href="mailto:contact@example.com">contact@example.com</a>.</p>
+            </div>
         </div>
-    </div>
 
-    <!-- SUPPORT -->
-    <div id="page-support" class="page">
-        <div class="legal">
-            <h1>Support</h1>
-            <p class="meta">Size Matters for Google Docs &nbsp;·&nbsp; We're happy to help</p>
+        <!-- SUPPORT -->
+        <div id="page-support" class="page">
+            <div class="legal">
+                <h1>Support</h1>
+                <p class="meta">Size Matters for Google Docs &nbsp;·&nbsp; We're happy to help</p>
 
-            <div class="support-grid">
-                <div class="support-card">
-                    <h3>Report a bug</h3>
-                    <p>Found something broken? Email us and describe what happened — include your browser and what you
-                        were trying to do.</p>
-                    <p style="margin-top:10px"><a href="mailto:contact@example.com">contact@example.com</a></p>
+                <div class="support-grid">
+                    <div class="support-card">
+                        <h3>Report a bug</h3>
+                        <p>Found something broken? Email us and describe what happened — include your browser and what
+                            you were trying to do.</p>
+                        <p style="margin-top:10px"><a href="mailto:contact@example.com">contact@example.com</a></p>
+                    </div>
+                    <div class="support-card">
+                        <h3>Feature request</h3>
+                        <p>Have an idea for something that would make Size Matters even better? We'd love to hear it.
+                        </p>
+                        <p style="margin-top:10px"><a href="mailto:contact@example.com">contact@example.com</a></p>
+                    </div>
                 </div>
-                <div class="support-card">
-                    <h3>Feature request</h3>
-                    <p>Have an idea for something that would make Size Matters even better? We'd love to hear it.</p>
-                    <p style="margin-top:10px"><a href="mailto:contact@example.com">contact@example.com</a></p>
+
+                <h2>Frequently asked questions</h2>
+
+                <div class="faq-item">
+                    <h3>Why doesn't Google Docs support custom page sizes natively?</h3>
+                    <p>No one knows. Google Docs has offered a fixed set of presets for years with no indication this
+                        will change. Size Matters exists to fill that gap by applying page dimensions directly to your
+                        document using the Google Docs API.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is this add-on really free?</h3>
+                    <p>Yes. Completely free, no subscription, no trial period. Setting a custom page size is a basic
+                        feature — it shouldn't cost money.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How do I open the Size Matters sidebar?</h3>
+                    <p>In Google Docs, go to <strong>Extensions → Size Matters → Open</strong>. The sidebar will appear
+                        on the right side of your document.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What units of measurement are supported?</h3>
+                    <p>You can enter dimensions in inches, centimeters, or points. Switch between them using the units
+                        selector at the top of the sidebar — the values will convert automatically.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What page size presets are included?</h3>
+                    <p>The preset dropdown includes common sizes like Letter (US), A4, A5, Legal, Tabloid, and more. You
+                        can also type in any custom dimensions you need.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Will changing the page size affect my text and content?</h3>
+                    <p>Yes — changing page dimensions will reflow your document content to fit the new size, the same as
+                        it would in any word processor. It's a good idea to check your layout after applying a new size.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3>How do I reset to the default Google Docs page size?</h3>
+                    <p>Click the <strong>Reset to default</strong> button in the sidebar. This restores the standard
+                        Letter size (8.5 × 11 in), default margins, and white page color.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Are my saved colors stored anywhere?</h3>
+                    <p>Custom colors you save are cached locally within Google Apps Script's PropertiesService,
+                        associated with your Google account. They are never sent to any external server.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>The add-on isn't appearing in my Extensions menu. What do I do?</h3>
+                    <p>Try refreshing Google Docs. If it still doesn't appear, go to <strong>Extensions → Add-ons →
+                            Manage add-ons</strong> and make sure Size Matters is installed and enabled. If you continue
+                        to have issues, email us.</p>
                 </div>
             </div>
-
-            <h2>Frequently asked questions</h2>
-
-            <div class="faq-item">
-                <h3>Why doesn't Google Docs support custom page sizes natively?</h3>
-                <p>No one knows. Google Docs has offered a fixed set of presets for years with no indication this will
-                    change. Size Matters exists to fill that gap by applying page dimensions directly to your document
-                    using the Google Docs API.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Is this add-on really free?</h3>
-                <p>Yes. Completely free, no subscription, no trial period. Setting a custom page size is a basic feature
-                    — it shouldn't cost money.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How do I open the Size Matters sidebar?</h3>
-                <p>In Google Docs, go to <strong>Extensions → Size Matters → Open</strong>. The sidebar will appear on
-                    the right side of your document.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What units of measurement are supported?</h3>
-                <p>You can enter dimensions in inches, centimeters, or points. Switch between them using the units
-                    selector at the top of the sidebar — the values will convert automatically.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What page size presets are included?</h3>
-                <p>The preset dropdown includes common sizes like Letter (US), A4, A5, Legal, Tabloid, and more. You can
-                    also type in any custom dimensions you need.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Will changing the page size affect my text and content?</h3>
-                <p>Yes — changing page dimensions will reflow your document content to fit the new size, the same as it
-                    would in any word processor. It's a good idea to check your layout after applying a new size.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How do I reset to the default Google Docs page size?</h3>
-                <p>Click the <strong>Reset to default</strong> button in the sidebar. This restores the standard Letter
-                    size (8.5 × 11 in), default margins, and white page color.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Are my saved colors stored anywhere?</h3>
-                <p>Custom colors you save are cached locally within Google Apps Script's PropertiesService, associated
-                    with your Google account. They are never sent to any external server.</p>
-            </div>
-            <div class="faq-item">
-                <h3>The add-on isn't appearing in my Extensions menu. What do I do?</h3>
-                <p>Try refreshing Google Docs. If it still doesn't appear, go to <strong>Extensions → Add-ons → Manage
-                        add-ons</strong> and make sure Size Matters is installed and enabled. If you continue to have
-                    issues, email us.</p>
-            </div>
         </div>
-    </div>
 
-    <footer>
-        <span>© 2025 Size Matters for Google Docs</span>
-        <div>
-            <a href="how-it-works.html" target="_blank">How it works</a>
-            <a onclick="showPage('privacy')">Privacy policy</a>
-            <a onclick="showPage('tos')">Terms of service</a>
-            <a onclick="showPage('support')">Support</a>
-        </div>
-    </footer>
+        <footer>
+            <span>© 2025 Size Matters for Google Docs</span>
+            <div>
+                <a href="how-it-works.html" target="_blank">How it works</a>
+                <a onclick="showPage('privacy')">Privacy policy</a>
+                <a onclick="showPage('tos')">Terms of service</a>
+                <a onclick="showPage('support')">Support</a>
+            </div>
+        </footer>
 
-    <script>
-        function showPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            document.getElementById('page-' + id).classList.add('active');
-            const navEl = document.getElementById('nav-' + id);
-            if (navEl) navEl.classList.add('active');
-            window.scrollTo(0, 0);
-        }
-    </script>
+        <script>
+            function showPage(id) {
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                document.getElementById('page-' + id).classList.add('active');
+                const navEl = document.getElementById('nav-' + id);
+                if (navEl) navEl.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        </script>
 </body>
 
 </html>
