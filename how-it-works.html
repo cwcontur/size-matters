@@ -26,7 +26,7 @@
             --text2: #5f6368;
             --code-bg: #f1f3f4;
             --sidebar-w: 260px;
-            --nav-h: 56px;
+            --nav-h: 64px;
             --green: #137333;
             --purple: #7c3aed;
             --orange: #b45309;
@@ -852,7 +852,8 @@
                 display name. The sanitization strips everything except lowercase letters and digits, then prepends
                 <code class="inline">custom_</code> to distinguish custom presets from built-in ones like <code
                     class="inline">"letter"</code> or <code class="inline">"a4"</code> in the client-side <code
-                    class="inline">PAGE_SIZES</code> lookup.</p>
+                    class="inline">PAGE_SIZES</code> lookup.
+            </p>
 
             <div class="code-block">
                 <div class="code-header"><span class="code-filename">Cached.gs — saveCustomPreset()</span><span
@@ -933,11 +934,13 @@
                 <code class="inline">"#f28b82"</code>. But the way color travels between the client (the color picker)
                 and the server is as an <strong>RGB object with float components between 0 and 1</strong> — because
                 that's the format <code class="inline">body.getBackgroundColor()</code> returns as, and it's consistent
-                with how the Docs API represents colors internally.</p>
+                with how the Docs API represents colors internally.
+            </p>
             <p>This means every color operation crosses two format boundaries. On the way <em>in</em> (applying a
                 color), the flow is: browser hex → float RGB object → server → hex string → Docs API. On the way
                 <em>out</em> (reading the current color), the flow reverses: Docs API hex string → float RGB object →
-                client.</p>
+                client.
+            </p>
 
             <h3 class="section-heading" id="colours-conversion">Hex ↔ RGB conversion</h3>
             <p>The server-side conversions in this file work with float components in the 0–1 range. This is the
@@ -1183,7 +1186,8 @@
                     class="inline">toPoints()</code> function, a <code class="inline">fromPoints()</code> function, and
                 a display <code class="inline">label</code>. Any code that needs to convert a value just calls <code
                     class="inline">CONVERSIONS[unit].toPoints(value)</code> or <code
-                    class="inline">CONVERSIONS[unit].fromPoints(value)</code>.</p>
+                    class="inline">CONVERSIONS[unit].fromPoints(value)</code>.
+            </p>
 
             <div class="code-block">
                 <div class="code-header"><span class="code-filename">SidebarUtils.html — CONVERSIONS</span><span
@@ -1619,7 +1623,8 @@
                 call → hide spinner → show toast. The server receives an RGB float object (<code
                     class="inline">{ red, green, blue }</code> in 0–1 range) and writes it to the document. On success,
                 <code class="inline">ColorState.currentPageColor</code> is updated so the Apply button correctly becomes
-                disabled (since the page color now matches the selected color).</p>
+                disabled (since the page color now matches the selected color).
+            </p>
 
             <div class="code-block">
                 <div class="code-header"><span class="code-filename">SidebarColorPicker.html — apply color
