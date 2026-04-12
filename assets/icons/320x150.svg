@@ -1,0 +1,57 @@
+<svg width="320" height="150" viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bgH" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#1a5fd4" />
+            <stop offset="100%" style="stop-color:#3a8ef6" />
+        </linearGradient>
+        <linearGradient id="pg" x1="10%" y1="0%" x2="90%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff" />
+            <stop offset="100%" style="stop-color:#e8eef8" />
+        </linearGradient>
+        <linearGradient id="fd" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#c5d5ee" />
+            <stop offset="100%" style="stop-color:#a0b8de" />
+        </linearGradient>
+        <linearGradient id="ln" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#6aabee" />
+            <stop offset="100%" style="stop-color:#9cc8f8" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="320" height="150" rx="14" fill="url(#bgH)" />
+
+    <!-- ============= Icon ============= -->
+
+    <!-- Icon tile: 64×64, left-padded 20px, vertically centered: y=(150-64)/2=43 -->
+    <rect x="18" y="43" width="64" height="64" rx="14" fill="white" fill-opacity="0.15" />
+    <!-- Doc: 32w 40h centered in tile: x=20+(64-32)/2=36, y=43+(64-40)/2=55 -->
+    <rect x="34" y="55" width="32" height="40" rx="2.5" fill="url(#pg)" />
+    <!-- Fold: starts at x=36+21=57, corner=(68,55) -->
+    <polygon points="55,55 66,55 66,66" fill="url(#fd)" />
+    <polygon points="55,55 66,66 55,66" fill="white" fill-opacity="0.55" />
+    <line x1="55" y1="55" x2="55" y2="66" stroke="#b0c4de" stroke-width="0.7" />
+    <line x1="55" y1="66" x2="66" y2="66" stroke="#b0c4de" stroke-width="0.7" />
+    <!-- 3 lines -->
+    <rect x="38" y="72" width="19" height="2.5" rx="1.25" fill="url(#ln)" />
+    <rect x="38" y="79" width="23" height="2.5" rx="1.25" fill="url(#ln)" />
+    <rect x="38" y="86" width="14" height="2.5" rx="1.25" fill="url(#ln)" />
+    <!-- TL bracket: corner=(36,55), arm=9 -->
+    <path d="M34,64 L34,55 L43,55" fill="none" stroke="url(#ln)" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    <!-- BR bracket: doc right=68, doc bottom=95, arm=9 -->
+    <path d="M66,86 L66,95 L57,95" fill="none" stroke="url(#ln)" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+
+    <!-- ============= Text ============= -->
+
+    <!-- Text: starts at x=100, right edge=300 (20px padding) -->
+    <!-- Block height: 20+7+14+8+1+8+13=71px, start y=(150-71)/2=40 -->
+    <text x="98" y="60" font-family="Google Sans, Roboto, sans-serif" font-size="20" font-weight="700" fill="white">Size
+        Matters</text>
+    <text x="98" y="78" font-family="Roboto, sans-serif" font-size="13" fill="white" fill-opacity="0.88">Custom page
+        sizes for Google Docs</text>
+    <line x1="98" y1="87" x2="300" y2="87" stroke="white" stroke-opacity="0.2" stroke-width="0.8" />
+    <text x="98" y="103" font-family="Roboto, sans-serif" font-size="12" fill="white" fill-opacity="0.72">Free · No
+        subscription · Open to all</text>
+</svg>

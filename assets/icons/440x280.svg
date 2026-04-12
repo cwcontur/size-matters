@@ -1,0 +1,63 @@
+<svg width="440" height="280" viewBox="0 0 440 280" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bgH" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#1a5fd4" />
+            <stop offset="100%" style="stop-color:#3a8ef6" />
+        </linearGradient>
+        <linearGradient id="pg" x1="10%" y1="0%" x2="90%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff" />
+            <stop offset="100%" style="stop-color:#e8eef8" />
+        </linearGradient>
+        <linearGradient id="fd" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#c5d5ee" />
+            <stop offset="100%" style="stop-color:#a0b8de" />
+        </linearGradient>
+        <linearGradient id="ln" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#6aabee" />
+            <stop offset="100%" style="stop-color:#9cc8f8" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="440" height="280" rx="18" fill="url(#bgH)" />
+
+    <!-- Icon tile: 110×110, centered in left half (0..220): x=(220-110)/2=55, y=(280-110)/2=85 -->
+    <rect x="35" y="85" width="110" height="110" rx="24" fill="white" fill-opacity="0.15" />
+    <!-- Doc: 56w 70h centered in tile: x=55+(110-56)/2=82, y=85+(110-70)/2=105 -->
+    <rect x="62" y="105" width="56" height="70" rx="4" fill="url(#pg)" />
+    <!-- Fold: starts at x=82+37=119, corner=(138,105) -->
+    <polygon points="99,105 118,105 118,124" fill="url(#fd)" />
+    <polygon points="99,105 118,124 99,124" fill="white" fill-opacity="0.55" />
+    <line x1="99" y1="105" x2="99" y2="124" stroke="#b0c4de" stroke-width="0.8" />
+    <line x1="99" y1="124" x2="118" y2="124" stroke="#b0c4de" stroke-width="0.8" />
+    <!-- 3 lines -->
+    <rect x="70" y="136" width="34" height="5" rx="2.5" fill="url(#ln)" />
+    <rect x="70" y="149" width="40" height="5" rx="2.5" fill="url(#ln)" />
+    <rect x="70" y="162" width="28" height="5" rx="2.5" fill="url(#ln)" />
+    <!-- TL bracket: corner=(82,105), arm=18 -->
+    <path d="M62,123 62,105 80,105" fill="none" stroke="url(#ln)" stroke-width="4.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    <!-- BR bracket: doc right=138, doc bottom=175, arm=18 -->
+    <path d="M118,157 118,175 100,175" fill="none" stroke="url(#ln)" stroke-width="4.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+
+    <!-- Text: right half starts at x=230, right edge=420 (20px padding) -->
+    <!-- Block height: 28+8+15+10+1+10+14+6+14+6+14+12+22=160px, start y=(280-160)/2=60 -->
+    <!-- title baseline = 60+26=86 -->
+    <text x="190" y="86" font-family="Google Sans, Roboto, sans-serif" font-size="26" font-weight="700"
+        fill="white">Size Matters</text>
+    <text x="190" y="107" font-family="Roboto, sans-serif" font-size="13.5" fill="white" fill-opacity="0.88">Custom page
+        sizes for Google Docs</text>
+    <!-- Divider matches subtitle width ~215px: 190 to 405 -->
+    <line x1="190" y1="118" x2="405" y2="118" stroke="white" stroke-opacity="0.2" stroke-width="0.8" />
+    <text x="190" y="136" font-family="Roboto, sans-serif" font-size="12.5" fill="white" fill-opacity="0.78">Any
+        dimensions · Inches, cm, or points</text>
+    <text x="190" y="154" font-family="Roboto, sans-serif" font-size="12.5" fill="white" fill-opacity="0.78">Custom
+        presets · Portrait &amp; landscape</text>
+    <text x="190" y="172" font-family="Roboto, sans-serif" font-size="12.5" fill="white" fill-opacity="0.78">Page color
+        picker · Free forever</text>
+    <!-- FREE badge -->
+    <rect x="190" y="184" width="56" height="22" rx="11" fill="white" fill-opacity="0.18" />
+    <text x="218" y="199" text-anchor="middle" font-family="Roboto, sans-serif" font-size="11" font-weight="700"
+        fill="white">FREE</text>
+</svg>
