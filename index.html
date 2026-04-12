@@ -591,7 +591,8 @@
             <h2>appscript.json — project manifest</h2>
             <p>The manifest declares the V8 runtime and the two OAuth scopes the extension uses. Nothing more is
                 requested — <code>documents.currentonly</code> grants access only to the currently open document, and
-                <code>script.container.ui</code> allows the sidebar panel to be shown.</p>
+                <code>script.container.ui</code> allows the sidebar panel to be shown.
+            </p>
             <pre><code>"oauthScopes": [
   "https://www.googleapis.com/auth/documents.currentonly",
   "https://www.googleapis.com/auth/script.container.ui"
@@ -615,7 +616,8 @@
             <p>Custom presets are stored as a JSON-serialized object keyed by a sanitized version of the preset name.
                 Before saving, the backend enforces the 20-preset cap and throws a catchable
                 <code>MAX_LIMIT_REACHED</code> error if it's hit — so the frontend can show an appropriate warning
-                without crashing.</p>
+                without crashing.
+            </p>
             <pre><code>// Preset keys are generated like this:
 const safeKey = "custom_" + name.toLowerCase().replace(/[^a-z0-9]/g, "");
 
@@ -630,7 +632,8 @@ if (!presets[safeKey] && Object.keys(presets).length >= MAX_PRESETS) {
                 <code>setPageColor()</code> accepts an RGB object with float components and writes it to
                 <code>body.setBackgroundColor()</code>, which expects a hex string — so it converts on the way in.
                 <code>getCurrentPageColor()</code> reads the hex string back from the API and converts it to floats for
-                the frontend.</p>
+                the frontend.
+            </p>
             <pre><code>// Server-side: floats (0–1) in, hex string to the API
 function rgbToHex(r, g, b) {
   const toHex = (c) => {
@@ -645,7 +648,8 @@ function rgbToHex(r, g, b) {
             <h2>CurrentPageSettings.gs — reading document state</h2>
             <p>The Docs API always returns page dimensions in points (1/72 of an inch).
                 <code>getCurrentPageSettings(unit)</code> fetches width, height, and all four margins, then converts
-                them to whatever unit the user has selected before returning the data.</p>
+                them to whatever unit the user has selected before returning the data.
+            </p>
             <p><code>getInitialSidebarData()</code> is the most important function for startup performance — it bundles
                 the user's unit preference, their saved custom presets, and the current page settings into a single
                 server call, so the sidebar can fully initialize in one round trip instead of three.</p>
@@ -694,7 +698,8 @@ body.setMarginRight(72);</code></pre>
                 are defined in a <code>TOAST_TYPES</code> config object (including support for message functions that
                 take a unit string), so adding a new notification never requires touching the display logic.</p>
             <p>The file also includes test suites for unit conversion and color math that run automatically when
-                <code>CONFIG.debug</code> is set to true.</p>
+                <code>CONFIG.debug</code> is set to true.
+            </p>
 
             <h2>SidebarLogic.html — core application logic</h2>
             <p>The largest file. All page state is stored in <code>AppState</code>, with all internal values kept in
@@ -760,7 +765,7 @@ inputs.right.value  = vals.b.toFixed(2);</code></pre>
     <div id="page-privacy" class="page">
         <div class="legal">
             <h1>Privacy policy</h1>
-            <p class="meta">Last updated: January 1, 2025 &nbsp;·&nbsp; Size Matters for Google Docs</p>
+            <p class="meta">Last updated: April 12, 2026 &nbsp;·&nbsp; Size Matters for Google Docs</p>
 
             <p>Your privacy is important. This policy explains what information Size Matters ("the Add-on") collects,
                 how it is used, and your rights regarding that information.</p>
