@@ -648,7 +648,7 @@
         <span class="nav-section">How It Works</span>
         <div class="nav-links">
             <a id="nav-home" class="active" onclick="showPage('home')">Home</a>
-            <a id="nav-howitworks" href="how-it-works.html" target="_blank">How it works</a>
+            <a id="nav-howitworks" href="how-it-works.html">How it works</a>
             <a id="nav-privacy" href="privacy.html">Privacy policy</a>
             <a id="nav-tos" href="tos.html">Terms of service</a>
             <a id="nav-support" href="support.html">Support</a>
@@ -1812,6 +1812,14 @@
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.getElementById('page-' + id).classList.add('active');
+            const navEl = document.getElementById('nav-' + id);
+            if (navEl) navEl.classList.add('active');
+            window.scrollTo(0, 0);
+        }
     </script>
 </body>
 
