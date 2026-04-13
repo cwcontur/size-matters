@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found – Size Matters</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233a8ef6'/%3E%3Cstop offset='100%25' style='stop-color:%231a5fd4'/%3E%3C/linearGradient%3E%3ClinearGradient id='pg' x1='10%25' y1='0%25' x2='90%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ffffff'/%3E%3Cstop offset='100%25' style='stop-color:%23e8eef8'/%3E%3C/linearGradient%3E%3ClinearGradient id='fd' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23c5d5ee'/%3E%3Cstop offset='100%25' style='stop-color:%23a0b8de'/%3E%3C/linearGradient%3E%3ClinearGradient id='ln' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:%236aabee'/%3E%3Cstop offset='100%25' style='stop-color:%239cc8f8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' width='32' height='32' rx='7' fill='url(%23bg)'/%3E%3Crect x='8' y='5' width='16' height='22' rx='1.5' fill='url(%23pg)'/%3E%3Cpolygon points='18,5 24,5 24,11' fill='url(%23fd)'/%3E%3Cpolygon points='18,5 24,11 18,11' fill='white' fill-opacity='0.5'/%3E%3Cline x1='18' y1='5' x2='18' y2='11' stroke='%23b0c4de' stroke-width='0.4'/%3E%3Cline x1='17.8' y1='11' x2='24' y2='11' stroke='%23b0c4de' stroke-width='0.4'/%3E%3Crect x='10' y='15' width='8' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Crect x='10' y='19' width='10' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Crect x='10' y='23' width='6' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Cpath d='M8,10 L8,5 L13,5' fill='none' stroke='url(%23ln)' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M24,22 L24,27 L19,27' fill='none' stroke='url(%23ln)' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            color: #202124;
+            background: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column
+        }
+
+        :root {
+            --blue: #1a73e8;
+            --blue-dark: #1557b0;
+            --blue-light: #e8f0fe;
+            --gray: #5f6368;
+            --border: #dadce0;
+            --surface: #f8f9fa;
+            --text: #202124
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            height: 64px;
+            border-bottom: 1px solid var(--border);
+            background: #fff
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none
+        }
+
+        .nav-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .nav-title {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text)
+        }
+
+        .nav-home {
+            font-size: 14px;
+            color: var(--gray);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.15s
+        }
+
+        .nav-home:hover {
+            background: var(--surface)
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+            text-align: center
+        }
+
+        .error-icon {
+            margin-bottom: 32px;
+            position: relative;
+            display: inline-block
+        }
+
+        .error-icon svg.doc {
+            filter: drop-shadow(0 8px 24px rgba(26, 95, 212, 0.18))
+        }
+
+        .error-code {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 96px;
+            font-weight: 700;
+            color: var(--blue-light);
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: -4px
+        }
+
+        .error-title {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 12px
+        }
+
+        .error-subtitle {
+            font-size: 15px;
+            color: var(--gray);
+            max-width: 420px;
+            line-height: 1.7;
+            margin-bottom: 36px
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue);
+            color: #fff;
+            font-family: 'Google Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 24px;
+            border: 1px solid var(--blue);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.15s
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-dark)
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            color: var(--blue);
+            font-family: 'Google Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            transition: background 0.15s
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface)
+        }
+
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--gray)
+        }
+
+        footer a {
+            color: var(--gray);
+            text-decoration: none;
+            margin-left: 16px
+        }
+
+        footer a:hover {
+            color: var(--blue)
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a class="nav-brand" href="index.html">
+            <div class="nav-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="nbg" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3a8ef6" />
+                            <stop offset="100%" style="stop-color:#1a5fd4" />
+                        </linearGradient>
+                        <linearGradient id="npg" x1="10%" y1="0%" x2="90%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff" />
+                            <stop offset="100%" style="stop-color:#e8eef8" />
+                        </linearGradient>
+                        <linearGradient id="nfd" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#c5d5ee" />
+                            <stop offset="100%" style="stop-color:#a0b8de" />
+                        </linearGradient>
+                        <linearGradient id="nln" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#6aabee" />
+                            <stop offset="100%" style="stop-color:#9cc8f8" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="32" height="32" rx="7" fill="url(#nbg)" />
+                    <rect x="8" y="5" width="16" height="22" rx="1.5" fill="url(#npg)" />
+                    <polygon points="18,5 24,5 24,11" fill="url(#nfd)" />
+                    <polygon points="18,5 24,11 18,11" fill="white" fill-opacity="0.5" />
+                    <line x1="18" y1="5" x2="18" y2="11" stroke="#b0c4de" stroke-width="0.4" />
+                    <line x1="17.8" y1="11" x2="24" y2="11" stroke="#b0c4de" stroke-width="0.4" />
+                    <rect x="10" y="15" width="8" height="1.5" rx="0.75" fill="url(#nln)" />
+                    <rect x="10" y="19" width="10" height="1.5" rx="0.75" fill="url(#nln)" />
+                    <rect x="10" y="23" width="6" height="1.5" rx="0.75" fill="url(#nln)" />
+                    <path d="M8,10 L8,5 L13,5" fill="none" stroke="url(#nln)" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M24,22 L24,27 L19,27" fill="none" stroke="url(#nln)" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <span class="nav-title">Size Matters</span>
+        </a>
+        <a class="nav-home" href="index.html">← Back to home</a>
+    </nav>
+
+    <div class="content">
+        <!-- Oversized 404 as background text, with icon overlaid -->
+        <div class="error-icon">
+            <svg class="doc" width="120" height="120" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="ibg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3a8ef6" />
+                        <stop offset="100%" style="stop-color:#1a5fd4" />
+                    </linearGradient>
+                    <linearGradient id="ipg" x1="10%" y1="0%" x2="90%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffffff" />
+                        <stop offset="100%" style="stop-color:#e8eef8" />
+                    </linearGradient>
+                    <linearGradient id="ifd" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#c5d5ee" />
+                        <stop offset="100%" style="stop-color:#a0b8de" />
+                    </linearGradient>
+                    <linearGradient id="iln" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#6aabee" />
+                        <stop offset="100%" style="stop-color:#9cc8f8" />
+                    </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="32" height="32" rx="7" fill="url(#ibg)" />
+                <rect x="8" y="5" width="16" height="22" rx="1.5" fill="url(#ipg)" />
+                <polygon points="18,5 24,5 24,11" fill="url(#ifd)" />
+                <polygon points="18,5 24,11 18,11" fill="white" fill-opacity="0.5" />
+                <line x1="18" y1="5" x2="18" y2="11" stroke="#b0c4de" stroke-width="0.4" />
+                <line x1="17.8" y1="11" x2="24" y2="11" stroke="#b0c4de" stroke-width="0.4" />
+                <rect x="10" y="15" width="8" height="1.5" rx="0.75" fill="url(#iln)" />
+                <rect x="10" y="19" width="10" height="1.5" rx="0.75" fill="url(#iln)" />
+                <rect x="10" y="23" width="6" height="1.5" rx="0.75" fill="url(#iln)" />
+                <path d="M8,10 L8,5 L13,5" fill="none" stroke="url(#iln)" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M24,22 L24,27 L19,27" fill="none" stroke="url(#iln)" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page not found</h1>
+        <p class="error-subtitle">Looks like this page doesn't exist — or maybe it was set to a custom size and got
+            lost. Either way, here's how to get back.</p>
+
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center">
+            <a class="btn-primary" href="index.html">Go to home</a>
+            <a class="btn-secondary" href="index.html#support">Get support</a>
+        </div>
+    </div>
+
+    <footer>
+        <span>© 2026 Size Matters for Google Docs</span>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="how-it-works.html">How it works</a>
+            <a href="index.html">Privacy policy</a>
+            <a href="index.html">Terms of service</a>
+            <a href="index.html">Support</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
