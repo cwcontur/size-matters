@@ -102,45 +102,56 @@
             color: var(--gray)
         }
 
-        .nav-links {
+        .nav-links-right {
+            margin-left: auto;
             display: flex;
             gap: 4px
         }
 
-        .nav-links a {
+        .nav-links-right a {
             font-size: 14px;
             color: var(--gray);
             text-decoration: none;
             padding: 8px 12px;
             border-radius: 4px;
-            transition: background 0.15s;
-            position: relative
+            cursor: pointer;
+            transition: background 0.15s
         }
 
-        .nav-links a:hover {
+        .nav-links-right a:hover {
             background: var(--surface)
         }
 
-        .nav-links a.active {
+        .nav-links-right a.active {
             color: var(--blue)
         }
 
-        .nav-links a::after {
+        .nav-links-right a {
+            position: relative;
+        }
+
+        .nav-links-right a::after {
             content: '';
             position: absolute;
             bottom: 4px;
-            left: 12px;
-            right: 12px;
+            left: 10px;
+            right: 10px;
             height: 2px;
             background: var(--blue);
             border-radius: 1px;
             transform: scaleX(0);
-            transition: transform 0.2s ease
+            transition: transform 0.2s ease;
         }
 
-        .nav-links a.active::after,
-        .nav-links a:hover::after {
-            transform: scaleX(1)
+        .nav-links-right a.active::after,
+        .nav-links-right a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* LAYOUT */
+        .layout {
+            display: flex;
+            flex: 1
         }
 
         /* SIDEBAR */
@@ -635,12 +646,12 @@
         </a>
         <span class="nav-sep">/</span>
         <span class="nav-section">How It Works</span>
-        <div class="nav-links">
-            <a id="nav-home" href="index.html"">Home</a>
-            <a class=" active" href="how-it-works.html">How it works</a>
-            <a id="nav-privacy" href="privacy.html">Privacy policy</a>
-            <a id="nav-tos" href="tos.html">Terms of service</a>
-            <a id="nav-support" href="support.html">Support</a>
+        <div class="nav-links-right">
+            <a href="index.html">Home</a>
+            <a class="active" href="how-it-works.html">How it works</a>
+            <a href="privacy.html">Privacy policy</a>
+            <a href="tos.html">Terms of service</a>
+            <a href="support.html">Support</a>
         </div>
     </nav>
 
