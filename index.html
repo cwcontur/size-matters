@@ -262,6 +262,93 @@
             line-height: 1.6
         }
 
+        /* ANIMATIONS */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .anim-ready {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .anim-ready.anim-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero entrance */
+        .hero-badge {
+            animation: fadeSlideUp 0.5s ease both;
+            animation-delay: 0.05s;
+        }
+
+        .hero h1 {
+            animation: fadeSlideUp 0.5s ease both;
+            animation-delay: 0.15s;
+        }
+
+        .hero p {
+            animation: fadeSlideUp 0.5s ease both;
+            animation-delay: 0.25s;
+        }
+
+        .hero-btns {
+            animation: fadeSlideUp 0.5s ease both;
+            animation-delay: 0.35s;
+        }
+
+        /* Feature card hover */
+        .feat-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .feat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(26, 95, 212, 0.10);
+        }
+
+        /* Nav link animated underline */
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            background: var(--blue);
+            border-radius: 1px;
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Button press feedback */
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.97);
+        }
+
         .carousel-wrap {
             position: relative;
             display: flex;
@@ -574,7 +661,7 @@
             <h1>Page sizes that actually<br><span>fit your needs</span></h1>
             <p>Google Docs gives you a handful of page size presets. Size Matters gives you any size you want — down to
                 the exact millimeter. Free, forever.</p>
-            <div style="display:flex;align-items:center;justify-content:center;gap:12px">
+            <div style="display:flex;align-items:center;justify-content:center;gap:12px" class="hero-btns">
                 <a class="btn-primary" href="#" target="_blank">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
                         <path
@@ -1168,7 +1255,33 @@ inputs.right.value  = vals.b.toFixed(2);</code></pre>
             document.querySelectorAll('.carousel-dot').forEach((d, i) => {
                 d.classList.toggle('active', i === currentSlide);
             });
+            const captions = document.querySelectorAll('.carousel-caption');
+            captions.forEach((c, i) => {
+                c.style.transition = 'none';
+                c.style.opacity = '0';
+                if (i === currentSlide) {
+                    setTimeout(() => {
+                        c.style.transition = 'opacity 0.3s ease';
+                        c.style.opacity = '1';
+                    }, 200);
+                }
+            });
         }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('anim-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.feat-card, .free-banner, .features h2, .carousel-wrap, .carousel-dots').forEach((el, i) => {
+            el.classList.add('anim-ready');
+            el.style.transitionDelay = `${(i % 3) * 0.08}s`;
+            observer.observe(el);
+        });
     </script>
 </body>
 
