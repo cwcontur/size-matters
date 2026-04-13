@@ -648,9 +648,9 @@
         <div class="nav-links">
             <a id="nav-home" class="active" onclick="showPage('home')">Home</a>
             <a id="nav-howitworks" href="how-it-works.html" target="_blank">How it works</a>
-            <a id="nav-privacy" onclick="showPage('privacy')">Privacy policy</a>
-            <a id="nav-tos" onclick="showPage('tos')">Terms of service</a>
-            <a id="nav-support" onclick="showPage('support')">Support</a>
+            <a id="nav-privacy" href="privacy.html">Privacy policy</a>
+            <a id="nav-tos" href="tos.html">Terms of service</a>
+            <a id="nav-support" href="support.html">Support</a>
         </div>
     </nav>
 
@@ -669,7 +669,7 @@
                     </svg>
                     Install from Workspace Marketplace
                 </a>
-                <a class="btn-secondary" onclick="showPage('support')">Learn more</a>
+                <a class="btn-secondary" href="support.html">Learn more</a>
             </div>
         </div>
 
@@ -813,230 +813,8 @@
             </div>
         </div>
     </div>
-    <!-- HOW IT WORKS -->
-    <div id="page-howitworks" class="page">
-        <div class="legal" style="max-width:860px">
-            <h1>How it works</h1>
-            <p class="meta">A breakdown of the extension's architecture and key implementation details.</p>
 
-            <p>Size Matters is built entirely with Google Apps Script — no external servers, no build tools, no
-                dependencies beyond what Google provides. The extension consists of a handful of <code>.gs</code>
-                server-side files and a set of HTML template files that form the sidebar UI. Here's how each piece
-                fits together.</p>
-
-            <!-- ARCHITECTURE OVERVIEW -->
-            <div class="arch-grid">
-                <div class="arch-card">
-                    <div class="arch-label">Server-side (.gs)</div>
-                    <div class="arch-files">
-                        <span class="file-tag">appscript.json</span>
-                        <span class="file-tag">Main.gs</span>
-                        <span class="file-tag">Margins.gs</span>
-                        <span class="file-tag">Reset.gs</span>
-                        <span class="file-tag">Colours.gs</span>
-                        <span class="file-tag">CurrentPageSettings.gs</span>
-                        <span class="file-tag">Cached.gs</span>
-                    </div>
-                    <p class="arch-desc">Runs on Google's servers. Interacts with the Docs API. Manages user-scoped
-                        persistence via PropertiesService.</p>
-                </div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-card">
-                    <div class="arch-label">Client-side (HTML)</div>
-                    <div class="arch-files">
-                        <span class="file-tag">Sidebar.html</span>
-                        <span class="file-tag">SidebarCSS.html</span>
-                        <span class="file-tag">SidebarUtils.html</span>
-                        <span class="file-tag">SidebarLogic.html</span>
-                        <span class="file-tag">SidebarColorPicker.html</span>
-                    </div>
-                    <p class="arch-desc">Runs in the sidebar iframe. Manages UI state, input validation, and calls
-                        the server via <code>google.script.run</code>.</p>
-                </div>
-            </div>
-
-            <!-- FILE BREAKDOWNS -->
-            <h2>appscript.json — project manifest</h2>
-            <p>The manifest declares the V8 runtime and the two OAuth scopes the extension uses. Nothing more is
-                requested — <code>documents.currentonly</code> grants access only to the currently open document,
-                and <code>script.container.ui</code> allows the sidebar panel to be shown.</p>
-            <pre><code>"oauthScopes": [
-  "https://www.googleapis.com/auth/documents.currentonly",
-  "https://www.googleapis.com/auth/script.container.ui"
-]</code></pre>
-
-            <h2>Main.gs — entry points</h2>
-            <p><code>onInstall()</code> and <code>onOpen()</code> are the standard Apps Script lifecycle hooks. They
-                add a "Size Matters" menu item to the Google Docs toolbar. <code>showSidebar()</code> compiles the
-                HTML template and opens it as a sidebar panel.</p>
-            <p>The <code>include()</code> helper is used by the HTML templates to stitch together multiple files at
-                render time — so <code>SidebarCSS.html</code>, <code>SidebarUtils.html</code>, and so on are all
-                inlined into the final sidebar output via <code>&lt;?!= include('filename') ?&gt;</code> template
-                tags.</p>
-            <pre><code>function include(filename) {
-  return HtmlService.createHtmlOutputFromFile(filename).getContent();
-}</code></pre>
-
-            <h2>Cached.gs — user persistence</h2>
-            <p>All user preferences are stored with <code>PropertiesService.getUserProperties()</code>, which is
-                scoped per-user and persists across sessions. Three things are saved: the preferred unit of
-                measurement, custom page size presets (capped at 20), and custom saved colors (capped at 30).</p>
-            <p>Custom presets are stored as a JSON-serialized object keyed by a sanitized version of the preset
-                name. Before saving, the backend enforces the 20-preset cap and throws a catchable
-                <code>MAX_LIMIT_REACHED</code> error if it's hit — so the frontend can show an appropriate warning
-                without crashing.
-            </p>
-            <pre><code>// Preset keys are generated like this:
-const safeKey = "custom_" + name.toLowerCase().replace(/[^a-z0-9]/g, "");
-
-// The limit check:
-if (!presets[safeKey] && Object.keys(presets).length >= MAX_PRESETS) {
-  throw new Error("MAX_LIMIT_REACHED");
-}</code></pre>
-
-            <h2>Colours.gs — page background color</h2>
-            <p>The Google Docs API represents colors as RGB floats between 0 and 1, not the 0–255 integers or hex
-                strings that a browser color picker works with. This file handles the conversion boundary.
-                <code>setPageColor()</code> accepts an RGB object with float components and writes it to
-                <code>body.setBackgroundColor()</code>, which expects a hex string — so it converts on the way in.
-                <code>getCurrentPageColor()</code> reads the hex string back from the API and converts it to floats
-                for the frontend.
-            </p>
-            <pre><code>// Server-side: floats (0–1) in, hex string to the API
-function rgbToHex(r, g, b) {
-  const toHex = (c) => {
-    const hex = Math.round(c * 255).toString(16);
-    return hex.length === 1 ? "0" + hex : hex;
-  };
-  return "#" + toHex(r) + toHex(g) + toHex(b);
-}</code></pre>
-            <p>Note: the client side has its own <code>rgbToHex</code>/<code>hexToRgb</code> functions that work
-                with 0–255 integers instead — the two sides of the bridge use different scales by design.</p>
-
-            <h2>CurrentPageSettings.gs — reading document state</h2>
-            <p>The Docs API always returns page dimensions in points (1/72 of an inch).
-                <code>getCurrentPageSettings(unit)</code> fetches width, height, and all four margins, then converts
-                them to whatever unit the user has selected before returning the data.
-            </p>
-            <p><code>getInitialSidebarData()</code> is the most important function for startup performance — it
-                bundles the user's unit preference, their saved custom presets, and the current page settings into a
-                single server call, so the sidebar can fully initialize in one round trip instead of three.</p>
-            <pre><code>function getInitialSidebarData() {
-  const unit = getUserUnitPreference() || "inches";
-  return {
-    customPresets: getCustomPresets(),
-    unitPreference: unit,
-    pageSettings: getCurrentPageSettings(unit),
-  };
-}</code></pre>
-
-            <h2>Margins.gs — writing page settings</h2>
-            <p><code>setCustomPageSizeWithMargins(settings, unit)</code> is the core write operation. It receives
-                all six values (width, height, four margins) already converted to points by the frontend, then calls
-                the six corresponding <code>body.set*()</code> methods on the document. Errors are caught, logged,
-                and re-thrown — so the client-side <code>withFailureHandler</code> fires and shows an error toast
-                rather than silently failing.</p>
-
-            <h2>Reset.gs — restoring defaults</h2>
-            <p>Google Docs' default page is US Letter: 8.5 × 11 inches with 1-inch margins on all sides. In points
-                (the unit the API uses), that's 612 × 792 with margins of 72. The reset function hardcodes these
-                values directly.</p>
-            <pre><code>body.setPageHeight(11 * 72);  // 792pt
-body.setPageWidth(8.5 * 72);  // 612pt
-body.setMarginTop(72);        // 1 inch on all sides
-body.setMarginBottom(72);
-body.setMarginLeft(72);
-body.setMarginRight(72);</code></pre>
-
-            <h2>SidebarUtils.html — shared client utilities</h2>
-            <p>This file loads first (included before the logic files) and defines the shared building blocks
-                everything else depends on. A few worth highlighting:</p>
-            <p><strong>CONVERSIONS</strong> — a lookup object with <code>toPoints()</code> and
-                <code>fromPoints()</code> for inches, cm, and points. Using a single central object means unit
-                conversion logic is never duplicated.
-            </p>
-            <pre><code>const CONVERSIONS = {
-  inches: { toPoints: (v) => v * 72,         fromPoints: (v) => v / 72 },
-  cm:     { toPoints: (v) => (v / 2.54) * 72, fromPoints: (v) => (v * 2.54) / 72 },
-  points: { toPoints: (v) => v,               fromPoints: (v) => v }
-};</code></pre>
-            <p><strong>compareFloats()</strong> — floating-point arithmetic means <code>8.5 * 72</code> doesn't
-                always equal exactly <code>612</code>. This helper wraps
-                <code>Math.abs(a - b) &lt;= tolerance</code> and is used everywhere a numeric comparison needs to be
-                reliable.
-            </p>
-            <p><strong>ToastManager</strong> — a single object that handles all toast notifications. All toast
-                messages are defined in a <code>TOAST_TYPES</code> config object (including support for message
-                functions that take a unit string), so adding a new notification never requires touching the display
-                logic.</p>
-            <p>The file also includes test suites for unit conversion and color math that run automatically when
-                <code>CONFIG.debug</code> is set to true.
-            </p>
-
-            <h2>SidebarLogic.html — core application logic</h2>
-            <p>The largest file. All page state is stored in <code>AppState</code>, with all internal values kept in
-                points regardless of what unit the user has selected. This means conversions only happen at the
-                display layer — when reading from inputs or writing to them — never during computation.</p>
-            <p><strong>Input validation</strong> happens in a debounced handler that fires 300ms after the user
-                stops typing. It checks for out-of-range values (enforcing a 0.1–120 inch safe zone) and also
-                catches margin overlap — where combined left + right or top + bottom margins would leave no room for
-                content.</p>
-            <p><strong>Orientation swap</strong> is a good example of the logic being careful. Switching from
-                portrait to landscape doesn't just swap width and height — it also transposes top/bottom margins
-                with left/right margins, which is the correct behavior for a rotated page.</p>
-            <pre><code>// Portrait → Landscape: swap dimensions AND transpose margins
-inputs.width.value  = vals.h.toFixed(2);  // old height becomes new width
-inputs.height.value = vals.w.toFixed(2);
-inputs.top.value    = vals.l.toFixed(2);  // old left becomes new top
-inputs.left.value   = vals.t.toFixed(2);
-inputs.bottom.value = vals.r.toFixed(2);
-inputs.right.value  = vals.b.toFixed(2);</code></pre>
-            <p><strong>Custom preset saving</strong> has several layers of protection: duplicate dimension detection
-                (before the modal even opens), overwrite confirmation (if the same preset name is reused), and a
-                20-preset hard cap enforced on both the client and server independently.</p>
-            <p><strong>Unit switching</strong> converts the live input values — not the saved internal state — so if
-                a user has typed a modified value that they haven't applied yet, that value is preserved and
-                converted correctly when they switch units.</p>
-
-            <h2>SidebarColorPicker.html — the color picker</h2>
-            <p>The gradient canvas is drawn pixel-by-pixel using <code>ImageData</code> rather than CSS gradients,
-                which gives exact HSL control. The X axis is saturation (0→1), the Y axis is lightness (1→0), and
-                the hue comes from the slider above.</p>
-            <pre><code>for (let y = 0; y < height; y++) {
-  for (let x = 0; x < width; x++) {
-    const saturation = x / (width - 1);
-    const lightness  = 1 - (y / (height - 1));
-    const [r, g, b]  = hslToRgb(hue, saturation, lightness);
-    // write r,g,b,255 into ImageData at (x,y)...
-  }
-}</code></pre>
-            <p>The hex input has a ghost-text prediction system: as you type, a translucent overlay input shows a
-                predicted completed hex value. Pressing Tab accepts the prediction. Single-character input predicts
-                by repeating the character (<code>f</code> → <code>ffffff</code>); three-character input expands
-                shorthand (<code>abc</code> → <code>aabbcc</code>).</p>
-            <p>Custom colors use optimistic UI updates — the color swatch appears in the grid immediately on click,
-                and the server save happens asynchronously in the background. If the save fails, an error toast
-                appears but the UI has already responded, making the interaction feel instant.</p>
-
-            <h2>SidebarCSS.html — styling</h2>
-            <p>All colors are defined as CSS custom properties at the <code>:root</code> level, organized by role
-                (text, backgrounds, borders, buttons, toasts, etc.). This makes the entire color scheme easy to
-                adjust from one place and keeps component styles from hardcoding values.</p>
-            <p>The signature entrance animation — where sidebar elements drop in with a random rotation and a slight
-                bounce — is a single <code>@keyframes hard-slam</code> rule applied via the <code>.tumble</code>
-                class, with the rotation angle randomized per-element via a CSS variable set by JavaScript on load.
-            </p>
-            <pre><code>@keyframes hard-slam {
-  0%   { opacity: 0; transform: translateY(-800px) rotate(var(--random-rotation, 10deg)); }
-  75%  { opacity: 1; transform: translateY(0) rotate(0deg); }
-  85%  { transform: translateY(3px); }   /* subtle impact overshoot */
-  100% { transform: translateY(0); }
-}</code></pre>
-
-        </div>
-    </div>
-
-    <div id="page-privacy" class="page">
+    <!-- <div id="page-privacy" class="page">
         <div class="legal">
             <h1>Privacy policy</h1>
             <p class="meta">Last updated: April 12, 2026 &nbsp;·&nbsp; Size Matters for Google Docs</p>
@@ -1085,10 +863,10 @@ inputs.right.value  = vals.b.toFixed(2);</code></pre>
             <p>If you have questions about this privacy policy, please contact us at <a
                     href="mailto:contact@example.com">contact@example.com</a>.</p>
         </div>
-    </div>
+    </div> -->
 
     <!-- TERMS OF SERVICE -->
-    <div id="page-tos" class="page">
+    <!-- <div id="page-tos" class="page">
         <div class="legal">
             <h1>Terms of service</h1>
             <p class="meta">Last updated: April 12, 2026 &nbsp;·&nbsp; Size Matters for Google Docs</p>
@@ -1142,10 +920,10 @@ inputs.right.value  = vals.b.toFixed(2);</code></pre>
             <p>For questions about these terms, contact us at <a
                     href="mailto:contact@example.com">contact@example.com</a>.</p>
         </div>
-    </div>
+    </div> -->
 
     <!-- SUPPORT -->
-    <div id="page-support" class="page">
+    <!-- <div id="page-support" class="page">
         <div class="legal">
             <h1>Support</h1>
             <p class="meta">Size Matters for Google Docs &nbsp;·&nbsp; We're happy to help</p>
@@ -1216,15 +994,15 @@ inputs.right.value  = vals.b.toFixed(2);</code></pre>
                     to have issues, email us.</p>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <footer>
         <span>© 2026 Size Matters for Google Docs</span>
         <div>
             <a href="how-it-works.html" target="_blank">How it works</a>
-            <a onclick="showPage('privacy')">Privacy policy</a>
-            <a onclick="showPage('tos')">Terms of service</a>
-            <a onclick="showPage('support')">Support</a>
+            <a href="privacy.html">Privacy policy</a>
+            <a href="tos.html">Terms of service</a>
+            <a href="support.html">Support</a>
         </div>
     </footer>
 

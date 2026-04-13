@@ -1,0 +1,45 @@
+<svg width="120" height="120" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#3a8ef6" />
+            <stop offset="100%" style="stop-color:#1a5fd4" />
+        </linearGradient>
+        <linearGradient id="pg" x1="10%" y1="0%" x2="90%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff" />
+            <stop offset="100%" style="stop-color:#e8eef8" />
+        </linearGradient>
+        <linearGradient id="fd" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#c5d5ee" />
+            <stop offset="100%" style="stop-color:#a0b8de" />
+        </linearGradient>
+        <linearGradient id="ln" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#6aabee" />
+            <stop offset="100%" style="stop-color:#9cc8f8" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background tile -->
+    <rect x="0" y="0" width="128" height="128" rx="28" fill="url(#bg)" />
+
+    <!-- Doc: 72w 90h, centered: x=(128-72)/2=28, y=(128-90)/2=19 -->
+    <rect x="28" y="19" width="72" height="90" rx="5" fill="url(#pg)" />
+
+    <!-- Fold: starts at x=28+48=76, corner=(100,19) -->
+    <polygon points="76,19 100,19 100,43" fill="url(#fd)" />
+    <polygon points="76,19 100,43 76,43" fill="white" fill-opacity="0.5" />
+    <line x1="76" y1="19" x2="76" y2="43" stroke="#b0c4de" stroke-width="0.8" />
+    <line x1="76" y1="43" x2="100" y2="43" stroke="#b0c4de" stroke-width="0.8" />
+
+    <!-- 3 lines -->
+    <rect x="38" y="64" width="48" height="5" rx="2.5" fill="url(#ln)" />
+    <rect x="38" y="79" width="56" height="5" rx="2.5" fill="url(#ln)" />
+    <rect x="38" y="94" width="38" height="5" rx="2.5" fill="url(#ln)" />
+
+    <!-- TL bracket: corner=(28,19), arm=20 -->
+    <path d="M28,39 L28,19 L48,19" fill="none" stroke="url(#ln)" stroke-width="5" stroke-linecap="round"
+        stroke-linejoin="round" />
+
+    <!-- BR bracket: doc right=100, doc bottom=109, arm=20 -->
+    <path d="M100,89 L100,109 L80,109" fill="none" stroke="url(#ln)" stroke-width="5" stroke-linecap="round"
+        stroke-linejoin="round" />
+</svg>

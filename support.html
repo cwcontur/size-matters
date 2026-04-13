@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support – Size Matters</title>
+    <meta name="description"
+        content="Get help with Size Matters, the free Google Docs add-on for custom page sizes. FAQs, bug reports, and feature requests.">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233a8ef6'/%3E%3Cstop offset='100%25' style='stop-color:%231a5fd4'/%3E%3C/linearGradient%3E%3ClinearGradient id='pg' x1='10%25' y1='0%25' x2='90%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ffffff'/%3E%3Cstop offset='100%25' style='stop-color:%23e8eef8'/%3E%3C/linearGradient%3E%3ClinearGradient id='fd' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23c5d5ee'/%3E%3Cstop offset='100%25' style='stop-color:%23a0b8de'/%3E%3C/linearGradient%3E%3ClinearGradient id='ln' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:%236aabee'/%3E%3Cstop offset='100%25' style='stop-color:%239cc8f8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' width='32' height='32' rx='7' fill='url(%23bg)'/%3E%3Crect x='8' y='5' width='16' height='22' rx='1.5' fill='url(%23pg)'/%3E%3Cpolygon points='18,5 24,5 24,11' fill='url(%23fd)'/%3E%3Cpolygon points='18,5 24,11 18,11' fill='white' fill-opacity='0.5'/%3E%3Cline x1='18' y1='5' x2='18' y2='11' stroke='%23b0c4de' stroke-width='0.4'/%3E%3Cline x1='17.8' y1='11' x2='24' y2='11' stroke='%23b0c4de' stroke-width='0.4'/%3E%3Crect x='10' y='15' width='8' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Crect x='10' y='19' width='10' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Crect x='10' y='23' width='6' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Cpath d='M8,10 L8,5 L13,5' fill='none' stroke='url(%23ln)' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M24,22 L24,27 L19,27' fill='none' stroke='url(%23ln)' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            color: #202124;
+            background: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column
+        }
+
+        :root {
+            --blue: #1a73e8;
+            --blue-dark: #1557b0;
+            --blue-light: #e8f0fe;
+            --gray: #5f6368;
+            --border: #dadce0;
+            --surface: #f8f9fa;
+            --text: #202124;
+            --text2: #5f6368
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            height: 64px;
+            border-bottom: 1px solid var(--border);
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none
+        }
+
+        .nav-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .nav-title {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text)
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--gray);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.15s;
+            position: relative
+        }
+
+        .nav-links a:hover {
+            background: var(--surface)
+        }
+
+        .nav-links a.active {
+            color: var(--blue)
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            background: var(--blue);
+            border-radius: 1px;
+            transform: scaleX(0);
+            transition: transform 0.2s ease
+        }
+
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            transform: scaleX(1)
+        }
+
+        .legal {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 48px 24px;
+            flex: 1
+        }
+
+        .legal h1 {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 8px
+        }
+
+        .legal .meta {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 36px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .legal h2 {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 28px 0 10px
+        }
+
+        .legal p,
+        .legal li {
+            font-size: 14px;
+            color: #3c4043;
+            line-height: 1.75
+        }
+
+        .legal ul {
+            padding-left: 24px;
+            margin: 10px 0
+        }
+
+        .legal li {
+            margin-bottom: 6px
+        }
+
+        .legal a {
+            color: var(--blue);
+            text-decoration: none
+        }
+
+        .legal a:hover {
+            text-decoration: underline
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 24px 0
+        }
+
+        .support-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px
+        }
+
+        .support-card h3 {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px
+        }
+
+        .support-card p {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.6
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0
+        }
+
+        .faq-item:last-child {
+            border-bottom: none
+        }
+
+        .faq-item h3 {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text)
+        }
+
+        .faq-item p {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.7
+        }
+
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--gray)
+        }
+
+        footer a {
+            color: var(--gray);
+            text-decoration: none;
+            margin-left: 16px
+        }
+
+        footer a:hover {
+            color: var(--blue)
+        }
+
+        @media(max-width:600px) {
+            .nav-links a {
+                padding: 8px 8px;
+                font-size: 13px
+            }
+
+            .support-grid {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a class="nav-brand" href="index.html">
+            <div class="nav-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="nbg" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3a8ef6" />
+                            <stop offset="100%" style="stop-color:#1a5fd4" />
+                        </linearGradient>
+                        <linearGradient id="npg" x1="10%" y1="0%" x2="90%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff" />
+                            <stop offset="100%" style="stop-color:#e8eef8" />
+                        </linearGradient>
+                        <linearGradient id="nfd" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#c5d5ee" />
+                            <stop offset="100%" style="stop-color:#a0b8de" />
+                        </linearGradient>
+                        <linearGradient id="nln" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#6aabee" />
+                            <stop offset="100%" style="stop-color:#9cc8f8" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="32" height="32" rx="7" fill="url(#nbg)" />
+                    <rect x="8" y="5" width="16" height="22" rx="1.5" fill="url(#npg)" />
+                    <polygon points="18,5 24,5 24,11" fill="url(#nfd)" />
+                    <polygon points="18,5 24,11 18,11" fill="white" fill-opacity="0.5" />
+                    <line x1="18" y1="5" x2="18" y2="11" stroke="#b0c4de" stroke-width="0.4" />
+                    <line x1="17.8" y1="11" x2="24" y2="11" stroke="#b0c4de" stroke-width="0.4" />
+                    <rect x="10" y="15" width="8" height="1.5" rx="0.75" fill="url(#nln)" />
+                    <rect x="10" y="19" width="10" height="1.5" rx="0.75" fill="url(#nln)" />
+                    <rect x="10" y="23" width="6" height="1.5" rx="0.75" fill="url(#nln)" />
+                    <path d="M8,10 L8,5 L13,5" fill="none" stroke="url(#nln)" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M24,22 L24,27 L19,27" fill="none" stroke="url(#nln)" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <span class="nav-title">Size Matters</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="how-it-works.html">How it works</a>
+            <a href="privacy.html">Privacy policy</a>
+            <a href="tos.html">Terms of service</a>
+            <a class="active" href="support.html">Support</a>
+        </div>
+    </nav>
+
+    <div class="legal">
+        <h1>Support</h1>
+        <p class="meta">Size Matters for Google Docs &nbsp;·&nbsp; We're happy to help</p>
+
+        <div class="support-grid">
+            <div class="support-card">
+                <h3>Report a bug</h3>
+                <p>Found something broken? Email us and describe what happened — include your browser and what you were
+                    trying to do.</p>
+                <p style="margin-top:10px"><a href="mailto:contact@example.com">contact@example.com</a></p>
+            </div>
+            <div class="support-card">
+                <h3>Feature request</h3>
+                <p>Have an idea for something that would make Size Matters even better? We'd love to hear it.</p>
+                <p style="margin-top:10px"><a href="mailto:contact@example.com">contact@example.com</a></p>
+            </div>
+        </div>
+
+        <h2>Frequently asked questions</h2>
+
+        <div class="faq-item">
+            <h3>Why doesn't Google Docs support custom page sizes natively?</h3>
+            <p>No one knows. Google Docs has offered a fixed set of presets for years with no indication this will
+                change. Size Matters exists to fill that gap by applying page dimensions directly to your document using
+                the Google Docs API.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Is this add-on really free?</h3>
+            <p>Yes. Completely free, no subscription, no trial period. Setting a custom page size is a basic feature —
+                it shouldn't cost money.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How do I open the Size Matters sidebar?</h3>
+            <p>In Google Docs, go to <strong>Extensions → Size Matters → Open</strong>. The sidebar will appear on the
+                right side of your document.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What units of measurement are supported?</h3>
+            <p>You can enter dimensions in inches, centimeters, or points. Switch between them using the units selector
+                at the top of the sidebar — the values will convert automatically.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What page size presets are included?</h3>
+            <p>The preset dropdown includes common sizes like Letter (US), A4, A5, Legal, Tabloid, and more. You can
+                also save your own custom presets by name for quick reuse.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Will changing the page size affect my text and content?</h3>
+            <p>Yes — changing page dimensions will reflow your document content to fit the new size, the same as it
+                would in any word processor. It's a good idea to check your layout after applying a new size.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How do I reset to the default Google Docs page size?</h3>
+            <p>Click the <strong>Reset to default</strong> button in the sidebar. This restores the standard Letter size
+                (8.5 × 11 in), default margins, and white page color.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Are my saved colors stored anywhere?</h3>
+            <p>Custom colors you save are cached locally within Google Apps Script's PropertiesService, associated with
+                your Google account. They are never sent to any external server.</p>
+        </div>
+        <div class="faq-item">
+            <h3>The add-on isn't appearing in my Extensions menu. What do I do?</h3>
+            <p>Try refreshing Google Docs. If it still doesn't appear, go to <strong>Extensions → Add-ons → Manage
+                    add-ons</strong> and make sure Size Matters is installed and enabled. If you continue to have
+                issues, email us.</p>
+        </div>
+    </div>
+
+    <footer>
+        <span>© 2026 Size Matters for Google Docs</span>
+        <div>
+            <a href="how-it-works.html">How it works</a>
+            <a href="privacy.html">Privacy policy</a>
+            <a href="tos.html">Terms of service</a>
+            <a href="support.html">Support</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
