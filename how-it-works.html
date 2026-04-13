@@ -113,8 +113,8 @@
             text-decoration: none;
             padding: 8px 12px;
             border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.15s
+            transition: background 0.15s;
+            position: relative
         }
 
         .nav-links a:hover {
@@ -123,11 +123,6 @@
 
         .nav-links a.active {
             color: var(--blue)
-        }
-
-        /* Nav link animated underline */
-        .nav-links a {
-            position: relative;
         }
 
         .nav-links a::after {
@@ -140,18 +135,12 @@
             background: var(--blue);
             border-radius: 1px;
             transform: scaleX(0);
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease
         }
 
         .nav-links a.active::after,
         .nav-links a:hover::after {
-            transform: scaleX(1);
-        }
-
-        /* LAYOUT */
-        .layout {
-            display: flex;
-            flex: 1
+            transform: scaleX(1)
         }
 
         /* SIDEBAR */
@@ -1812,14 +1801,6 @@
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
-        function showPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            document.getElementById('page-' + id).classList.add('active');
-            const navEl = document.getElementById('nav-' + id);
-            if (navEl) navEl.classList.add('active');
-            window.scrollTo(0, 0);
-        }
     </script>
 </body>
 
