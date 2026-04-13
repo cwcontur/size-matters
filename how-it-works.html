@@ -102,13 +102,12 @@
             color: var(--gray)
         }
 
-        .nav-links-right {
-            margin-left: auto;
+        .nav-links {
             display: flex;
             gap: 4px
         }
 
-        .nav-links-right a {
+        .nav-links a {
             font-size: 14px;
             color: var(--gray);
             text-decoration: none;
@@ -118,12 +117,35 @@
             transition: background 0.15s
         }
 
-        .nav-links-right a:hover {
+        .nav-links a:hover {
             background: var(--surface)
         }
 
-        .nav-links-right a.active {
+        .nav-links a.active {
             color: var(--blue)
+        }
+
+        /* Nav link animated underline */
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            background: var(--blue);
+            border-radius: 1px;
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            transform: scaleX(1);
         }
 
         /* LAYOUT */
@@ -624,12 +646,12 @@
         </a>
         <span class="nav-sep">/</span>
         <span class="nav-section">How It Works</span>
-        <div class="nav-links-right">
-            <a href="index.html">Home</a>
-            <a href="how-it-works.html" target="_blank">How it works</a>
-            <a href="privacy.html">Privacy policy</a>
-            <a href="tos.html">Terms of service</a>
-            <a href="support.html">Support</a>
+        <div class="nav-links">
+            <a id="nav-home" class="active" onclick="showPage('home')">Home</a>
+            <a id="nav-howitworks" href="how-it-works.html" target="_blank">How it works</a>
+            <a id="nav-privacy" href="privacy.html">Privacy policy</a>
+            <a id="nav-tos" href="tos.html">Terms of service</a>
+            <a id="nav-support" href="support.html">Support</a>
         </div>
     </nav>
 
