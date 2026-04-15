@@ -51,7 +51,7 @@
     <text x="190" y="90" font-family="Google Sans, Roboto, sans-serif" font-size="26" font-weight="700"
         fill="white">Size Matters</text>
     <text x="190" y="111" font-family="Roboto, sans-serif" font-size="13.5" fill="white" fill-opacity="0.88">Custom page
-        sizes for Google Docs</text>
+        sizes for Google Docs™</text>
     <!-- Divider matches subtitle width ~215px: 190 to 405 -->
     <line x1="190" y1="122" x2="405" y2="122" stroke="white" stroke-opacity="0.2" stroke-width="0.8" />
     <text x="190" y="140" font-family="Roboto, sans-serif" font-size="12.5" fill="white" fill-opacity="0.78">Any

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>How It Works – Size Matters</title>
     <meta name="description"
-        content="A deep-dive into the architecture, logic, and implementation details behind Size Matters — the free Google Docs add-on for custom page sizes.">
+        content="A deep-dive into the architecture, logic, and implementation details behind Size Matters — the free Google Docs™ add-on for custom page sizes.">
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233a8ef6'/%3E%3Cstop offset='100%25' style='stop-color:%231a5fd4'/%3E%3C/linearGradient%3E%3ClinearGradient id='pg' x1='10%25' y1='0%25' x2='90%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ffffff'/%3E%3Cstop offset='100%25' style='stop-color:%23e8eef8'/%3E%3C/linearGradient%3E%3ClinearGradient id='fd' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23c5d5ee'/%3E%3Cstop offset='100%25' style='stop-color:%23a0b8de'/%3E%3C/linearGradient%3E%3ClinearGradient id='ln' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:%236aabee'/%3E%3Cstop offset='100%25' style='stop-color:%239cc8f8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' width='32' height='32' rx='7' fill='url(%23bg)'/%3E%3Crect x='8' y='5' width='16' height='22' rx='1.5' fill='url(%23pg)'/%3E%3Cpolygon points='18,5 24,5 24,11' fill='url(%23fd)'/%3E%3Cpolygon points='18,5 24,11 18,11' fill='white' fill-opacity='0.5'/%3E%3Cline x1='18' y1='5' x2='18' y2='11' stroke='%23b0c4de' stroke-width='0.4'/%3E%3Cline x1='17.8' y1='11' x2='24' y2='11' stroke='%23b0c4de' stroke-width='0.4'/%3E%3Crect x='10' y='15' width='8' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Crect x='10' y='19' width='10' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Crect x='10' y='23' width='6' height='1.5' rx='0.75' fill='url(%23ln)'/%3E%3Cpath d='M8,10 L8,5 L13,5' fill='none' stroke='url(%23ln)' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M24,22 L24,27 L19,27' fill='none' stroke='url(%23ln)' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     <link
@@ -725,7 +725,7 @@
             <h3 class="section-heading" id="overview">Architecture</h3>
             <p>Size Matters is built entirely with Google Apps Script — no external servers, no build pipeline, no npm.
                 The project splits cleanly into two layers: server-side <code class="inline">.gs</code> files that
-                interact with the Google Docs API, and client-side HTML template files that form the sidebar UI. These
+                interact with the Google Docs™ API, and client-side HTML template files that form the sidebar UI. These
                 two layers communicate exclusively through <code class="inline">google.script.run</code>, Google's
                 built-in async bridge for calling server functions from the sidebar iframe.</p>
 
@@ -817,7 +817,7 @@
                 </tr>
                 <tr>
                     <td>script.container.ui</td>
-                    <td>Allows the script to render a sidebar panel inside the Google Docs UI.</td>
+                    <td>Allows the script to render a sidebar panel inside the Google Docs™ UI.</td>
                 </tr>
             </table>
 
@@ -839,7 +839,7 @@
                 launcher</div>
             <p><code class="inline">onInstall()</code> and <code class="inline">onOpen()</code> are reserved Apps Script
                 lifecycle hooks — Google calls them automatically when the add-on is installed or a document is opened.
-                They add a "Size Matters" menu to the Google Docs toolbar. <code class="inline">onInstall()</code> just
+                They add a "Size Matters" menu to the Google Docs™ toolbar. <code class="inline">onInstall()</code> just
                 delegates to <code class="inline">onOpen()</code> so the menu appears immediately after install without
                 needing a page refresh.</p>
             <p><code class="inline">showSidebar()</code> compiles the <code class="inline">Sidebar.html</code> template
@@ -995,7 +995,7 @@
             </div>
 
             <h3 class="section-heading" id="colours-api">The API color format problem</h3>
-            <p>The Google Docs API and a browser color picker speak two different color dialects. The Docs API's <code
+            <p>The Google Docs™ API and a browser color picker speak two different color dialects. The Docs API's <code
                     class="inline">body.setBackgroundColor()</code> method expects a <strong>hex string</strong> like
                 <code class="inline">"#f28b82"</code>. But the way color travels between the client (the color picker)
                 and the server is as an <strong>RGB object with float components between 0 and 1</strong> — because
@@ -1169,7 +1169,7 @@
             <!-- ============================================================ -->
             <h2 class="file-heading" id="reset-gs">Reset.gs</h2>
             <div class="file-role"><span class="badge badge-server">Server-side</span> Default restoration</div>
-            <p>Google Docs' default document is US Letter: 8.5 × 11 inches with 1-inch margins on all sides. Since the
+            <p>Google Docs™' default document is US Letter: 8.5 × 11 inches with 1-inch margins on all sides. Since the
                 Docs API works in points, these values are hardcoded as their point equivalents — no conversion math
                 needed at runtime.</p>
 
