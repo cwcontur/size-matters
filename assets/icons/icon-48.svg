@@ -1,0 +1,43 @@
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a8ef6"/>
+      <stop offset="100%" style="stop-color:#1a5fd4"/>
+    </linearGradient>
+    <linearGradient id="pg" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#e8eef8"/>
+    </linearGradient>
+    <linearGradient id="fd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c5d5ee"/>
+      <stop offset="100%" style="stop-color:#a0b8de"/>
+    </linearGradient>
+    <linearGradient id="ln" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6aabee"/>
+      <stop offset="100%" style="stop-color:#9cc8f8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background tile: 48×48, rx scales from 128→48: 28*(48/128)≈10.5 -->
+  <rect x="0" y="0" width="48" height="48" rx="10" fill="url(#bg)"/>
+
+  <!-- Doc: 27w 34h, centered: x=(48-27)/2=10.5≈11, y=(48-34)/2=7 -->
+  <rect x="11" y="7" width="27" height="34" rx="2" fill="url(#pg)"/>
+
+  <!-- Fold: starts at x=11+18=29, corner=(38,7) -->
+  <polygon points="29,7 38,7 38,16" fill="url(#fd)"/>
+  <polygon points="29,7 38,16 29,16" fill="white" fill-opacity="0.5"/>
+  <line x1="29" y1="7" x2="29" y2="16" stroke="#b0c4de" stroke-width="0.5"/>
+  <line x1="29" y1="16" x2="38" y2="16" stroke="#b0c4de" stroke-width="0.5"/>
+
+  <!-- 3 lines -->
+  <rect x="14" y="24" width="18" height="2" rx="1" fill="url(#ln)"/>
+  <rect x="14" y="30" width="21" height="2" rx="1" fill="url(#ln)"/>
+  <rect x="14" y="36" width="14" height="2" rx="1" fill="url(#ln)"/>
+
+  <!-- TL bracket: corner=(11,7), arm=7.5≈8 -->
+  <path d="M11,15 L11,7 L19,7" fill="none" stroke="url(#ln)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- BR bracket: doc right=38, doc bottom=41, arm=8 -->
+  <path d="M38,33 L38,41 L30,41" fill="none" stroke="url(#ln)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
